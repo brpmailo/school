@@ -1,0 +1,654 @@
+<!-- saikshik.html -->
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brpmailo</title>
+    <link rel="icon" type="image/png" href="b1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background-color: #4682B4;
+            color: white;
+            padding: 20px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+
+        .marquee-container {
+            margin-top: 10px;
+            background-color: #eef;
+            padding: 10px;
+        }
+
+        .section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        a.download-link {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: DeepPink; 
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a.download-link:hover {
+            background-color: Green; 
+        }
+
+        .pdf-list {
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start; 
+        }
+
+        .pdf-list a {
+            background-color: orange; 
+            color: black; 
+            display: block; 
+            margin: 5px 0; 
+            padding: 10px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            width: auto; 
+            max-width: 300px; 
+        }
+
+        .pdf-list a:hover {
+            background-color: green; 
+        }
+
+        #pdf-list, #teacherguided, #courseList, #booklist, #c7 {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .pdf-title {
+            color: #000080; 
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        .social-icons a {
+            margin: 0 5px;
+        }
+
+        .social-icons img {
+            width: 50px;  
+            height: 50px; 
+        }
+
+
+
+<style>
+  .pdf-item {
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: orange;
+      border-radius: 5px;
+  }
+
+  .pdf-text {
+      color: black;
+      padding: 5px 10px;
+      flex-grow: 1; 
+  }
+
+  .download-link {
+      padding: 5px 10px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-left: 10px;
+  }
+
+  .view-link {
+      background-color: #4285F4;
+      color: white;
+  }
+
+  .download-btn {
+      background-color: #34a853;
+      color: white;
+  }
+</style>
+
+<style>
+    .footer-container {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        max-width: 90%;
+        margin: auto;
+    }
+
+    .responsive-text {
+        font-size: clamp(12px, 2vw, 18px);
+        text-align: center;
+    }
+
+    .social-icons {
+        margin-top: 15px;
+    }
+
+    .social-icons a i {
+        font-size: 40px;
+    }
+
+    .gmail-icon {
+        background: linear-gradient(45deg, #EA4335, #FBBC05, #34A853, #4285F4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    @media (max-width: 600px) {
+        .footer-container {
+            flex-direction: column;
+            text-align: center;
+        }
+        .mobile-break {
+            display: block;
+        }
+    }
+</style>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+
+
+
+
+
+
+<script>
+    function toggleVisibility(idToShow, event) {
+        event.preventDefault(); 
+        const elements = ['pdf-list', 'teacherguided', 'courseList', 'booklist', 'c7', 'homework7']; 
+        elements.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                if (id === idToShow) {
+                    element.style.display = element.style.display === 'block' ? 'none' : 'block';
+                    if (element.style.display === 'block') {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else {
+                    element.style.display = 'none';
+                }
+            }
+        });
+    }
+</script>
+
+
+
+<script>
+  function toggleVisibility(id, event) {
+    event.preventDefault();
+    var box = document.getElementById(id);
+    box.style.display = (box.style.display === "none") ? "block" : "none";
+  }
+</script>
+
+
+
+
+
+
+
+
+<body>
+<header>
+    <h1>शैक्षिक पेज</h1>
+   <p>"Learn Today, Teach Tomorrow !" "आज सिक, भोलि सिकाऊ !"</p>
+</header>
+
+<div class="marquee-container">
+    <marquee>तपाईलाई यस शैक्षिक वेबमा स्वागत छ। तलको लिंकहरूमा क्लिक गरि आफूलाई चाहिएको Note डाउनलोड गरि आफ्नो मोबाइल तथा कम्प्युटरमै पढ्न सक्नुहुन्छ। youtube को icon मा क्लिक गरेर सम्बन्धित शीर्षकको भिडियो पनि हेर्न सक्नुहुन्छ तपाईलाई लागेको केहि कुरा भए मलाई सम्पर्क समेत गर्न सक्नुहुन्छ धन्यवाद!</marquee>
+</div>
+
+
+
+
+
+
+
+<section class="section">
+    <h1><span class="highlight" style="color: red;">Lovely Angels English Boarding School</span></h1>
+    <h2><span class="highlight" style="color: blue;">For Class 5 Students</span></h2>
+    <a href="#" onclick="toggleVisibility('pdf-list', event)" class="download-link">सामाजिक ५ (Class 5 Social)</a>
+    <div id="pdf-list" class="pdf-list">
+        <div class="pdf-title">PDF फाइलहरू:</div>
+
+
+  <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">परम्परागत सामाजिक प्रचलनहरू</span>
+      <div style="display: flex; gap: 70px;">
+        <a href="https://drive.google.com/file/d/13SkdnKTXmPb1co696R5PQZedgwWp-wNn/view?usp=sharing" target="_blank" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">View</a>
+      </div>  
+    </div>
+
+        
+         <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">स्थानीय सम्पदाको संरक्षण र सम्बर्धन</span>          
+ <div style="display: flex; gap: 70px;">            
+<a href="https://drive.google.com/file/d/1mMjqJsHfhv2JTkq3bkSP8NN8x9pYdXuc/view?usp=sharing" target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>          
+ </div> 
+  </div>
+      
+  
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">स्थानीय उत्पादन</span>        
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1htxVTpqfidT9ELioDi6uRxIJbOpo-R9j/view?usp=sharing"target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>
+</div>
+
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">स्थानीय भाषा, वेषभुषा र रहनसहन</span>      
+   <div style="display: flex; gap: 70px;">
+<a href="    "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>
+</div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">जनकपुर धाम</span>       
+   <div style="display: flex; gap: 70px;">
+      <a href="https://drive.google.com/file/d/1PVTvaR-hoaW3IbiK9ETJbtqrIU_vZTSS/view?usp=sharing"target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div> 
+</div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">सौर्यमण्डल, ग्रह तथा उपग्रहहरु</span>         
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1WplaVdafziMvmvABOeT3ZFmeAoG-NSIE/view?usp=sharing "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>
+</div>
+
+
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">सडक सुरक्षा तथा ट्राफिक नियम</span>  
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1HHCxQUj0rdseTkKDTIU6ZdlDjFfSTPLx/view?usp=sharing "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div> 
+</div>
+
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">नेपालको प्राकृतिक तथा धरातलिय स्वरूप</span>       
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1XIeus41hMkyyfCEOQt7IHhMUcXOVHg5I/view?usp=sharing"target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div> 
+</div>
+
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">सामुदायिक कार्यमा सहभागीता</span>        
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1evKjoX1KRxpvwqoY80jv0kuH6ibMNZFg/view?usp=sharing  "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+ </div> 
+   </div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">हाम्रो पेसा तथा व्यवसायहरु </span>  
+   <div style="display: flex; gap: 70px;">
+<a href="  https://drive.google.com/file/d/1XC9inECNq9ioH0CCcpQSfwgF-5Pru4uL/view?usp=sharing   "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>   
+</div>
+
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">अनुशासन</span>      
+   <div style="display: flex; gap: 70px;">
+ <a href="https://drive.google.com/file/d/1-8Fp8IB1mAfpKOBzrdQboKuQ_R5GtOIm/view?usp=sharing"target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>    
+</div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">राष्ट्रिय विभूतिहरु</span>      
+   <div style="display: flex; gap: 70px;">
+ <a href="https://drive.google.com/file/d/1o_0RpJLBcYC0ji_3zNdsvs8Pgj8xmKa7/view?usp=sharing"target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>    
+</div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">सुरक्षा सहयोगी सेवाहरु</span>    
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/11XjOXGg-sesd8A2wiWdRklrutlhbULe9/view?usp=sharing"target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>
+</div>
+
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">सामाजिक समस्या:चोरी डकैती</span>      
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1ziwTtusleyXMdnVlvXl8kB0N0X013ym4/view?usp=sharing  "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>  
+</div> 
+</div>
+
+        <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">Test-1</span>      
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/13CCfmvdSz2Z3rzPF9tHaWNXxU6gQdd9H/view?usp=sharing  "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>  
+</div> 
+</div>
+
+
+       <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">Test-2</span>      
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1JsAD-qY9zZNICg5t0T0gCHpLUQjxM6mF/view?usp=sharing  "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>  
+</div>
+</div>
+
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">Test-3</span>      
+   <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1rPO2mnCcaO-6wHt-ZKI7GKLvpojmdrB5/view?usp=sharing  "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>  
+</div>
+</div>
+        
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">Set-7</span>      
+  <div style="display: flex; gap: 70px;">
+<a href=" https://drive.google.com/file/d/1l1PsGZbZ0TdfYq4GqhUvUnTD0QpnHiJd/view?usp=sharing  "target="_blank" 
+style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>  
+  </div>
+</div>
+
+
+
+ <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">प्रतिवेदन लेखन</span>        
+   <div style="display: flex; gap: 70px;">
+<a href="  https://drive.google.com/file/d/1sTuwLVCltyA4KdzXBcJAHC5vBp3tDJbO/view?usp=sharing "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+</div>
+</div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;">समाचार लेखन</span>          
+   <div style="display: flex; gap: 70px;">
+<a href="  https://drive.google.com/file/d/1cdaNQCeG0g20t9Jlql1T5H-1gKbPlJZW/view?usp=sharing "target="_blank" class="download-link" style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; margin-left: 10px;">View</a>
+ </div>
+</div>
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+  <span style="color: black; background-color: orange; padding: 5px 10px; border-radius: 5px;"> संवाद लेखन  </span>
+  <a href="https://drive.google.com/file/d/1Cq7EUQsODmjEdy6Zb0ReJpIXs2vqWb0k/view?usp=sharing" target="_blank"
+     style="background-color: #4285F4; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;"> View</a>
+</div>
+</div>
+        
+</section>
+ 
+
+
+
+
+
+
+
+
+
+
+<section class="section">
+  <h1><span class="highlight" style="color: red;">Lovely Angels English Boarding School</span></h1>
+  <h2><span class="highlight" style="color: blue;">For Class 7 Students</span></h2>
+
+  <!-- Existing Grammar Section -->
+  <a href="#" onclick="toggleVisibility('c7', event)" class="download-link">नेपाली ब्याकरण नोट</a>
+  <div id="c7" class="pdf-list" style="display: none;">
+    <div class="pdf-title">PDF फाइलहरू:</div>
+    
+    <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center;">
+      <span style="background-color: orange; padding: 5px 10px; border-radius: 5px;">व्याकरणको परिचय र नामका प्रकार</span>  
+      <a href="https://drive.google.com/file/d/1fr4DherHA1LMjkbcp9lgJ4mBqWYF8XXJ/view?usp=sharing" target="_blank" class="download-link" style="margin-left: 10px; background-color: #4285F4; color: white; padding: 5px 10px; border-radius: 5px;">View</a>
+    </div>
+
+    <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center;">
+      <span style="background-color: orange; padding: 5px 10px; border-radius: 5px;">पदवर्ग (नाम, सर्वनाम, विशेषण, क्रियापद...)</span>  
+      <a href="https://drive.google.com/file/d/18VXRkP1BoTGiqPlMt-DrVu316bajq_Ec/view?usp=sharing" target="_blank" class="download-link" style="margin-left: 10px; background-color: #4285F4; color: white; padding: 5px 10px; border-radius: 5px;">View</a>
+    </div>
+  
+
+
+     <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center;">
+      <span style="background-color: orange; padding: 5px 10px; border-radius: 5px;">पदसंगति (वाक्य परिवर्तन)</span>  
+      <a href=" https://drive.google.com/file/d/1cTUJaOOYtkI7TvVunD2l-XO4bq1PHcAg/view?usp=sharing" target="_blank" class="download-link" style="margin-left: 10px; background-color: #4285F4; color: white; padding: 5px 10px; border-radius: 5px;">View</a>
+    </div>
+
+
+     
+  <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center;">
+      <span style="background-color: orange; padding: 5px 10px; border-radius: 5px;">पहिलो त्रैमासिक नमूना प्रश्न</span>  
+      <a href="https://drive.google.com/file/d/1f9C_OZacmBx0m-GnHymQBuWjSSLCofNB/view?usp=sharing" target="_blank" class="download-link" style="margin-left: 10px; background-color: #4285F4; color: white; padding: 5px 10px; border-radius: 5px;">View</a>
+    </div>
+ 
+
+
+<div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center;">
+      <span style="background-color: orange; padding: 5px 10px; border-radius: 5px;">नमूना प्रश्न र उत्तर लेख्ने तरिका </span>  
+      <a href="https://drive.google.com/file/d/1D0mp9uTvcstaL60YnzZBdgYxgGOktdtv/view?usp=sharing" target="_blank" class="download-link" style="margin-left: 10px; background-color: #4285F4; color: white; padding: 5px 10px; border-radius: 5px;">View</a>
+    </div>
+
+
+
+      <div class="pdf-item" style="padding: 10px; margin-bottom: 10px; display: flex; align-items: center;">
+      <span style="background-color: orange; padding: 5px 10px; border-radius: 5px;">घरायसी चिठी र निवेदन </span>  
+      <a href="https://drive.google.com/file/d/1VfdM76Fd_g7zAyJ8LbXxNEN4CF-Tf8K6/view?usp=sharing" target="_blank" class="download-link" style="margin-left: 10px; background-color: #4285F4; color: white; padding: 5px 10px; border-radius: 5px;">View</a>
+    </div>
+  </div>    
+</section>
+
+
+
+
+
+
+
+
+<section class="section">
+<a href="#" class="download-link" onclick="toggleVisibility('sst7', event)">
+  सामाजिक अध्ययन तथा मानव मूल्य शिक्षा नोट
+</a>
+
+<div id="sst7" class="pdf-list" style="display:none;">
+  <div class="pdf-title">PDF फाइल नोट:</div>
+
+  <!-- Item 1 -->
+  <div class="pdf-item" style="padding:10px; margin-bottom:10px; display:flex; align-items:center;">
+    <span style="background-color:orange; padding:5px 10px; border-radius:5px;">
+     विकासका पूर्वाधार शिक्षा र स्वास्थ्य 
+    </span>
+    <a href="https://drive.google.com/file/d/1vMeiOmsSEctXKCnaIhgyCxFTtz6xyx9P/view?usp=sharing" target="_blank"
+       style="margin-left:10px; background:#4285F4; color:white; padding:5px 10px; border-radius:5px;">
+       View
+    </a>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="pdf-item" style="padding:10px; margin-bottom:10px; display:flex; align-items:center;">
+    <span style="background-color:orange; padding:5px 10px; border-radius:5px;">
+      नेपाली परम्परागत परिकार र पहिरन
+    </span>
+    <a href="https://drive.google.com/file/d/1y06IVGIq0a_qGtPhkjSrMNKMH4rg73p2/view?usp=sharing" target="_blank"
+       style="margin-left:10px; background:#4285F4; color:white; padding:5px 10px; border-radius:5px;">
+       View
+    </a>
+  </div>
+
+ <!-- Item 3 -->
+  <div class="pdf-item" style="padding:10px; margin-bottom:10px; display:flex; align-items:center;">
+    <span style="background-color:orange; padding:5px 10px; border-radius:5px;">
+     टेस्ट प्रश्नहरु VVI
+    </span>
+    <a href=" https://drive.google.com/file/d/1URELS62VfSPtV9YJXJrnwND3K9JP10GS/view?usp=sharing" target="_blank"
+       style="margin-left:10px; background:#4285F4; color:white; padding:5px 10px; border-radius:5px;">
+       View
+    </a>
+  </div>
+   
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+<section class="section">
+    <h2><span class="highlight" style="color: red;">शिक्षक निर्देशिका (Teachers Guided)</h2>
+    <p class="highlight"><span style="color: green;">यहाँ पाठ्यक्रम विकास केन्द्रद्वारा तयार गरिएका विभिन्न कक्षाका विषयगत शिक्षक निर्देशिका (Subjective Teachers Guided) उपलब्ध छन: शिक्षक निर्देशिकाले शिक्षण सिकाई क्रियाकलापलाई थप मजबुद बनाउछ भन्ने कुरामा हामि बिस्वस्त छौं । pdf मा क्लिक गरी निशुल्क रुपमा अध्ययन गर्न सक्नुहुन्छ</span></p>
+    <a href="#" onclick="toggleVisibility('teacherguided', event)" class="download-link">शिक्षक निर्देशिका (Teachers Guided)</a>
+    <div id="teacherguided" class="pdf-list">
+        <div class="pdf-title">PDF फाइलहरू:</div>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/1 english.pdf" class="download-link" target="_blank" download>english 1 </a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/1 math.pdf" class="download-link" target="_blank" download>अनिवार्य गणित Math1</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/1 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली १</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/1 serophero.pdf" class="download-link" target="_blank" download>हाम्रो सेरोफेरो १</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/2 english.pdf" class="download-link" target="_blank" download>english 2</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/2 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली २</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/2 math.pdf" class="download-link" target="_blank" download>अनिवार्य गणित Math 2</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/5 english.pdf" class="download-link" target="_blank" download>english 5</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/5 social.pdf" class="download-link" target="_blank" download>सामाजिक अध्ययन तथा मानव मूल्य शिक्षा ५ </a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/6 english.pdf" class="download-link" target="_blank" download>english 6</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/6 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली ६</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/6 math.pdf" class="download-link" target="_blank" download>अनिवार्य गणित Math 6</a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/6 social.pdf" class="download-link" target="_blank" download>सामाजिक अध्ययन ६ </a>
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/6 health.pdf" class="download-link" target="_blank" download>स्वास्थ्य शारीरिक (Health) 6</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/7 english.pdf" class="download-link" target="_blank" download>english 7</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/7 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली ७</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/7 math.pdf" class="download-link" target="_blank" download>अनिवार्य गणित Math 7</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/7 social.pdf" class="download-link" target="_blank" download>सामाजिक अध्ययन ७</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/7 health.pdf" class="download-link" target="_blank" download>स्वास्थ्य शारीरिक (Health) 7</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/8 english.pdf" class="download-link" target="_blank" download>english 8</a> 
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/8 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली ८</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/8 math.pdf" class="download-link" target="_blank" download>अनिवार्य गणित Math 8</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/8 social.pdf" class="download-link" target="_blank" download>सामाजिक अध्ययन ८</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9 english.pdf" class="download-link" target="_blank" download>english 9</a>  
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली ९</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9 science.pdf" class="download-link" target="_blank" download>science 9</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9 social.pdf" class="download-link" target="_blank" download>सामाजिक अध्ययन ९</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/10 english.pdf" class="download-link" target="_blank" download>english 10</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/10 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली १०</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/10 math.pdf" class="download-link" target="_blank" download>अनिवार्य गणित Math 10</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/10 science.pdf" class="download-link" target="_blank" download>science 10</a>   
+<a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/10 social.pdf" class="download-link" target="_blank" download>सामाजिक अध्ययन १०</a>   
+
+ </div>
+</section>
+
+
+
+
+
+
+
+<section class="section">
+    <h2><span class="highlight" style="color: red;">पाठ्यक्रम (Curriculum)</h2>
+    <p class="highlight"><span style="color: green;">यहाँ पाठ्यक्रम विकास केन्द्रद्वारा तयार गरिएका विभिन्न पाठ्यक्रमहरु उपलब्ध छन: pdf मा क्लिक गरी निशुल्क रुपमा अध्ययन गर्न सक्नुहुन्छ</p>
+    <a href="#" onclick="toggleVisibility('courseList', event)" class="download-link">पाठ्यक्रमहरू (Curriculum)</a>
+    <div id="courseList" class="pdf-list">
+        <div class="pdf-title">PDF फाइलहरू:</div>
+     
+         <li><a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 nepali.pdf" class="download-link" target="_blank" download>अनिवार्य नेपाली ९-१०</a></li>
+        <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 Opt.Math.pdf" class="download-link" download>Opt.Math 9-10 </a></li>
+        <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 computer science.pdf" class="download-link" download>computer science 9-10</a></li>
+        <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 plant science.pdf" class="download-link" download> plant science 9-10</a></li>
+        <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 Electrical Engineering.pdf" class="download-link" download> Electrical Engineering 9-10</a></li>
+       <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 civil engineering.pdf" class="download-link" download> civil engineering 9-10</a></li>
+       <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 animal science.pdf" class="download-link" download> 9-10 animal science</a></li>
+       <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 korian language.pdf" class="download-link" download> 9-10 korian language 9-10</a></li>
+       <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9-10 computer engineering.pdf" class="download-link" download> Computer Engineering 9-10</a></li>
+    
+
+    </div>
+</section>
+
+
+   
+  
+        <section class="section">
+    <h2><span class="highlight" style="color: red;">पाठ्यपुस्तकहरु (Books)</h2>
+    <p class="highlight"><span style="color: green;">यहाँ नेपाल सरकार शिक्षा विज्ञान तथा प्रविधि मन्त्रालय पाठ्यक्रम विकास केन्द्र सानोठिमी भक्तपुरद्वारा निर्माण गरिएका सबै तहका पाठ्यपुस्तकहरु रहेका छन् निशुल्क रुपमा अध्ययन गर्न pdf मा क्लिक गर्न सक्नुहुन्छ </p>
+    <a href="#" onclick="toggleVisibility('booklist', event)" class="download-link">पाठ्यपुस्तकहरु (Books)</a>
+    <div id="booklist" class="pdf-list">
+     <div class="pdf-title">PDF फाइलहरू:</div>
+
+             <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/12 nepali.pdf" class="download-link" download> नेपाली १२ </a></li>
+             <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/12 samajik.pdf" class="download-link" download> social study & life skill education 12 </a></li>
+             <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/11 samajik.pdf" class="download-link" download> social study & life skill education 11 </a></li>
+             <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/10 nepali.pdf" class="download-link" download> नेपाली १०</a></li>
+               <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/9 samajik.pdf" class="download-link" download> social 9</a></li>
+             <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/5 nepali.pdf" class="download-link" download> नेपाली ५ </a></li>
+            <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/5 samajik.pdf" class="download-link" download> social 5 </a></li>
+               <li> <a href="https://github.com/brpmailobaburam/baburamphuyal/raw/main/4 samajik.pdf" class="download-link" download> social 4 </a></li>
+
+<!-- Additional courses -->             
+    </div>
+</section>
+
+
+
+
+
+
+<footer style="background-color: black; color: white; text-align: center; padding: 20px; margin-top: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p style="margin: 0;">
+            <span class="highlight" style="color: #00FF00;">&copy; 2025 Developer</span> All rights reserved
+        </p>
+        <p style="margin: 0;">Have any questions: <span class="highlight" style="color:skyblue;">Call +977-9844078996</span></p>
+   <p style="margin: 0;">
+            <span class="highlight" style="color: lightgreen;">Website Developed by</span>
+            <span class="highlight" style="color: yellow;"> Brpmailo</span>
+        </p>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+        <a href="mailto:brpmailobaburam@gmail.com" target="_blank">
+            <i class="fa-solid fa-envelope gmail-icon" style="font-size: 40px; margin: 0 10px;"></i>
+        </a>
+        <a href="http://www.youtube.com/@brpmailo" target="_blank">
+            <i class="fa-brands fa-youtube" style="font-size: 40px; color: #FF0000; margin: 0 10px;"></i>
+        </a>
+    </div>
+</footer>
+</body>
+</html>
+    
+
