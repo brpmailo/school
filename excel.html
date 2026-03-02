@@ -1,0 +1,165 @@
+<!-- excel.html -->
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ms_Excel Course</title>
+     <link rel="icon" type="image/png" href="b.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            width: 100%;
+        }
+        h3 { color: red; }
+        h4 { color: blue; }
+        .video-section, .quiz-section {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+        }
+        .quiz-section {
+            display: none;
+        }
+        .question {
+            margin: 10px 0;
+            font-size: 18px;
+            display: none;
+        }
+        .question label {
+            display: block;
+            margin: 5px 0;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .cer-link {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-section" id="videoSectionBasics">
+        <h3>यहाँ राखिएका भिडियोहरु हेरेर तपाईं MS Excel जान्नुहुने छ</h3>
+        <h4>MS Excel Video Tutorial</h4>
+        <iframe id="mainVideo" src="https://www.youtube.com/embed/AtZ3xzi1wq0" frameborder="0" allowfullscreen></iframe>
+ <iframe id="mainVideo" src="https://www.youtube.com/embed/g12v0O2JxjE?si=zWWMIqOJrwQIkEvr " frameborder="0" allowfullscreen></iframe>
+        <button onclick="startQuiz()">Take Exam & Get Your Achievement</button>
+    </div>
+ 
+    <div class="quiz-section" id="quizSection">
+        <h3>Answer these questions to get your certificate</h3>
+        <form id="quizForm">
+            <div id="questionsContainer"></div>
+            <div id="result"></div>
+            <button type="button" onclick="checkQuiz()">Submit</button>            
+<a href="cer.html"  id="certificateLink" class="cer-link" style="color: orange; text-decoration: none; padding: 10px; background-color: blue; border-radius: 5px; font-weight: bold; font-size: 20px;">Get Your Achievement</a>       
+ </form>
+    </div>
+
+
+
+    <script>
+        const questions = [
+            { q: "MS Excel मा कुन प्रकारको डेटा प्रयोग गर्न सकिन्छ?", options: ["चित्र मात्र", "संख्या, अक्षर, सूत्र आदि", "भिडियो मात्र"], answer: 1 },
+            { q: "Excel मा FORMULA सुरु गर्न कुन चिन्ह प्रयोग गरिन्छ?", options: ["= (बराबर चिन्ह)", "#Hash", "+ Pluss"], answer: 0 },
+            { q: "IF() फङ्क्शनले के गर्छ?", options: [ "संख्या जोड्ने", "भाग गर्ने", "शर्त अनुसार मान फर्काउने"], answer: 2 },
+           { q: "+ चिह्नले के काम गर्छ?", options:  ["शर्त अनुसार मान घटाउने", "शर्त अनुसार मान जोड्ने", "भाग गर्ने"], answer: 1 },
+           { q: "What is the function of SUM in Excel?", options:  ["Adds numbers in a range", " Finds the maximum value ", " Subtracts numbers"], answer: 1 }, 
+    { q: "MS Excel मा गुणन (Multiply) गर्न कुन चिह्न प्रयोग गरिन्छ?", options: ["*", "#", "+"], answer: 0 },
+    { q: "Excel मा एक पटक FORMULA प्रयोग गरेपछि फेरी पनि प्रयोग गर्ने गरिन्छ?", options: ["ठिक", "सन्दर्भ अनुसार", "बेठिक"], answer: 1 },
+    { q: "SUM() फङ्क्शनले के गर्छ?", options: ["संख्या जोड्ने", "संख्या घटाउने", "संख्या गुणा गर्ने"], answer: 0 },
+    { q: "Excel मा नयाँ शीट थप्न कुन सर्टकट कि प्रयोग गरिन्छ?", options: ["Ctrl + N", "Shift + F11", "Alt + S"], answer: 1 },
+    { q: "Excel मा सेल मर्ज गर्न कुन फङ्क्शन प्रयोग गरिन्छ?", options: ["Merge & Center", "Wrap Text", "Format Painter"], answer: 0 },
+    { q: "Excel मा फाइल सेभ गर्न कुन सर्टकट कि प्रयोग गरिन्छ?", options: ["Ctrl + V", "Ctrl + P", "Ctrl + S"], answer: 2 },
+    { q: "Excel मा रिलेटेड डेटा फिल्टर गर्न कुन सुविधा प्रयोग गरिन्छ?", options: ["Sort", "Filter", "Data Validation"], answer: 1 },
+    { q: "Excel मा ग्राफ वा चार्ट बनाउन कुन अप्सन प्रयोग गरिन्छ?", options: ["Pivot Table", "Data Sort", "Insert Chart"], answer: 2 },
+    { q: "Excel मा कुनै सेलको पछिल्लो मान फर्काउन कुन सर्टकट प्रयोग गरिन्छ?", options: ["Ctrl + Z", "Ctrl + Y", "Ctrl + C"], answer: 0 },
+    { q: "Excel मा COUNT() फङ्क्शनको प्रयोग केका लागि गरिन्छ?", options: ["संख्या गणना गर्न", "संख्या घटाउन", "डेटा मर्ज गर्न"], answer: 0 },
+    { q: "Excel मा % निकाल्न कुन सूत्र प्रयोग गरिन्छ?", options: ["=A1*B1", "=A1+B1", "=A1/B1*100"], answer: 2 },
+    { q: "Excel मा कुनै पङ्क्ति/स्तम्भ लुकाउन कुन सर्टकट कि प्रयोग गरिन्छ?", options: ["Ctrl + H", "Ctrl + 9 / Ctrl + 0 ", "Ctrl + L"], answer: 1 },
+    { q: "Excel मा समान डेटा छान्न कुन सुविधा प्रयोग गरिन्छ?", options: ["Remove Duplicates", "Find & Replace", "Sort"], answer: 0 },
+    { q: "Excel मा Print Preview हेर्न कुन सर्टकट Key प्रयोग गरिन्छ?", options: ["Ctrl + V", "Ctrl + F", "Ctrl + P"], answer: 2 },
+    { q: "Excel मा AutoSum गर्न कुन सर्टकट प्रयोग गरिन्छ?", options: ["Alt + =", "Ctrl + A", "Shift + S"], answer: 0 }
+
+// Add up to 20 questions here
+        ];
+
+        function startQuiz() {
+            document.getElementById("videoSectionBasics").style.display = "none";
+            document.getElementById("quizSection").style.display = "block";
+            loadQuestions();
+        }
+
+        function loadQuestions() {
+            const container = document.getElementById("questionsContainer");
+            container.innerHTML = "";
+            questions.forEach((q, index) => {
+                const div = document.createElement("div");
+                div.className = "question";
+                div.style.display = index === 0 ? "block" : "none";
+                div.id = "question" + (index + 1);
+                div.innerHTML = `<p>${index + 1}. ${q.q}</p>` +
+                    q.options.map((opt, i) => `<label><input type="radio" name="q${index}" value="${i}" onclick="showNextQuestion(${index + 2})"> ${opt}</label>`).join("");
+                container.appendChild(div);
+            });
+        }
+
+        function showNextQuestion(nextIndex) {
+            const currentIndex = nextIndex - 1;
+            if (currentIndex < questions.length) {
+                document.getElementById("question" + currentIndex).style.display = "none";
+                if (document.getElementById("question" + nextIndex)) {
+                    document.getElementById("question" + nextIndex).style.display = "block";
+                }
+            }
+        }
+
+        function checkQuiz() {
+            let correctAnswers = 0;
+            const totalQuestions = questions.length;
+            questions.forEach((q, index) => {
+                const selected = document.querySelector(`input[name='q${index}']:checked`);
+                if (selected && parseInt(selected.value) === q.answer) {
+                    correctAnswers++;
+                }
+            });
+
+           if (correctAnswers >= 15) {
+    document.getElementById("result").innerText = "Congratulations!";
+    document.getElementById("result").style.color = "green";
+    document.getElementById("certificateLink").style.display = "block";
+} else {
+    document.getElementById("result").innerText = "Please try again!";
+    document.getElementById("result").style.color = "red";
+    document.getElementById("certificateLink").style.display = "none";
+}
+
+        }
+    </script>
+</body>
+</html>
