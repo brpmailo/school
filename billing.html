@@ -1,10 +1,10 @@
-<!-- student portal.html -->
+<!-- Billing portal.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tuition Student Management</title>
+  <title>Student-Billing</title>
   <link rel="icon" type="image/png" href="b.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -114,6 +114,42 @@
 
 
 <body>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCRZ3hgNXAkXH1hT3M7Hut6Zr5s8Kd4rZA",
+    authDomain: "school-login-c007e.firebaseapp.com",
+    projectId: "school-login-c007e",
+    storageBucket: "school-login-c007e.firebasestorage.app",
+    messagingSenderId: "464966509096",
+    appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ✅ Login check
+onAuthStateChanged(auth, user => {
+    if(user && user.emailVerified){
+        console.log("Verified user:", user.email);
+        // User logged in, allow access
+    } else {
+        alert("Login required! Redirecting to login page.");
+        window.location.href = "login.html";
+    }
+});
+</script>
+
+
+
+
+
+
+
   <h1>Tuition Student Management Portal</h1>
 
   <!-- Teacher Menu -->
