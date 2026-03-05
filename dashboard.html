@@ -66,7 +66,7 @@ button.logout:hover{ background:#e04848; }
 <body>
 
 <header>
-    <h1>Welcome!, <span id="userName">Student</span></h1>
+    <h1>Welcome! <span id="userName">Student</span></h1>
     <button class="logout" onclick="logout()">Logout</button>
 </header>
 
@@ -75,21 +75,21 @@ button.logout:hover{ background:#e04848; }
 
 
 <div class="container">
-    <div class="card" onclick="openPage('gradesheet.html')">
+    <div class="card" onclick="openPage('grade-sheet.html')">
         <h2>Grade Sheet</h2>
-        <p>View and download your grades</p>
+        <p>You can manage your students grade-sheets</p>
     </div>
-    <div class="card" onclick="openPage('certificate.html')">
+    <div class="card" onclick="openPage('aca_cer.html')">
         <h2>Certificate</h2>
-        <p>Access your certificates</p>
+        <p>Access your Student's certificates</p>
     </div>
-    <div class="card" onclick="openPage('exam.html')">
-        <h2>Exam Schedule</h2>
-        <p>Check upcoming exams</p>
+    <div class="card" onclick="openPage('billing.html')">
+        <h2>Billing</h2>
+        <p>Manage here School Billing</p>
     </div>
-    <div class="card" onclick="openPage('notes.html')">
-        <h2>Notes</h2>
-        <p>Download study notes</p>
+    <div class="card" onclick="openPage('seatplan.html')">
+        <h2>Seat Planing</h2>
+        <p>You can Manage Exam Seat plan here.</p>
     </div>
     <div class="card" onclick="openPage('attendance.html')">
         <h2>Attendance</h2>
@@ -151,3 +151,4 @@ window.openPage = function(page){
 </body>
 
 </html>
+
