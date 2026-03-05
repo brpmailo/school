@@ -1,117 +1,206 @@
-<!-- Billing portal.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student-Billing</title>
-  <link rel="icon" type="image/png" href="b.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<meta charset="UTF-8">
+<title>Tuition Billing System</title>
 
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2px; padding: 0; }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    table { width: 100%; border-collapse: collapse; margin-top: 2px; }
-    th, td { padding: 2px; border: 1px solid #ddd; text-align: center; }
-
-    .teacher-menu { margin-bottom: 20px; }
-    .teacher-container { display: none; margin-top: 20px; }
-    .teacher-container input { margin-bottom: 10px; }
-    .student-photo { width: 80px; height: 80px; object-fit: cover; }
-    .signature-photo { width: 100px; height: 50px; object-fit: contain; }
-    .action-btn { color: white; border: none; padding: 5px 10px; cursor: pointer; margin: 2px; }
-    .delete-btn { background-color: #f44336; }
- .edit-btn { background-color: #2196F3; }
-    .print-btn { background-color: #4CAF50; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
-
-    /* A4 page print settings */
-    @media print {
-      body * { visibility: hidden; }
-      .print-area, .print-area * { visibility: visible; }
-
-      @page {
-        size: A4 portrait;
-        margin: 3mm;
-      }
-
-
-      .print-area {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, auto);
-        gap: 3mm;
-        page-break-before: always;
-      }
-
-      .bill {
-        border: 1px solid #ddd;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 14px;
-      }
-
-      .bill img {
-        margin-bottom: 15px;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      .bill strong {
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-
-      .bill .details {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
-
-      .bill .fee {
-        margin: 10px 0;
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center;
-      }
-
-.bill .signature {
-  margin-top: 0px;
-  text-align: right; 
-  width: 100%;
-  font-size: 12px;
+<style>
+body{
+font-family:Segoe UI;
+margin:0;
+padding:20px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:#333;
 }
 
-.bill .signature .signature-photo {
-  width: 90px; 
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 0px; 
+h1{
+text-align:center;
+color:white;
 }
 
-.bill .signature .line {
-  margin-top: 0px;
-  border-top: 1px solid black;
-  width: 100px; 
-  margin-left: auto;
+button{
+padding:8px 14px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#2c7be5;
+color:white;
+margin:3px;
 }
 
-.bill .signature span {
-  display: block; 
- 
-  margin-top: 0px; 
+.dashboard{
+display:flex;
+gap:15px;
+margin:20px 0;
 }
+
+.card{
+flex:1;
+background:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
-  </style>
+
+.form-box{
+background:white;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+input,select{
+padding:7px;
+margin:5px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:10px;
+overflow:hidden;
+}
+
+th{
+background:#2c7be5;
+color:white;
+padding:10px;
+}
+
+td{
+padding:8px;
+border-bottom:1px solid #eee;
+text-align:center;
+}
+
+.student-photo{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+}
+
+/* BILL */
+
+.bill{
+border:1px dashed #000;
+padding:6px;
+font-size:13px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+background:white;
+}
+
+.bill-header{
+display:flex;
+justify-content:space-between;
+font-weight:bold;
+color:#0a2a66;
+}
+
+.bill-name{
+text-align:center;
+font-weight:bold;
+font-size:16px;
+}
+
+.bill img{
+width:35px;
+height:35px;
+border-radius:50%;
+margin:auto;
+}
+
+.bill p{
+margin:2px 0;
+}
+
+
+
+/* QR */
+
+.qr{
+display:flex;
+justify-content:center;
+margin-top:3px;
+}
+
+.qr img{
+width:55px;
+height:55px;
+}
+
+/* SIGNATURE */
+
+.signature{
+text-align:right;
+margin-left:auto;
+width:100px;
+}
+
+.signature img{
+height:40px;
+display:block;
+margin-left:auto;
+}
+
+.signature .line{
+border-top:1px solid black;
+width:70px;
+margin-left:auto;
+}
+
+.signature span{
+font-size:10px;
+}
+
+/* PRINT */
+
+.print-area{
+display:none;
+}
+
+@media print{
+
+@page{
+size:A4;
+margin:8mm;
+}
+
+body *{
+visibility:hidden;
+}
+
+.print-area,
+.print-area *{
+visibility:visible;
+}
+
+.print-area{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+grid-template-rows:repeat(3,1fr);
+gap:4mm;
+}
+
+.bill{
+height:90mm;
+}
+
+}
+</style>
 </head>
-
 
 <body>
 
@@ -150,233 +239,225 @@ onAuthStateChanged(auth, user => {
 
 
 
-  <h1>Tuition Student Management Portal</h1>
+<h1>Tuition Billing System</h1>
 
-  <!-- Teacher Menu -->
-  <button onclick="toggleTeacherMenu()">Teachers</button>
+<div class="dashboard">
+<div class="card">Total Students
+<h2 id="totalStudents">0</h2></div>
+<div class="card">Paid
+<h2 id="paidStudents">0</h2></div>
+<div class="card">Unpaid
+<h2 id="unpaidStudents">0</h2></div>
+<div class="card">Collection
+<h2 id="totalCollection">0</h2></div>
+</div>
 
-  <!-- Teacher Container -->
-  <div class="teacher-container" id="teacherContainer">
-    <button onclick="addTeacher()">Add Signature</button>
-    <button onclick="changeTeacher()">Change Signature</button>
-    <input type="file" id="teacherSignature" accept="image/*" required style="display: none;">
-    <button id="saveSignatureBtn" style="display: none;" onclick="saveSignature()">Save Signature</button>
-  </div>
+<input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
 
-  <!-- Add Student Form -->
-  <button onclick="toggleForm()">Add Student</button>
-  <div id="formContainer" style="display: none; margin-top: 20px;">
-    <label for="studentId">Student ID:</label>
-    <input type="text" id="studentId" placeholder="Enter Student ID" required>
-    
-    <label for="studentName">Name:</label>
-    <input type="text" id="studentName" placeholder="Enter Student Name" required>
+<button onclick="toggleForm()">Add Student</button>
+<button onclick="printAll()">Print All Bills</button>
+<button onclick="exportCSV()">Export Excel</button>
 
-    <label for="studentClass">Class:</label>
-    <input type="text" id="studentClass" placeholder="Enter Class" required>
+<br><br>
 
-    <label for="studentFee">Fee:</label>
-    <input type="number" id="studentFee" placeholder="Enter Fee" required>
+<input type="file" id="teacherSign">
+<button onclick="saveSignature()">Save Teacher Signature</button>
 
-    <label for="studentPhoto">Upload Photo:</label>
-    <input type="file" id="studentPhoto" accept="image/*" required>
+<input type="file" id="paymentQR">
+<button onclick="saveQR()">Save Payment QR</button>
 
-    <button onclick="addStudent()">Add Student</button>
-  </div>
+<div class="form-box" id="formBox" style="display:none">
+<input id="id" placeholder="Symbol No">
+<input id="name" placeholder="Name">
+<input id="class" placeholder="Class">
+<input id="fee" placeholder="Fee">
 
-  <button onclick="printAllBills()">Print All Bills</button> <!-- Print All Bills button -->
-  
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Class</th>
-        <th>Fee</th>
-        <th>Photo</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="studentTable"></tbody>
-  </table>
+<select id="month">
+<option>Baishakh</option>
+<option>Jestha</option>
+<option>Asar</option>
+<option>Shrawan</option>
+<option>Bhadra</option>
+<option>Ashwin</option>
+<option>Kartik</option>
+<option>Mangsir</option>
+<option>Poush</option>
+<option>Magh</option>
+<option>Falgun</option>
+<option>Chaitra</option>
+</select>
 
-  <!-- Print Area -->
-  <div class="print-area" id="printArea"></div>
+<input type="file" id="photo">
+<button onclick="addStudent()">Save Student</button>
+</div>
 
-  <script>
-    let teacherSignature = localStorage.getItem('teacherSignature'); // Retrieve teacher's signature from localStorage
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Name</th>
+<th>Class</th>
+<th>Month</th>
+<th>Fee</th>
+<th>Status</th>
+<th>Photo</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="table"></tbody>
+</table>
 
-    function toggleTeacherMenu() {
-      const teacherMenu = document.getElementById("teacherContainer");
-      teacherMenu.style.display = teacherMenu.style.display === "block" ? "none" : "block";
-    }
+<div class="print-area" id="printArea"></div>
 
-    function addTeacher() {
-      const signatureInput = document.getElementById("teacherSignature").files[0];
-      if (!signatureInput) {
-        alert("Please upload a signature!");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = function () {
-        teacherSignature = reader.result;
-        localStorage.setItem('teacherSignature', teacherSignature); // Save signature to localStorage
-        alert("Teacher's signature saved successfully!");
-        toggleTeacherMenu();
-      };
-      reader.readAsDataURL(signatureInput);
-    }
+<script>
+let students=JSON.parse(localStorage.getItem("students"))||[];
+let teacherSignature=localStorage.getItem("teacherSignature");
+let paymentQR=localStorage.getItem("paymentQR");
 
-    function changeTeacher() {
-      document.getElementById("teacherSignature").style.display = "block";
-      document.getElementById("saveSignatureBtn").style.display = "inline-block"; // Show save button
-    }
-
-    function saveSignature() {
-      const signatureInput = document.getElementById("teacherSignature").files[0];
-      if (!signatureInput) {
-        alert("Please upload a signature to save!");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = function () {
-        teacherSignature = reader.result;
-        localStorage.setItem('teacherSignature', teacherSignature); // Save signature to localStorage
-        alert("Teacher's signature saved successfully!");
-        document.getElementById("teacherSignature").style.display = "none"; // Hide file input after saving
-        document.getElementById("saveSignatureBtn").style.display = "none"; // Hide save button
-      };
-      reader.readAsDataURL(signatureInput);
-    }
-
-    function toggleForm() {
-      const form = document.getElementById("formContainer");
-      form.style.display = form.style.display === "block" ? "none" : "block";
-    }
-
-    function addStudent() {
-      const id = document.getElementById("studentId").value.trim();
-      const name = document.getElementById("studentName").value.trim();
-      const studentClass = document.getElementById("studentClass").value.trim();
-      const fee = document.getElementById("studentFee").value.trim();
-      const photo = document.getElementById("studentPhoto").files[0];
-
-      if (!id || !name || !studentClass || !fee || !photo) {
-        alert("All fields are required!");
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onloadend = function () {
-        const students = JSON.parse(localStorage.getItem("students")) || [];
-        students.push({ id, name, studentClass, fee, photo: reader.result });
-        localStorage.setItem("students", JSON.stringify(students));
-        displayStudents();
-        toggleForm();
-      };
-      reader.readAsDataURL(photo);
-    }
-
-    function displayStudents() {
-      const students = JSON.parse(localStorage.getItem("students")) || [];
-      const studentTable = document.getElementById("studentTable");
-      studentTable.innerHTML = students.map((student, index) => `
-        <tr>
-          <td>${student.id}</td>
-          <td>${student.name}</td>
-          <td>${student.studentClass}</td>
-          <td>${student.fee}</td>
-          <td><img src="${student.photo}" alt="Photo" class="student-photo"></td>
-          <td>
-           <button class="action-btn print-btn" onclick="printStudentBill(${index})">Print</button>
-     	 <button class="action-btn edit-btn" onclick="editStudent(${index})">Edit</button>
-            <button class="action-btn delete-btn" onclick="deleteStudent(${index})">Delete</button>            
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function deleteStudent(index) {
-      const students = JSON.parse(localStorage.getItem("students")) || [];
-      students.splice(index, 1);
-      localStorage.setItem("students", JSON.stringify(students));
-      displayStudents();
-    }
-// Edit Student
-    function editStudent(index) {
-      const students = JSON.parse(localStorage.getItem("students")) || [];
-      const student = students[index];
-
-      const newName = prompt("Edit Name:", student.name) || student.name;
-      const newClass = prompt("Edit Class:", student.studentClass) || student.studentClass;
-      const newFee = prompt("Edit Fee:", student.fee) || student.fee;
-
-      students[index] = { ...student, name: newName, studentClass: newClass, fee: newFee };
-      localStorage.setItem("students", JSON.stringify(students));
-      displayStudents();
-    }
-
-    function getCurrentDate() {
-  const today = new Date();
-  const nepaliDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-  return nepaliDate;
+function toggleForm(){
+let f=document.getElementById("formBox");
+f.style.display=f.style.display=="none"?"block":"none";
 }
 
-// Replace placeholder dates on bill generation
-function printStudentBill(index) {
-  const students = JSON.parse(localStorage.getItem("students"));
-  const student = students[index];
-  const printArea = document.getElementById("printArea");
-
-  printArea.innerHTML = `
-    <div class="bill">
-      <img src="${student.photo}" alt="Photo">
-      <strong>${student.name}</strong>
-      <div class="details">
-        <span><strong>Class:</strong> ${student.studentClass}</span>
-        <span><strong>ID:</strong> ${student.id}</span>
-      </div>
-
-      <div class="fee">
-        <span style="font-size: 10px; margin-top: 5px; display: inline-block;"><p>Date: ${getCurrentDate()}</p>
-        <p><strong>Tuition Fee: Rs ${student.fee}</strong></p>
-      </div>
-     <div class="signature">
-        ${teacherSignature ? `<img src="${teacherSignature}" class="signature-photo" alt="Teacher's Signature">` : ''}
-        <div class="line"></div>
-        <span style="font-size: 10px; font-weight: bold; margin-top: 5px; display: inline-block;">Teacher's Signature</span>
-      </div>
-    </div>
-  `;
-  window.print();
+function saveSignature(){
+let file=document.getElementById("teacherSign").files[0];
+let reader=new FileReader();
+reader.onload=function(){
+teacherSignature=reader.result;
+localStorage.setItem("teacherSignature",teacherSignature);
+alert("Signature Saved");
+}
+reader.readAsDataURL(file);
 }
 
-function printAllBills() {
-  const students = JSON.parse(localStorage.getItem("students"));
-  const printArea = document.getElementById("printArea");
-
-  printArea.innerHTML = students.map(student => `
-    <div class="bill">
-      <img src="${student.photo}" alt="Photo">
-      <strong>${student.name}</strong>
-      <div class="details">
-        <span><strong>ID:</strong> ${student.id}</span>
-        <span><strong>Class:</strong> ${student.studentClass}</span>
-      </div>
-      <div class="fee">
-        <span style="font-size: 10px; margin-top: 5px; display: inline-block;"><p>Date: ${getCurrentDate()}</p>
-        <p><strong>Tuition Fee: Rs. ${student.fee}</strong></p>
-      </div>
-      <div class="signature">
-        ${teacherSignature ? `<img src="${teacherSignature}" class="signature-photo" alt="Teacher's Signature">` : ''}
-        <div class="line"></div>
-        <span style="font-size: 10px; font-weight: bold; margin-top: 5px; display: inline-block;">Teacher's Signature</span>
-      </div>
-    </div>
-  `).join('');
-  window.print();
+function saveQR(){
+let file=document.getElementById("paymentQR").files[0];
+let reader=new FileReader();
+reader.onload=function(){
+paymentQR=reader.result;
+localStorage.setItem("paymentQR",paymentQR);
+alert("QR Saved");
 }
-    window.onload = displayStudents;
-  </script>
+reader.readAsDataURL(file);
+}
+
+function addStudent(){
+let id=document.getElementById("id").value;
+let name=document.getElementById("name").value;
+let cls=document.getElementById("class").value;
+let fee=document.getElementById("fee").value;
+let month=document.getElementById("month").value;
+let file=document.getElementById("photo").files[0];
+let reader=new FileReader();
+reader.onload=function(){
+students.push({id,name,class:cls,fee,month,photo:reader.result,paid:false});
+save();
+}
+reader.readAsDataURL(file);
+}
+
+function save(){
+localStorage.setItem("students",JSON.stringify(students));
+display();
+}
+
+function display(){
+let html="";
+let paid=0;
+let total=0;
+students.forEach((s,i)=>{
+if(s.paid){paid++; total+=Number(s.fee);}
+html+=`
+<tr>
+<td>${s.id}</td>
+<td>${s.name}</td>
+<td>${s.class}</td>
+<td>${s.month}</td>
+<td>${s.fee}</td>
+<td>${s.paid?"Paid":"Unpaid"}</td>
+<td><img src="${s.photo}" class="student-photo"></td>
+<td>
+<button onclick="pay(${i})"><i class="fa fa-check"></i></button>
+<button onclick="editMonth(${i})"><i class="fa fa-pen"></i></button>
+<button onclick="printBill(${i})"><i class="fa fa-print"></i></button>
+<button onclick="del(${i})"><i class="fa fa-trash"></i></button>
+</td>
+</tr>
+`;
+});
+document.getElementById("table").innerHTML=html;
+document.getElementById("totalStudents").innerText=students.length;
+document.getElementById("paidStudents").innerText=paid;
+document.getElementById("unpaidStudents").innerText=students.length-paid;
+document.getElementById("totalCollection").innerText=total;
+}
+
+function pay(i){students[i].paid=true; save();}
+function del(i){students.splice(i,1); save();}
+
+function searchStudent(){
+let v=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll("#table tr").forEach(r=>{
+let name=r.children[1].innerText.toLowerCase();
+r.style.display=name.includes(v)?"":"none";
+});
+}
+
+function editMonth(i){
+let newMonth = prompt("Enter New Month", students[i].month);
+if(newMonth){students[i].month=newMonth; save();}
+}
+
+function billHTML(s){
+return`
+<div class="bill">
+<div class="bill-header">
+<span>Symbol: ${s.id}</span>
+<span>Class: ${s.class}</span>
+</div>
+<div class="bill-name">${s.name}</div>
+<img src="${s.photo}">
+<p>Month : ${s.month}</p>
+<p><b>Fee : Rs ${s.fee}</b></p>
+<p>Status : <b>${s.paid ? "PAID" : "UNPAID"}</b></p>
+<div class="qr">
+${paymentQR?`<img src="${paymentQR}">`:""}
+</div>
+<div class="signature">
+${teacherSignature?`<img src="${teacherSignature}">`:""}
+<div class="line"></div>
+<span>Teacher</span>
+</div>
+</div>
+`;
+}
+
+function printBill(i){
+document.getElementById("printArea").innerHTML=billHTML(students[i]);
+window.print();
+}
+
+function printAll(){
+let html="";
+students.forEach(s=>{html+=billHTML(s);});
+document.getElementById("printArea").innerHTML=html;
+window.print();
+}
+
+function exportCSV(){
+let csv="ID,Name,Class,Month,Fee,Status\n";
+students.forEach(s=>{
+csv+=`${s.id},${s.name},${s.class},${s.month},${s.fee},${s.paid?'Paid':'Unpaid'}\n`;
+});
+let blob=new Blob([csv]);
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="students.csv";
+a.click();
+}
+
+display();
+</script>
+
 </body>
 </html>
