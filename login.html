@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>School Secure Login / Signup</title>
+<title>School Login/Signup</title>
+<link rel="icon" type="image/png" href="b.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI', sans-serif;
     background: linear-gradient(135deg,#667eea,#764ba2);
     height:100vh;
     display:flex;
@@ -17,13 +18,13 @@ body{
 .container{
     background:white;
     padding:40px;
-    width:350px;
+    width:380px;
     border-radius:15px;
     box-shadow:0 15px 35px rgba(0,0,0,0.3);
     text-align:center;
 }
-h2{ margin-bottom:25px; color:#333; }
-.input-group{ margin-bottom:20px; }
+h2{ margin-bottom:20px; color:#333; }
+.input-group{ margin-bottom:15px; }
 input{
     width:100%;
     padding:12px;
@@ -46,8 +47,19 @@ button:hover{ background:#5a67d8; }
 #message{ margin-top:15px; font-size:14px; font-weight:bold; }
 .success{ color:green; }
 .error{ color:red; }
-.footer{ margin-top:20px; font-size:13px; color:#777; }
+.footer{ margin-top:15px; font-size:13px; color:#777; }
 .switch{ margin-top:10px; cursor:pointer; color:#667eea; text-decoration:underline;}
+#resendBtn{
+    margin-top:10px;
+    display:none;
+    padding:8px 12px;
+    background:#ff9800;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+}
+#resendBtn:hover{ background:#e68a00;}
 </style>
 </head>
 <body>
@@ -58,24 +70,21 @@ button:hover{ background:#5a67d8; }
     <div class="input-group">
         <input type="email" id="email" placeholder="Enter Email">
     </div>
-
     <div class="input-group">
         <input type="password" id="password" placeholder="Enter Password">
     </div>
 
     <button id="actionBtn">Login</button>
-
     <p id="message"></p>
-    <p class="switch" id="switchForm">Don't have an account? Sign Up</p>
+    <button id="resendBtn">Resend Verification Email</button>
 
-    <div class="footer">
-        Secure Firebase Authentication
-    </div>
+    <p class="switch" id="switchForm">Don't have an account? Sign Up</p>
+    <div class="footer">Secure Firebase Authentication</div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
 // Firebase Config
 const firebaseConfig = {
@@ -86,7 +95,6 @@ const firebaseConfig = {
     messagingSenderId: "464966509096",
     appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -96,15 +104,19 @@ const formTitle = document.getElementById("formTitle");
 const actionBtn = document.getElementById("actionBtn");
 const switchForm = document.getElementById("switchForm");
 const message = document.getElementById("message");
+const resendBtn = document.getElementById("resendBtn");
 
+// Toggle Login/Signup
 switchForm.addEventListener("click",()=>{
     isLogin = !isLogin;
     formTitle.innerText = isLogin ? "Login" : "Sign Up";
     actionBtn.innerText = isLogin ? "Login" : "Sign Up";
     switchForm.innerText = isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login";
     message.innerText = "";
+    resendBtn.style.display="none";
 });
 
+// Signup/Login Button
 actionBtn.addEventListener("click",()=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -116,7 +128,7 @@ actionBtn.addEventListener("click",()=>{
     }
 
     if(isLogin){
-        // 🔹 Login
+        // Login
         signInWithEmailAndPassword(auth,email,password)
         .then(userCredential=>{
             const user = userCredential.user;
@@ -127,6 +139,7 @@ actionBtn.addEventListener("click",()=>{
             } else {
                 message.innerText="Email not verified ❌ Check Gmail";
                 message.className="error";
+                resendBtn.style.display="inline-block";
                 sendEmailVerification(user);
             }
         })
@@ -135,18 +148,29 @@ actionBtn.addEventListener("click",()=>{
             message.className="error";
         });
     } else {
-        // 🔹 Signup
+        // Signup
         createUserWithEmailAndPassword(auth,email,password)
         .then(userCredential=>{
             const user = userCredential.user;
             sendEmailVerification(user).then(()=>{
                 message.innerText="Sign Up Successful ✅ Verification email sent!";
                 message.className="success";
+                resendBtn.style.display="inline-block";
             });
         })
         .catch(error=>{
             message.innerText = error.message;
             message.className="error";
+        });
+    }
+});
+
+// Resend Verification
+resendBtn.addEventListener("click",()=>{
+    const user = auth.currentUser;
+    if(user){
+        sendEmailVerification(user).then(()=>{
+            alert("Verification email resent! Check Gmail / Spam folder.");
         });
     }
 });
