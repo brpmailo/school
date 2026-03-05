@@ -208,6 +208,38 @@ table {
 
 
 <body>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCRZ3hgNXAkXH1hT3M7Hut6Zr5s8Kd4rZA",
+    authDomain: "school-login-c007e.firebaseapp.com",
+    projectId: "school-login-c007e",
+    storageBucket: "school-login-c007e.firebasestorage.app",
+    messagingSenderId: "464966509096",
+    appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ✅ Login check
+onAuthStateChanged(auth, user => {
+    if(user && user.emailVerified){
+        console.log("Verified user:", user.email);
+        // User logged in, allow access
+    } else {
+        alert("Login required! Redirecting to login page.");
+        window.location.href = "login.html";
+    }
+});
+</script>
+
+
+
 <div class="header-buttons">
  <button class="btn" onclick="showSchoolSetupForm()">School Setup</button>
 <button class="btn" onclick="showStudentForm()">Add Student</button>
@@ -778,6 +810,17 @@ function renderGradesheet() {
 
   calculateGPA(anyNG);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // Initial Render
 renderSchoolInfo();
