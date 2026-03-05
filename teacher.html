@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brp Mailo Digital Institute - Question Bank</title>
+<link rel="icon" type="image/png" href="b.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background: #f3f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      grid-template-columns: 1fr; /* single column */
+    }
+  }
+  .card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+  h2 {
+    margin-bottom: 15px;
+    color: #2b7de9;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  select, button {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #d0d6e0;
+  }
+  button {
+    background: #2b7de9;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+  }
+  button:disabled {
+    background: #b0c4de;
+    cursor: not-allowed;
+  }
+  iframe {
+    width: 100%;
+    height: 450px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  .file-list {
+    margin-top: 15px;
+  }
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #eef3fb;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .muted {
+    color: #667889;
+    font-size: 13px;
+  }
+  .success {
+    color: #27ae60;
+    font-weight: 600;
+  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+
+
+
+
+
+<body>
+  <div class="container">
+    <!-- Left/Top Form -->
+    <div class="card">
+      <h2>Fill the Form</h2>
+      <p class="muted">Access to subjects and model questions will be available once the form has been submitted.</p>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfEIIgXVIUHzR4yDEiNWfiJLMhZpsXdEpIg0cTQdkhdkCopXw/viewform?usp=dialog"></iframe>
+      <button id="formSubmitBtn">I have submitted the form</button>
+      <p id="formMsg" class="muted"></p>
+    </div>
+
+
+
+
+
+
+
+    <div class="card">
+      <h2>Select Class & Subject</h2>
+      <label>Class</label>
+      <select id="classSelect">
+        <option value="">-- Select Class --</option>
+        <option value="Nursery">Nursery</option>
+        <option value="LKG">LKG</option>
+        <option value="UKG">UKG</option>
+        <option value="1">Class 1</option>
+        <option value="2">Class 2</option>
+        <option value="3">Class 3</option>
+        <option value="4">Class 4</option>
+        <option value="5">Class 5</option>
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+      </select>
+
+
+
+      <label>Subject</label>
+      <select id="subjectSelect" disabled>
+        <option value="">-- Select Subject --</option>
+      </select>
+
+
+
+ <div class="file-list" id="fileList">
+  <p class="muted">Submission of the form is required to proceed with viewing subjects and model questions.</p>
+</div>
+
+
+
+
+
+
+
+
+
+      <p style="margin-top:20px; text-align:center; font-size:13px; color:#667889;">
+        Design by: 
+        <a href="https://brp.baburamphuyal.com.np" target="_blank" style="color:#2b7de9; text-decoration:none; font-weight:600;">
+          Brpmailo
+        </a>
+      </p>
+      <hr style="border: none; height:1px; background: rgba(0,0,0,0.15); box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top:10px;">
+
+
+
+
+
+
+
+<script>
+  const files = {
+    
+       "Nursery": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1IIvl0WWngCOSsbePqIPEKt3nAWxtUcCM/view?usp=sharing" }
+      ],
+      "Maths": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+
+	]
+    },
+
+
+
+    
+       "LKG": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Maths": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1aN6vqggJnYljhcbTh8Sz7z1g6W2xl9IC/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+
+	]
+    },
+
+
+
+
+       "UKG": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1F-SgDX_AXl3W8FIXKY46DFynM9eg4X4j/view?usp=sharing" }
+      ],
+      "Maths": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+
+	]
+    },
+
+
+
+
+    
+       "1": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/13icugQUbpq7vsEAr1UKYjWQZ1MfTIiXi/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/18T49sNEj1wwMoh9fwRjRYu_sSRy0lTlR/view?usp=sharing" }
+      ],
+      "Maths": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+ "Mero Serophero": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+    },
+
+
+
+
+       "2": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+   "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Maths": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Mero Serophero": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1RAgOuwZuYiS4jXUD-JrOPpaTuk9SMzcw/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+    },
+
+
+
+
+       "3": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1FSQjqklmog0j6TvfMLYRdApk80zHV3uF/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Maths": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1OIFSI7LDXk20wKptd6_7W3H88L2ocnID/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+ "Mero Serophero": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+    },
+
+
+
+   
+       "4": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1wEA1caV-Y3EZ-sdKqNOCEL2SbkLYnFdY/view?usp=sharing" }
+      ],
+      "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1VBhBJbRoN5iHnyneVAywvs5Iex1e0XiJ/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+
+    },
+
+
+
+
+
+   
+       "5": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/14sgTwjXMWmbWyg68QthRWMgFgx6iaLdZ/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1FDDWbXBGU4oP7Ajr6eQ669v7VTAqldGd/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+
+    },
+
+
+
+
+
+    
+       "6": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+   "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1kTUSliUPFXc7O9_RoSQCdctmZzxcH28C/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1FDDWbXBGU4oP7Ajr6eQ669v7VTAqldGd/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+
+    },
+
+
+
+
+
+
+   
+       "7": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1BGNn8A84j8exXz4HdDXFu12kXSx-rLo6/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/file/d/170MyheFEF26AnueuJtln3dEAACVyfjqE/view?usp=sharing" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1yJCG5tpbt4UIelJn4sU07TsLN0NtFyZ2/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+
+    },
+
+
+
+
+     "8": { 
+ "Nepali": [
+        { name: "Nepali Set 1", url: "https://drive.google.com/file/d/19S0pr87u7z3Hvnm3wqziMS_57fQnIZfS/view?usp=sharing" },
+	 { name: "Nepali Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Nepali Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+   "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+      "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1CJPn8Caev6pH7fHgv2F6kdfjNNWp8Lym/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+
+    },
+
+
+
+
+
+    "9": { 
+ "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/19S0pr87u7z3Hvnm3wqziMS_57fQnIZfS/view?usp=sharing" },
+	 { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+  "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+        "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1uF9Jsoxpfl6XjJpxrE3v9xfjf_dWHARy/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1EfJwT_AkbKSzBxkFXqmHbJUjh-wWrGUL/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	]
+
+    },
+
+ 
+
+
+
+    "10": {
+      "Nepali": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_101" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_102" },
+        { name: "Model Set 3", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_103" }
+      ],
+      "English": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_104" }
+      ],
+       "Mathematics": [
+        { name: "Model Set 1", url: "https://drive.google.com/file/d/1uPY-aM0w7f95ih8Yb8Yot0rRwKAOgVtx/view?usp=sharing" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Science & Technology": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+     "Social Studies & Human Value": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+	],
+      "Health, Physical & Creative Arts": [
+        { name: "Model Set 1", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_105" },
+        { name: "Model Set 2", url: "https://drive.google.com/uc?export=download&id=DRIVE_ID_106" }
+      ]
+    }
+  };
+
+
+
+
+
+
+  const classSelect = document.getElementById('classSelect');
+  const subjectSelect = document.getElementById('subjectSelect');
+  const fileList = document.getElementById('fileList');
+  let formSubmitted = false;
+
+  // class change
+  classSelect.addEventListener('change', () => {
+    const cls = classSelect.value;
+    subjectSelect.innerHTML = '<option value="">-- Select Subject --</option>';
+    subjectSelect.disabled = true;
+    fileList.innerHTML = '';
+    if (!cls || !formSubmitted) return;
+    const subjObj = files[cls] || {};
+    Object.keys(subjObj).forEach(subj => {
+      const opt = document.createElement('option');
+      opt.value = subj;
+      opt.textContent = subj;
+      subjectSelect.appendChild(opt);
+    });
+    subjectSelect.disabled = false;
+  });
+
+  // subject change
+  subjectSelect.addEventListener('change', () => {
+    const cls = classSelect.value;
+    const subj = subjectSelect.value;
+    fileList.innerHTML = '';
+    if (!cls || !subj) return;
+
+    const pdfs = files[cls][subj];
+    pdfs.forEach(pdf => {
+      const div = document.createElement('div');
+      div.className = 'file-item';
+      div.innerHTML = `
+        <strong>${pdf.name}</strong>
+        <div>
+          <button onclick="window.open('${pdf.url}','_blank')">Preview</button>
+        </div>
+      `;
+      fileList.appendChild(div);
+    });
+  });
+
+  function downloadPDF(url){
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // form button
+  document.getElementById('formSubmitBtn').addEventListener('click', () => {
+    formSubmitted = true;
+fileList.innerHTML = `
+  <p class="success" style="animation: fadeIn 1.5s ease; text-align:center;">
+    <span style="color:#2b7de9; font-weight:600;">🙏 Thank you for your time.</span><br>
+    <span style="color:#27ae60;">The Question Bank is now unlocked — kindly select Subject to continue.</span>
+  </p>
+`;
+
+
+    subjectSelect.disabled = !classSelect.value;
+    document.getElementById('formMsg').textContent = 'Form submission complete.';
+  });
+</script>
+</body>
+</html>
