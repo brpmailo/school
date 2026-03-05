@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>School Secure Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-container{
+    background:white;
+    padding:40px;
+    width:350px;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    text-align:center;
+}
+
+.login-container h2{
+    margin-bottom:25px;
+    color:#333;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#667eea;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#5a67d8;
+}
+
+#message{
+    margin-top:15px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.success{ color:green; }
+.error{ color:red; }
+
+.footer{
+    margin-top:20px;
+    font-size:13px;
+    color:#777;
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>School Login</h2>
+
+    <div class="input-group">
+        <input type="email" id="email" placeholder="Enter Email">
+    </div>
+
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Enter Password">
+    </div>
+
+    <button onclick="login()">Login</button>
+
+    <p id="message"></p>
+
+    <div class="footer">
+        Secure Firebase Authentication
+    </div>
+</div>
+
+<script type="module">
+  // ✅ Import Firebase Modules (CDN)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, sendEmailVerification } 
+    from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+  // ✅ Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyCRZ3hgNXAkXH1hT3M7Hut6Zr5s8Kd4rZA",
+    authDomain: "school-login-c007e.firebaseapp.com",
+    projectId: "school-login-c007e",
+    storageBucket: "school-login-c007e.firebasestorage.app",
+    messagingSenderId: "464966509096",
+    appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
+  };
+
+  // ✅ Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // ✅ Login Function
+  window.login = function(){
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    if(email === "" || password === ""){
+        message.innerHTML="Please fill all fields";
+        message.className="error";
+        return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user = userCredential.user;
+
+        if(user.emailVerified){
+            message.innerHTML="Login Successful ✅";
+            message.className="success";
+
+            setTimeout(()=>{
+                window.location.href="dashboard.html";
+            },1500);
+
+        }else{
+            message.innerHTML="Email not verified ❌ Check Gmail";
+            message.className="error";
+            sendEmailVerification(user);
+        }
+
+    })
+    .catch((error)=>{
+        message.innerHTML=error.message;
+        message.className="error";
+    });
+  }
+</script>
+
+</body>
+</html>

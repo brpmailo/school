@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>School Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    background: #f0f4f8;
+}
+header{
+    background:#667eea;
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+header h1{ font-size:20px; }
+button.logout{
+    padding:8px 15px;
+    border:none;
+    border-radius:5px;
+    background:#ff5a5f;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+button.logout:hover{ background:#e04848; }
+
+.container{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow:0 15px 25px rgba(0,0,0,0.2);
+}
+.card h2{
+    margin:15px 0 10px 0;
+    font-size:18px;
+}
+.card p{
+    font-size:14px;
+    color:#555;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome, <span id="userName">Student</span></h1>
+    <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+
+
+
+
+<div class="container">
+    <div class="card" onclick="openPage('gradesheet.html')">
+        <h2>Grade Sheet</h2>
+        <p>View and download your grades</p>
+    </div>
+    <div class="card" onclick="openPage('certificate.html')">
+        <h2>Certificate</h2>
+        <p>Access your certificates</p>
+    </div>
+    <div class="card" onclick="openPage('exam.html')">
+        <h2>Exam Schedule</h2>
+        <p>Check upcoming exams</p>
+    </div>
+    <div class="card" onclick="openPage('notes.html')">
+        <h2>Notes</h2>
+        <p>Download study notes</p>
+    </div>
+    <div class="card" onclick="openPage('attendance.html')">
+        <h2>Attendance</h2>
+        <p>View attendance report</p>
+    </div>
+    <div class="card" onclick="openPage('profile.html')">
+        <h2>Profile</h2>
+        <p>Update your personal info</p>
+    </div>
+    <div class="card" onclick="openPage('news.html')">
+        <h2>News / Notices</h2>
+        <p>Check latest school news</p>
+    </div>
+</div>
+
+
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyCRZ3hgNXAkXH1hT3M7Hut6Zr5s8Kd4rZA",
+  authDomain: "school-login-c007e.firebaseapp.com",
+  projectId: "school-login-c007e",
+  storageBucket: "school-login-c007e.firebasestorage.app",
+  messagingSenderId: "464966509096",
+  appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Check user login
+onAuthStateChanged(auth, user => {
+    if(!user || !user.emailVerified){
+        window.location.href = "login.html";
+    } else {
+        document.getElementById("userName").innerText = user.email;
+    }
+});
+
+// Logout
+window.logout = function(){
+    signOut(auth).then(()=>{
+        window.location.href = "login.html";
+    });
+}
+
+// Open page
+window.openPage = function(page){
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>
