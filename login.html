@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>School Secure Login</title>
+<title>School Secure Login / Signup</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body{
     margin:0;
@@ -15,8 +14,7 @@ body{
     justify-content:center;
     align-items:center;
 }
-
-.login-container{
+.container{
     background:white;
     padding:40px;
     width:350px;
@@ -24,16 +22,8 @@ body{
     box-shadow:0 15px 35px rgba(0,0,0,0.3);
     text-align:center;
 }
-
-.login-container h2{
-    margin-bottom:25px;
-    color:#333;
-}
-
-.input-group{
-    margin-bottom:20px;
-}
-
+h2{ margin-bottom:25px; color:#333; }
+.input-group{ margin-bottom:20px; }
 input{
     width:100%;
     padding:12px;
@@ -41,7 +31,6 @@ input{
     border:1px solid #ccc;
     font-size:15px;
 }
-
 button{
     width:100%;
     padding:12px;
@@ -53,31 +42,18 @@ button{
     cursor:pointer;
     transition:0.3s;
 }
-
-button:hover{
-    background:#5a67d8;
-}
-
-#message{
-    margin-top:15px;
-    font-size:14px;
-    font-weight:bold;
-}
-
+button:hover{ background:#5a67d8; }
+#message{ margin-top:15px; font-size:14px; font-weight:bold; }
 .success{ color:green; }
 .error{ color:red; }
-
-.footer{
-    margin-top:20px;
-    font-size:13px;
-    color:#777;
-}
+.footer{ margin-top:20px; font-size:13px; color:#777; }
+.switch{ margin-top:10px; cursor:pointer; color:#667eea; text-decoration:underline;}
 </style>
 </head>
 <body>
 
-<div class="login-container">
-    <h2>School Login</h2>
+<div class="container">
+    <h2 id="formTitle">Login</h2>
 
     <div class="input-group">
         <input type="email" id="email" placeholder="Enter Email">
@@ -87,9 +63,10 @@ button:hover{
         <input type="password" id="password" placeholder="Enter Password">
     </div>
 
-    <button onclick="login()">Login</button>
+    <button id="actionBtn">Login</button>
 
     <p id="message"></p>
+    <p class="switch" id="switchForm">Don't have an account? Sign Up</p>
 
     <div class="footer">
         Secure Firebase Authentication
@@ -97,61 +74,82 @@ button:hover{
 </div>
 
 <script type="module">
-  // ✅ Import Firebase Modules (CDN)
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, sendEmailVerification } 
-    from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
-  // ✅ Firebase Config
-  const firebaseConfig = {
+// Firebase Config
+const firebaseConfig = {
     apiKey: "AIzaSyCRZ3hgNXAkXH1hT3M7Hut6Zr5s8Kd4rZA",
     authDomain: "school-login-c007e.firebaseapp.com",
     projectId: "school-login-c007e",
     storageBucket: "school-login-c007e.firebasestorage.app",
     messagingSenderId: "464966509096",
     appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
-  };
+};
 
-  // ✅ Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  // ✅ Login Function
-  window.login = function(){
+let isLogin = true;
+
+const formTitle = document.getElementById("formTitle");
+const actionBtn = document.getElementById("actionBtn");
+const switchForm = document.getElementById("switchForm");
+const message = document.getElementById("message");
+
+switchForm.addEventListener("click",()=>{
+    isLogin = !isLogin;
+    formTitle.innerText = isLogin ? "Login" : "Sign Up";
+    actionBtn.innerText = isLogin ? "Login" : "Sign Up";
+    switchForm.innerText = isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login";
+    message.innerText = "";
+});
+
+actionBtn.addEventListener("click",()=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const message = document.getElementById("message");
 
     if(email === "" || password === ""){
-        message.innerHTML="Please fill all fields";
+        message.innerText="Please fill all fields";
         message.className="error";
         return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        const user = userCredential.user;
-
-        if(user.emailVerified){
-            message.innerHTML="Login Successful ✅";
-            message.className="success";
-
-            setTimeout(()=>{
-                window.location.href="dashboard.html";
-            },1500);
-
-        }else{
-            message.innerHTML="Email not verified ❌ Check Gmail";
+    if(isLogin){
+        // 🔹 Login
+        signInWithEmailAndPassword(auth,email,password)
+        .then(userCredential=>{
+            const user = userCredential.user;
+            if(user.emailVerified){
+                message.innerText="Login Successful ✅";
+                message.className="success";
+                setTimeout(()=>{ window.location.href="dashboard.html"; },1500);
+            } else {
+                message.innerText="Email not verified ❌ Check Gmail";
+                message.className="error";
+                sendEmailVerification(user);
+            }
+        })
+        .catch(error=>{
+            message.innerText = error.message;
             message.className="error";
-            sendEmailVerification(user);
-        }
-
-    })
-    .catch((error)=>{
-        message.innerHTML=error.message;
-        message.className="error";
-    });
-  }
+        });
+    } else {
+        // 🔹 Signup
+        createUserWithEmailAndPassword(auth,email,password)
+        .then(userCredential=>{
+            const user = userCredential.user;
+            sendEmailVerification(user).then(()=>{
+                message.innerText="Sign Up Successful ✅ Verification email sent!";
+                message.className="success";
+            });
+        })
+        .catch(error=>{
+            message.innerText = error.message;
+            message.className="error";
+        });
+    }
+});
 </script>
 
 </body>
