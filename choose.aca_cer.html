@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Certificate Template Gallery</title>
+
+<style>
+
+body{
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#eef2f7,#dbe4f3);
+margin:0;
+padding:40px;
+text-align:center;
+}
+
+h1{
+margin-bottom:40px;
+color:#2c3e50;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+max-width:1000px;
+margin:auto;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+transition:all 0.3s ease;
+text-decoration:none;
+color:#333;
+}
+
+.card:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+
+.thumb{
+height:140px;
+background:linear-gradient(45deg,#3498db,#6dd5fa);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+font-weight:bold;
+color:white;
+}
+
+.card:nth-child(2) .thumb{
+background:linear-gradient(45deg,#9b59b6,#d291ff);
+}
+
+.card:nth-child(3) .thumb{
+background:linear-gradient(45deg,#f1c40f,#f39c12);
+}
+
+.card:nth-child(4) .thumb{
+background:linear-gradient(45deg,#1abc9c,#16a085);
+}
+
+.card:nth-child(5) .thumb{
+background:linear-gradient(45deg,#e74c3c,#ff7a7a);
+}
+
+.card-body{
+padding:15px;
+}
+
+.card-body h3{
+margin:0;
+font-size:18px;
+}
+
+.card-body p{
+font-size:14px;
+color:#777;
+margin-top:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCRZ3hgNXAkXH1hT3M7Hut6Zr5s8Kd4rZA",
+    authDomain: "school-login-c007e.firebaseapp.com",
+    projectId: "school-login-c007e",
+    storageBucket: "school-login-c007e.firebasestorage.app",
+    messagingSenderId: "464966509096",
+    appId: "1:464966509096:web:3e7fdb96ddafa45cf64b1d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ✅ Login check
+onAuthStateChanged(auth, user => {
+    if(user && user.emailVerified){
+        console.log("Verified user:", user.email);
+        // User logged in, allow access
+    } else {
+        alert("Login required! Redirecting to login page.");
+        window.location.href = "login.html";
+    }
+});
+</script>
+
+
+
+
+<h1>Choose Certificate Template</h1>
+
+<div class="gallery">
+
+<a href="basic.aca_cer.html" target="_blank" class="card">
+<div class="thumb">Template 1</div>
+<div class="card-body">
+<h3>School Certificate</h3>
+<p>Clean modern academic design</p>
+</div>
+</a>
+
+<a href="8.aca_cer.html" target="_blank" class="card">
+<div class="thumb">Template 2</div>
+<div class="card-body">
+<h3>Municipal Level Certificate</h3>
+<p>Basic Level</p>
+</div>
+</a>
+
+<a href="aca_cer.html.html" target="_blank" class="card">
+<div class="thumb">Template 3</div>
+<div class="card-body">
+<h3>SEE Certificate</h3>
+<p>Premium award certificate</p>
+</div>
+</a>
+
+<a href="neb_cer.html" target="_blank" class="card">
+<div class="thumb">Template 4</div>
+<div class="card-body">
+<h3>NEB Certificate</h3>
+<p>Simple and elegant layout</p>
+</div>
+</a>
+
+<a href="certificate5.html" target="_blank" class="card">
+<div class="thumb">Template 5</div>
+<div class="card-body">
+<h3>University Certificate</h3>
+<p>Formal university design</p>
+</div>
+</a>
+
+</div>
+
+</body>
+</html>
