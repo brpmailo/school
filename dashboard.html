@@ -40,6 +40,28 @@ button.logout:hover{ background:#e04848; }
     padding:30px;
 }
 
+
+.welcome-box{
+    display:flex;
+    flex-direction:column;
+}
+
+.welcome-text{
+    font-size:20px;
+    font-weight:700;
+}
+
+.date-time{
+    font-size:15px;
+    opacity:0.9;
+}
+
+
+
+
+
+
+
 .card{
     background:white;
     border-radius:12px;
@@ -65,12 +87,66 @@ button.logout:hover{ background:#e04848; }
 </head>
 <body>
 
+
+
 <header>
-    <h1>Welcome! <span id="userName">Student</span></h1>
+    <div class="welcome-box">
+        <div class="welcome-text" id="welcomeText">
+            🌅 Welcome! <span id="userName">Dear</span>
+        </div>
+        <div class="date-time" id="dateTime"></div>
+    </div>
+
     <button class="logout" onclick="logout()">Logout</button>
 </header>
 
 
+
+
+
+
+<script>
+function updateWelcome(){
+
+    const name = document.getElementById("userName").innerText;
+    const now = new Date();
+
+    const hour = now.getHours();
+    const minute = now.getMinutes().toString().padStart(2,'0');
+    const second = now.getSeconds().toString().padStart(2,'0');
+
+    let greeting;
+    let icon;
+
+    if(hour < 12){
+        greeting = "Good Morning!";
+        icon = "";
+    }
+    else if(hour < 17){
+        greeting = "Good Afternoon!";
+        icon = "";
+    }
+    else{
+        greeting = "Good Evening!";
+        icon = "";
+    }
+
+    let displayHour = hour % 12 || 12;
+    let ampm = hour >= 12 ? "PM" : "AM";
+
+    const options = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+    const today = now.toLocaleDateString('en-US', options);
+
+    document.getElementById("welcomeText").innerHTML =
+        `${icon} ${greeting}, <span id="userName">${name}</span>`;
+
+    document.getElementById("dateTime").innerHTML =
+        `📅 ${today} | ⏰ ${displayHour}:${minute}:${second} ${ampm}`;
+}
+
+setInterval(updateWelcome,1000);
+updateWelcome();
+</script>
 
 
 
@@ -152,6 +228,4 @@ window.openPage = function(page){
 </body>
 
 </html>
-
-
 
