@@ -57,7 +57,42 @@ button.logout:hover{ background:#e04848; }
 }
 
 
+.card img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    margin-bottom:10px;
+    transition: transform 0.3s;
+}
 
+.card:hover img{
+    transform: scale(1.05);
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow:0 15px 25px rgba(0,0,0,0.2);
+}
+
+.card h2{
+    margin:15px 0 10px 0;
+    font-size:18px;
+}
+
+.card p{
+    font-size:14px;
+    color:#555;
+}
 
 
 
@@ -150,35 +185,58 @@ updateWelcome();
 
 
 
+
 <div class="container">
-    <div class="card" onclick="openPage('grade-sheet.html')">
-        <h2>Grade Sheet</h2>
-        <p>You can manage your students grade-sheets</p>
-    </div>
-    <div class="card" onclick="openPage('choose.aca_cer.html')">
-        <h2>Academic Certificate</h2>
-        <p>Access your Student's certificates</p>
-    </div>
-    <div class="card" onclick="openPage('billing.html')">
-        <h2>Billing</h2>
-        <p>Manage here School Billing</p>
-    </div>
-    <div class="card" onclick="openPage('seatplan.html')">
-        <h2>Seat Planing</h2>
-        <p>You can Manage Exam Seat plan here.</p>
-    </div>
-    <div class="card" onclick="openPage('certif.html')">
-        <h2>Winner Certificate</h2>
-        <p>View Winner certificate templets</p>
-    </div>
-    <div class="card" onclick="openPage('profile.html')">
-        <h2>Profile</h2>
-        <p>Update your personal info</p>
-    </div>
-    <div class="card" onclick="openPage('news.html')">
-        <h2>News / Notices</h2>
-        <p>Check latest school news</p>
-    </div>
+
+  <!-- Grade Sheet -->
+  <div class="card" onclick="openPage('grade-sheet.html')">
+    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b" alt="Grade Sheet">
+    <h2>Grade Sheet</h2>
+    <p>You can manage your students grade-sheets</p>
+  </div>
+
+  <!-- Academic Certificate -->
+  <div class="card" onclick="openPage('choose.aca_cer.html')">
+    <img src="https://images.unsplash.com/photo-1581092795361-4415caa9328a" alt="Academic Certificate">
+    <h2>Academic Certificate</h2>
+    <p>Access your Student's certificates</p>
+  </div>
+
+  <!-- Billing -->
+  <div class="card" onclick="openPage('billing.html')">
+    <img src="https://images.unsplash.com/photo-1581091012184-8bfa6316bdf2" alt="Billing">
+    <h2>Billing</h2>
+    <p>Manage School Billing</p>
+  </div>
+
+  <!-- Seat Planning -->
+  <div class="card" onclick="openPage('seatplan.html')">
+    <img src="https://images.unsplash.com/photo-1581091870626-5f1a5c8d6f19" alt="Seat Plan">
+    <h2>Seat Planning</h2>
+    <p>Manage Exam Seat Plans</p>
+  </div>
+
+  <!-- Winner Certificate -->
+  <div class="card" onclick="openPage('certif.html')">
+    <img src="https://images.unsplash.com/photo-1596495577886-d920f1b9d1a1" alt="Winner Certificate">
+    <h2>Winner Certificate</h2>
+    <p>View Winner certificate templates</p>
+  </div>
+
+  <!-- Profile -->
+  <div class="card" onclick="openPage('profile.html')">
+    <img src="https://images.unsplash.com/photo-1596495577791-0cf4e5a0c4d5" alt="Profile">
+    <h2>Profile</h2>
+    <p>Update your personal info</p>
+  </div>
+
+  <!-- News / Notices -->
+  <div class="card" onclick="openPage('news.html')">
+    <img src="https://images.unsplash.com/photo-1581090700220-c44e0c81ab1f" alt="News / Notices">
+    <h2>News / Notices</h2>
+    <p>Check latest school news</p>
+  </div>
+
 </div>
 
 
