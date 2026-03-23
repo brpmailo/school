@@ -1,209 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <link rel="icon" type="image/png" href="Brp Digital Institute logo.png">
-<title>Tuition Billing System</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body{
-font-family:Segoe UI;
-margin:0;
-padding:20px;
-background:linear-gradient(135deg,#667eea,#764ba2);
-color:#333;
-}
-
-h1{
-text-align:center;
-color:white;
-}
-
-button{
-padding:8px 14px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-background:#2c7be5;
-color:white;
-margin:3px;
-}
-
-.dashboard{
-display:flex;
-gap:15px;
-margin:20px 0;
-}
-
-.card{
-flex:1;
-background:white;
-padding:15px;
-border-radius:10px;
-text-align:center;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-.form-box{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-bottom:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-input,select{
-padding:7px;
-margin:5px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-background:white;
-border-radius:10px;
-overflow:hidden;
-}
-
-th{
-background:#2c7be5;
-color:white;
-padding:10px;
-}
-
-td{
-padding:8px;
-border-bottom:1px solid #eee;
-text-align:center;
-}
-
-.student-photo{
-width:40px;
-height:40px;
-border-radius:50%;
-object-fit:cover;
-}
-
-/* BILL */
-
-.bill{
-border:1px dashed #000;
-padding:6px;
-font-size:13px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-background:white;
-}
-
-.bill-header{
-display:flex;
-justify-content:space-between;
-font-weight:bold;
-color:#0a2a66;
-}
-
-.bill-name{
-text-align:center;
-font-weight:bold;
-font-size:16px;
-}
-
-.bill img{
-width:35px;
-height:35px;
-border-radius:50%;
-margin:auto;
-}
-
-.bill p{
-margin:2px 0;
-}
-
-
-
-/* QR */
-
-.qr{
-display:flex;
-justify-content:center;
-margin-top:3px;
-}
-
-.qr img{
-width:55px;
-height:55px;
-}
-
-/* SIGNATURE */
-
-.signature{
-text-align:right;
-margin-left:auto;
-width:100px;
-}
-
-.signature img{
-height:40px;
-display:block;
-margin-left:auto;
-}
-
-.signature .line{
-border-top:1px solid black;
-width:70px;
-margin-left:auto;
-}
-
-.signature span{
-font-size:10px;
-}
-
-/* PRINT */
-
-.print-area{
-display:none;
-}
-
-@media print{
-
-@page{
-size:A4;
-margin:8mm;
-}
-
-body *{
-visibility:hidden;
-}
-
-.print-area,
-.print-area *{
-visibility:visible;
-}
-
-.print-area{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-grid-template-rows:repeat(3,1fr);
-gap:4mm;
-}
-
-.bill{
-height:90mm;
-}
-
-}
-</style>
+    <title>School Billing-Brp Digital Institute</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Poppins', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            padding: 16px;
+            min-height: 100vh;
+        }
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        /* Mobile First Header */
+        .school-header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 24px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        @media (min-width: 768px) {
+            .school-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 28px;
+            }
+            body {
+                padding: 20px;
+            }
+        }
+        .school-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .school-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        @media (min-width: 768px) {
+            .school-logo {
+                width: 70px;
+                height: 70px;
+            }
+        }
+        .school-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .school-logo span {
+            font-size: 32px;
+        }
+        .school-text h2 {
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #FDE68A, #F97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        @media (min-width: 768px) {
+            .school-text h2 {
+                font-size: 1.6rem;
+            }
+        }
+        .school-text p {
+            font-size: 0.7rem;
+            color: #cbd5e1;
+        }
+        @media (min-width: 768px) {
+            .school-text p {
+                font-size: 0.85rem;
+            }
+        }
+        .edit-profile-btn {
+            background: #334155;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: none;
+            color: white;
+            font-weight: 500;
+        }
+        /* Stats Cards - Mobile Friendly */
+        .stats-badge {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 640px) {
+            .stats-badge {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .stat-card h4 {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+        .stat-card .amount {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #f97316;
+        }
+        @media (min-width: 768px) {
+            .stat-card {
+                padding: 12px 24px;
+            }
+            .stat-card h4 {
+                font-size: 0.85rem;
+            }
+            .stat-card .amount {
+                font-size: 1.8rem;
+            }
+        }
+        /* Grid Layout */
+        .grid-3col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 768px) {
+            .grid-3col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .grid-3col {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        @media (min-width: 768px) {
+            .card {
+                padding: 20px 24px;
+            }
+        }
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-left: 4px solid #f97316;
+            padding-left: 12px;
+            color: #1e293b;
+        }
+        @media (min-width: 768px) {
+            .card h3 {
+                font-size: 1.4rem;
+                margin-bottom: 18px;
+                border-left-width: 6px;
+            }
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        input, select {
+            padding: 10px 14px;
+            border-radius: 50px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 120px;
+            background: #f8fafc;
+        }
+        @media (min-width: 768px) {
+            input, select {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        button {
+            background: linear-gradient(95deg, #f97316, #ea580c);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        @media (min-width: 768px) {
+            button {
+                padding: 10px 22px;
+                font-size: 0.9rem;
+            }
+        }
+        button:active {
+            transform: scale(0.96);
+        }
+        .delete-btn {
+            background: #475569;
+        }
+        .primary-btn {
+            background: linear-gradient(95deg, #3b82f6, #2563eb);
+        }
+        .edit-btn {
+            background: linear-gradient(95deg, #8b5cf6, #7c3aed);
+        }
+        .fee-list {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+        .fee-item {
+            background: white;
+            padding: 8px 12px;
+            margin: 6px 0;
+            border-radius: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+        .gender-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding: 8px;
+            background: #f1f5f9;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .gender-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 28px;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        @media (min-width: 768px) {
+            .modal-content {
+                max-width: 550px;
+                padding: 25px;
+            }
+        }
+        .fee-checkbox-group {
+            display: grid;
+            gap: 10px;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+        .fee-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+        }
+        .fee-check input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+        .logo-upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            cursor: pointer;
+            background: #f8fafc;
+        }
+        .logo-preview {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Table - Mobile Friendly */
+        .table-wrapper {
+            background: white;
+            border-radius: 24px;
+            overflow-x: auto;
+            box-shadow: 0 20px 30px -12px black;
+        }
+        .action-bar {
+            padding: 12px 16px;
+            background: #fef9e8;
+            border-bottom: 2px solid #fed7aa;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        @media (min-width: 640px) {
+            .action-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 18px 24px;
+            }
+        }
+        .action-bar input {
+            max-width: 100%;
+        }
+        @media (min-width: 640px) {
+            .action-bar input {
+                max-width: 250px;
+            }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        th {
+            background: #1e293b;
+            color: white;
+            padding: 10px 6px;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+        @media (min-width: 768px) {
+            th {
+                padding: 14px 10px;
+                font-size: 0.9rem;
+            }
+        }
+        td {
+            padding: 8px 4px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.7rem;
+        }
+        @media (min-width: 768px) {
+            td {
+                padding: 12px 8px;
+                font-size: 0.85rem;
+            }
+        }
+        .badge-paid, .badge-unpaid {
+            padding: 3px 8px;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            display: inline-block;
+        }
+        .month-badge {
+            background: #e0f2fe;
+            padding: 2px 6px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+        }
+        /* Invoice Print Styles */
+        .invoice-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+        .invoice-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        @media (min-width: 768px) {
+            .invoice-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .fee-table {
+            width: 100%;
+            font-size: 9px;
+            border-collapse: collapse;
+        }
+        .fee-table th, .fee-table td {
+            border: 1px solid #cbd5e1;
+            padding: 4px;
+        }
+        @media print {
+            body * { visibility: hidden; }
+            .print-section, .print-section * { visibility: visible; }
+            .print-section { position: absolute; top: 0; left: 0; width: 100%; }
+            .invoice-grid { gap: 12px; }
+            @page { size: A4; margin: 1cm; }
+        }
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            padding: 15px;
+        }
+        .batch-select {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 8px;
+            margin-top: 8px;
+            background: #f8fafc;
+        }
+        .batch-select div {
+            margin: 5px 0;
+            font-size: 0.75rem;
+        }
+        .student-select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 40px;
+            margin-bottom: 10px;
+            border: 1px solid #cbd5e1;
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
-
 <body>
+
+
 
 
 <script type="module">
@@ -240,226 +533,422 @@ onAuthStateChanged(auth, user => {
 
 
 
-<h1>Tuition Billing System</h1>
+<div class="main-container">
+    <!-- School Header with Logo Upload -->
+    <div class="school-header">
+        <div class="school-info">
+            <div class="school-logo" id="logoClickArea">
+                <img id="schoolLogoImg" src="" alt="Logo" style="display:none;">
+                <span id="schoolLogoPlaceholder">🏫</span>
+            </div>
+            <div class="school-text">
+                <h2 id="schoolNameDisplay">SCHOOL NAME</h2>
+                <p id="schoolAddressDisplay">School Address | Contact: 0000000000</p>
+            </div>
+        </div>
+        <button class="edit-profile-btn" onclick="openProfileModal()">✏️ Edit School</button>
+    </div>
 
-<div class="dashboard">
-<div class="card">Total Students
-<h2 id="totalStudents">0</h2></div>
-<div class="card">Paid
-<h2 id="paidStudents">0</h2></div>
-<div class="card">Unpaid
-<h2 id="unpaidStudents">0</h2></div>
-<div class="card">Collection
-<h2 id="totalCollection">0</h2></div>
+
+    <!-- Stats Cards - Mobile Friendly -->
+    <div class="stats-badge">
+        <div class="stat-card"><h4>📚 Total Students</h4><div class="amount" id="totalStudents">0</div></div>
+        <div class="stat-card"><h4>💰 Total Revenue</h4><div class="amount" id="totalRevenue">0</div></div>
+        <div class="stat-card"><h4>📅 Today's Collection</h4><div class="amount" id="todayRevenue">0</div></div>
+        <div class="stat-card"><h4>💵 Pending Amount</h4><div class="amount" id="pendingAmount">0</div></div>
+    </div>
+
+    <!-- 3 Column Grid -->
+    <div class="grid-3col">
+        <div class="card">
+            <h3>📋 FEE SET-UP</h3>
+            <div class="input-group">
+                <input type="text" id="feeHeadName" placeholder="Fee Name (e.g., Tuition)">
+                <input type="number" id="feeHeadAmount" placeholder="Monthly Amount ₹">
+                <button onclick="addFeeHead()">➕ Add</button>
+            </div>
+            <div class="fee-list" id="feeHeadsList"></div>
+            <p style="font-size:11px; margin-top:8px;">💡 Monthly fee × number of months</p>
+        </div>
+
+        <div class="card">
+            <h3>👨‍🎓 ADD STUDENT</h3>
+            <div class="input-group">
+                <input type="text" id="studentName" placeholder="Full Name">
+                <input type="text" id="studentClass" placeholder="Class">
+            </div>
+            <div class="gender-group">
+                <label><input type="radio" name="gender" value="Male" checked> 👨 Male</label>
+                <label><input type="radio" name="gender" value="Female"> 👩 Female</label>
+                <label><input type="radio" name="gender" value="Other"> 🌈 Other</label>
+            </div>
+            <div class="input-group">
+                <input type="month" id="fromMonth" placeholder="From Month">
+                <input type="month" id="toMonth" placeholder="To Month">
+            </div>
+            <button onclick="openFeeSelectionModal()" style="width:100%;">✨ Add Student & Select Fees</button>
+        </div>
+
+        <div class="card">
+            <h3>EDIT & PRINT</h3>
+            <select id="editStudentSelect" class="student-select"><option value="">-- Select Student --</option></select>
+            <button onclick="openEditStudentModal()" class="edit-btn" style="width:100%; margin-bottom:8px;">📝 Edit Student Fees</button>
+            <button onclick="printA4Invoices()" class="primary-btn" style="width:100%; margin-bottom:8px;">🖨️ Print All Invoices</button>
+            <div class="batch-select">
+                <div style="font-weight:bold; font-size:12px;">Select for batch print:</div>
+                <div id="studentChecklist"></div>
+            </div>
+            <button onclick="printSelectedInvoices()" style="width:100%; margin-top:8px;">✅ Print Selected</button>
+        </div>
+    </div>
+
+    <!-- Student Table -->
+    <div class="table-wrapper">
+        <div class="action-bar">
+            <span style="font-weight:bold;">📋 STUDENT LEDGER</span>
+            <input type="text" id="searchInput" placeholder="🔍 Search by Name/Class" onkeyup="filterTable()">
+            <button onclick="exportCSV()">📎 Export CSV</button>
+            <button onclick="resetAllData()" style="background:#ef4444;">⚠️ Reset</button>
+        </div>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Gender</th><th>Class</th><th>Duration</th><th>Fees</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="studentTableBody"></tbody>
+            </table>
+        </div>
+        <div id="emptyMsg" style="text-align:center; padding:30px;">No students yet. Add your first student!</div>
+    </div>
+    <footer>© 2026 Brp Digital Institute|All Rights Reserved</footer>
 </div>
 
-<input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
-
-<button onclick="toggleForm()">Add Student</button>
-<button onclick="printAll()">Print All Bills</button>
-<button onclick="exportCSV()">Export Excel</button>
-
-<br><br>
-
-<input type="file" id="teacherSign">
-<button onclick="saveSignature()">Save Teacher Signature</button>
-
-<input type="file" id="paymentQR">
-<button onclick="saveQR()">Save Payment QR</button>
-
-<div class="form-box" id="formBox" style="display:none">
-<input id="id" placeholder="Symbol No">
-<input id="name" placeholder="Name">
-<input id="class" placeholder="Class">
-<input id="fee" placeholder="Fee">
-
-<select id="month">
-<option>Baishakh</option>
-<option>Jestha</option>
-<option>Asar</option>
-<option>Shrawan</option>
-<option>Bhadra</option>
-<option>Ashwin</option>
-<option>Kartik</option>
-<option>Mangsir</option>
-<option>Poush</option>
-<option>Magh</option>
-<option>Falgun</option>
-<option>Chaitra</option>
-</select>
-
-<input type="file" id="photo">
-<button onclick="addStudent()">Save Student</button>
+<!-- School Profile Modal with Image Upload -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <h3>🏫 Edit School Profile</h3>
+        <div class="input-group">
+            <input type="text" id="schoolNameInput" placeholder="School Name">
+        </div>
+        <div class="input-group">
+            <input type="text" id="schoolAddressInput" placeholder="Address & Contact">
+        </div>
+        <div class="logo-upload-area" onclick="document.getElementById('logoFileInput').click()">
+            <div>📸 Click to Upload Logo</div>
+            <div class="logo-preview" id="logoPreview">
+                <span style="color:#94a3b8;">Preview</span>
+            </div>
+            <p style="font-size:11px; margin-top:5px;">Supports JPG, PNG, GIF (Max 2MB)</p>
+        </div>
+        <input type="file" id="logoFileInput" accept="image/*" style="display:none;" onchange="handleLogoUpload(event)">
+        <div class="input-group" style="margin-top:15px;">
+            <button onclick="saveSchoolProfile()">💾 Save Profile</button>
+            <button onclick="closeProfileModal()" class="delete-btn">Cancel</button>
+        </div>
+    </div>
 </div>
 
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Name</th>
-<th>Class</th>
-<th>Month</th>
-<th>Fee</th>
-<th>Status</th>
-<th>Photo</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody id="table"></tbody>
-</table>
+<!-- Fee Selection Modal -->
+<div id="feeModal" class="modal">
+    <div class="modal-content">
+        <h3>🎯 Select Fees for <span id="modalStudentName"></span></h3>
+        <div style="background:#fef3c7; padding:10px; border-radius:30px; margin:10px 0; text-align:center; font-size:13px;">
+            📅 <strong id="displayFromMonth"></strong> → <strong id="displayToMonth"></strong><br>
+            (<span id="monthCount"></span> months)
+        </div>
+        <div id="feeChecklist" class="fee-checkbox-group"></div>
+        <div class="input-group">
+            <button onclick="confirmAddStudent()">✅ Confirm</button>
+            <button onclick="closeFeeModal()" class="delete-btn">Cancel</button>
+        </div>
+    </div>
+</div>
 
-<div class="print-area" id="printArea"></div>
+<!-- Edit Student Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h3>✏️ Edit Fees: <span id="editStudentName"></span></h3>
+        <div style="background:#fef3c7; padding:10px; border-radius:30px; margin:10px 0; text-align:center; font-size:13px;">
+            📅 <strong id="editFromMonth"></strong> → <strong id="editToMonth"></strong><br>
+            (<span id="editMonthCount"></span> months)
+        </div>
+        <div id="editFeeChecklist" class="fee-checkbox-group"></div>
+        <button onclick="saveEditedStudentFees()">💾 Save Changes</button>
+        <button onclick="closeEditModal()" class="delete-btn">Cancel</button>
+    </div>
+</div>
 
 <script>
-let students=JSON.parse(localStorage.getItem("students"))||[];
-let teacherSignature=localStorage.getItem("teacherSignature");
-let paymentQR=localStorage.getItem("paymentQR");
+    // Data
+    let schoolProfile = JSON.parse(localStorage.getItem("school_profile_final")) || {
+        name: "SCHOOL NAME",
+        address: "School Address | Contact: 0000000000",
+        logo: ""
+    };
+    let feeHeads = JSON.parse(localStorage.getItem("school_feeHeads_final")) || [];
+    let students = JSON.parse(localStorage.getItem("school_students_final")) || [];
 
-function toggleForm(){
-let f=document.getElementById("formBox");
-f.style.display=f.style.display=="none"?"block":"none";
-}
+    function getTodayKey() { return new Date().toISOString().slice(0, 10); }
 
-function saveSignature(){
-let file=document.getElementById("teacherSign").files[0];
-let reader=new FileReader();
-reader.onload=function(){
-teacherSignature=reader.result;
-localStorage.setItem("teacherSignature",teacherSignature);
-alert("Signature Saved");
-}
-reader.readAsDataURL(file);
-}
+    function updateRevenue() {
+        let todayKey = getTodayKey();
+        let paidToday = students.filter(s => s.paidStatus && s.paidDate === todayKey).reduce((sum, s) => sum + s.totalAmount, 0);
+        let allTimeRevenue = students.filter(s => s.paidStatus).reduce((sum, s) => sum + s.totalAmount, 0);
+        let pendingTotal = students.filter(s => !s.paidStatus).reduce((sum, s) => sum + s.totalAmount, 0);
+        document.getElementById("todayRevenue").innerText = "₹" + paidToday.toLocaleString();
+        document.getElementById("totalRevenue").innerText = "₹" + allTimeRevenue.toLocaleString();
+        document.getElementById("pendingAmount").innerText = "₹" + pendingTotal.toLocaleString();
+        document.getElementById("totalStudents").innerText = students.length;
+    }
 
-function saveQR(){
-let file=document.getElementById("paymentQR").files[0];
-let reader=new FileReader();
-reader.onload=function(){
-paymentQR=reader.result;
-localStorage.setItem("paymentQR",paymentQR);
-alert("QR Saved");
-}
-reader.readAsDataURL(file);
-}
+    function saveAll() {
+        localStorage.setItem("school_profile_final", JSON.stringify(schoolProfile));
+        localStorage.setItem("school_feeHeads_final", JSON.stringify(feeHeads));
+        localStorage.setItem("school_students_final", JSON.stringify(students));
+        updateSchoolDisplay();
+        renderFeeHeads();
+        renderStudentTable();
+        updateDropdowns();
+        updateRevenue();
+    }
 
-function addStudent(){
-let id=document.getElementById("id").value;
-let name=document.getElementById("name").value;
-let cls=document.getElementById("class").value;
-let fee=document.getElementById("fee").value;
-let month=document.getElementById("month").value;
-let file=document.getElementById("photo").files[0];
-let reader=new FileReader();
-reader.onload=function(){
-students.push({id,name,class:cls,fee,month,photo:reader.result,paid:false});
-save();
-}
-reader.readAsDataURL(file);
-}
+    // Image Upload
+    function handleLogoUpload(event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            if (file.size > 2 * 1024 * 1024) {
+                alert("Image too large! Max 2MB");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById("logoPreview");
+                preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`;
+                schoolProfile.logoData = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("Please select a valid image file");
+        }
+    }
 
-function save(){
-localStorage.setItem("students",JSON.stringify(students));
-display();
-}
+    function updateSchoolDisplay() {
+        document.getElementById("schoolNameDisplay").innerText = schoolProfile.name;
+        document.getElementById("schoolAddressDisplay").innerText = schoolProfile.address;
+        if (schoolProfile.logoData) {
+            document.getElementById("schoolLogoImg").src = schoolProfile.logoData;
+            document.getElementById("schoolLogoImg").style.display = "block";
+            document.getElementById("schoolLogoPlaceholder").style.display = "none";
+        } else if (schoolProfile.logo) {
+            document.getElementById("schoolLogoImg").src = schoolProfile.logo;
+            document.getElementById("schoolLogoImg").style.display = "block";
+            document.getElementById("schoolLogoPlaceholder").style.display = "none";
+        } else {
+            document.getElementById("schoolLogoImg").style.display = "none";
+            document.getElementById("schoolLogoPlaceholder").style.display = "block";
+        }
+    }
 
-function display(){
-let html="";
-let paid=0;
-let total=0;
-students.forEach((s,i)=>{
-if(s.paid){paid++; total+=Number(s.fee);}
-html+=`
-<tr>
-<td>${s.id}</td>
-<td>${s.name}</td>
-<td>${s.class}</td>
-<td>${s.month}</td>
-<td>${s.fee}</td>
-<td>${s.paid?"Paid":"Unpaid"}</td>
-<td><img src="${s.photo}" class="student-photo"></td>
-<td>
-<button onclick="pay(${i})"><i class="fa fa-check"></i></button>
-<button onclick="editMonth(${i})"><i class="fa fa-pen"></i></button>
-<button onclick="printBill(${i})"><i class="fa fa-print"></i></button>
-<button onclick="del(${i})"><i class="fa fa-trash"></i></button>
-</td>
-</tr>
-`;
-});
-document.getElementById("table").innerHTML=html;
-document.getElementById("totalStudents").innerText=students.length;
-document.getElementById("paidStudents").innerText=paid;
-document.getElementById("unpaidStudents").innerText=students.length-paid;
-document.getElementById("totalCollection").innerText=total;
-}
+    window.openProfileModal = function() {
+        document.getElementById("schoolNameInput").value = schoolProfile.name;
+        document.getElementById("schoolAddressInput").value = schoolProfile.address;
+        const preview = document.getElementById("logoPreview");
+        if (schoolProfile.logoData) {
+            preview.innerHTML = `<img src="${schoolProfile.logoData}" style="width:100%;height:100%;object-fit:cover;">`;
+        } else if (schoolProfile.logo) {
+            preview.innerHTML = `<img src="${schoolProfile.logo}" style="width:100%;height:100%;object-fit:cover;">`;
+        } else {
+            preview.innerHTML = `<span style="color:#94a3b8;">Preview</span>`;
+        }
+        document.getElementById("profileModal").style.display = "flex";
+    };
 
-function pay(i){students[i].paid=true; save();}
-function del(i){students.splice(i,1); save();}
+    window.saveSchoolProfile = function() {
+        schoolProfile.name = document.getElementById("schoolNameInput").value || "SCHOOL NAME";
+        schoolProfile.address = document.getElementById("schoolAddressInput").value || "School Address";
+        const previewImg = document.querySelector("#logoPreview img");
+        if (previewImg) {
+            schoolProfile.logoData = previewImg.src;
+            schoolProfile.logo = "";
+        }
+        saveAll();
+        closeProfileModal();
+    };
 
-function searchStudent(){
-let v=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll("#table tr").forEach(r=>{
-let name=r.children[1].innerText.toLowerCase();
-r.style.display=name.includes(v)?"":"none";
-});
-}
+    window.closeProfileModal = function() { document.getElementById("profileModal").style.display = "none"; };
 
-function editMonth(i){
-let newMonth = prompt("Enter New Month", students[i].month);
-if(newMonth){students[i].month=newMonth; save();}
-}
+    // Fee Heads
+    window.addFeeHead = function() {
+        let name = document.getElementById("feeHeadName").value.trim();
+        let amount = parseFloat(document.getElementById("feeHeadAmount").value);
+        if (!name || isNaN(amount) || amount <= 0) { alert("Enter valid fee name and amount"); return; }
+        if (feeHeads.some(f => f.name.toLowerCase() === name.toLowerCase())) { alert("Fee head exists!"); return; }
+        feeHeads.push({ id: Date.now(), name: name, monthlyAmount: amount });
+        saveAll();
+        document.getElementById("feeHeadName").value = "";
+        document.getElementById("feeHeadAmount").value = "";
+    };
 
-function billHTML(s){
-return`
-<div class="bill">
-<div class="bill-header">
-<span>Symbol: ${s.id}</span>
-<span>Class: ${s.class}</span>
-</div>
-<div class="bill-name">${s.name}</div>
-<img src="${s.photo}">
-<p>Month : ${s.month}</p>
-<p><b>Fee : Rs ${s.fee}</b></p>
-<p>Status : <b>${s.paid ? "PAID" : "UNPAID"}</b></p>
-<div class="qr">
-${paymentQR?`<img src="${paymentQR}">`:""}
-</div>
-<div class="signature">
-${teacherSignature?`<img src="${teacherSignature}">`:""}
-<div class="line"></div>
-<span>Teacher</span>
-</div>
-</div>
-`;
-}
+    window.deleteFeeHead = function(id) {
+        if (confirm("Delete this fee head?")) { feeHeads = feeHeads.filter(f => f.id !== id); saveAll(); }
+    };
 
-function printBill(i){
-document.getElementById("printArea").innerHTML=billHTML(students[i]);
-window.print();
-}
+    function renderFeeHeads() {
+        let container = document.getElementById("feeHeadsList");
+        if (!feeHeads.length) { container.innerHTML = "<span style='color:gray'>📌 No fee heads defined</span>"; return; }
+        container.innerHTML = feeHeads.map(f => `<div class="fee-item"><span><strong>${f.name}</strong> ₹${f.monthlyAmount}/month</span><button class="delete-btn" style="padding:4px 12px;" onclick="deleteFeeHead(${f.id})">🗑</button></div>`).join("");
+    }
 
-function printAll(){
-let html="";
-students.forEach(s=>{html+=billHTML(s);});
-document.getElementById("printArea").innerHTML=html;
-window.print();
-}
+    function calculateMonths(from, to) {
+        let fromDate = new Date(from + "-01"), toDate = new Date(to + "-01");
+        return (toDate.getFullYear() - fromDate.getFullYear()) * 12 + (toDate.getMonth() - fromDate.getMonth()) + 1;
+    }
 
-function exportCSV(){
-let csv="ID,Name,Class,Month,Fee,Status\n";
-students.forEach(s=>{
-csv+=`${s.id},${s.name},${s.class},${s.month},${s.fee},${s.paid?'Paid':'Unpaid'}\n`;
-});
-let blob=new Blob([csv]);
-let a=document.createElement("a");
-a.href=URL.createObjectURL(blob);
-a.download="students.csv";
-a.click();
-}
+    function formatMonth(m) { if(!m) return ""; let d = new Date(m + "-01"); return d.toLocaleString('default', { month: 'short', year: 'numeric' }); }
 
-display();
+    // Add Student
+    let pendingStudent = {};
+    window.openFeeSelectionModal = function() {
+        let name = document.getElementById("studentName").value.trim();
+        let cls = document.getElementById("studentClass").value.trim();
+        let gender = document.querySelector('input[name="gender"]:checked').value;
+        let from = document.getElementById("fromMonth").value;
+        let to = document.getElementById("toMonth").value;
+        if (!name || !cls) { alert("Enter name and class"); return; }
+        if (!from || !to) { alert("Select billing period"); return; }
+        if (new Date(from + "-01") > new Date(to + "-01")) { alert("From month must be earlier"); return; }
+        pendingStudent = { name, class: cls, gender, fromMonth: from, toMonth: to };
+        document.getElementById("modalStudentName").innerText = name;
+        document.getElementById("displayFromMonth").innerText = formatMonth(from);
+        document.getElementById("displayToMonth").innerText = formatMonth(to);
+        document.getElementById("monthCount").innerHTML = calculateMonths(from, to);
+        renderChecklist("feeChecklist", []);
+        document.getElementById("feeModal").style.display = "flex";
+    };
+
+    function renderChecklist(containerId, selectedIds) {
+        let container = document.getElementById(containerId);
+        if (!feeHeads.length) { container.innerHTML = "<p style='color:red'>⚠️ Add fee heads first!</p>"; return; }
+        container.innerHTML = feeHeads.map(f => `<div class="fee-check"><input type="checkbox" value="${f.id}" ${selectedIds.includes(f.id) ? 'checked' : ''}> <label><strong>${f.name}</strong> - ₹${f.monthlyAmount}/month</label></div>`).join("");
+    }
+
+    window.confirmAddStudent = function() {
+        let selected = [];
+        document.querySelectorAll("#feeChecklist input:checked").forEach(cb => {
+            let fee = feeHeads.find(f => f.id == cb.value);
+            if (fee) selected.push(fee);
+        });
+        if (!selected.length) { alert("Select at least one fee"); return; }
+        let months = calculateMonths(pendingStudent.fromMonth, pendingStudent.toMonth);
+        let feeDetails = selected.map(f => ({ name: f.name, monthlyAmount: f.monthlyAmount, months: months, total: f.monthlyAmount * months }));
+        students.push({
+            id: Date.now(), name: pendingStudent.name, gender: pendingStudent.gender, class: pendingStudent.class,
+            fromMonth: pendingStudent.fromMonth, toMonth: pendingStudent.toMonth, monthsCount: months,
+            selectedFees: feeDetails, totalAmount: feeDetails.reduce((s, f) => s + f.total, 0),
+            paidStatus: false, paidDate: null
+        });
+        saveAll();
+        closeFeeModal();
+        document.getElementById("studentName").value = "";
+        document.getElementById("studentClass").value = "";
+        document.getElementById("fromMonth").value = "";
+        document.getElementById("toMonth").value = "";
+        alert("Student added!");
+    };
+
+    window.closeFeeModal = function() { document.getElementById("feeModal").style.display = "none"; };
+
+    // Edit Student
+    function updateDropdowns() {
+        let select = document.getElementById("editStudentSelect");
+        select.innerHTML = '<option value="">-- Select Student --</option>' + students.map(s => `<option value="${s.id}">${s.name} (${s.class})</option>`).join("");
+        let checklist = document.getElementById("studentChecklist");
+        checklist.innerHTML = students.map(s => `<div><input type="checkbox" class="batchCheck" value="${s.id}"> <label style="font-size:11px;">${s.name} (${s.class})</label></div>`).join("");
+    }
+
+    window.openEditStudentModal = function() {
+        let id = parseInt(document.getElementById("editStudentSelect").value);
+        let student = students.find(s => s.id === id);
+        if (!student) { alert("Select a student"); return; }
+        document.getElementById("editStudentName").innerText = student.name;
+        document.getElementById("editFromMonth").innerText = formatMonth(student.fromMonth);
+        document.getElementById("editToMonth").innerText = formatMonth(student.toMonth);
+        document.getElementById("editMonthCount").innerHTML = student.monthsCount;
+        let preselected = student.selectedFees.map(f => { let fee = feeHeads.find(fh => fh.name === f.name); return fee ? fee.id : null; }).filter(id => id);
+        renderChecklist("editFeeChecklist", preselected);
+        window.editId = id;
+        document.getElementById("editModal").style.display = "flex";
+    };
+
+    window.saveEditedStudentFees = function() {
+        let student = students.find(s => s.id === window.editId);
+        if (!student) return;
+        let selected = [];
+        document.querySelectorAll("#editFeeChecklist input:checked").forEach(cb => {
+            let fee = feeHeads.find(f => f.id == cb.value);
+            if (fee) selected.push(fee);
+        });
+        if (!selected.length) { alert("Select at least one fee"); return; }
+        student.selectedFees = selected.map(f => ({ name: f.name, monthlyAmount: f.monthlyAmount, months: student.monthsCount, total: f.monthlyAmount * student.monthsCount }));
+        student.totalAmount = student.selectedFees.reduce((s, f) => s + f.total, 0);
+        saveAll();
+        closeEditModal();
+        alert("Fees updated!");
+    };
+
+    window.closeEditModal = function() { document.getElementById("editModal").style.display = "none"; };
+
+    window.togglePaid = function(id) {
+        let s = students.find(s => s.id === id);
+        if (s) {
+            if (!s.paidStatus) { s.paidStatus = true; s.paidDate = getTodayKey(); }
+            else { s.paidStatus = false; s.paidDate = null; }
+            saveAll();
+        }
+    };
+
+    window.deleteStudent = function(id) { if(confirm("Remove student?")) { students = students.filter(s => s.id !== id); saveAll(); } };
+
+    // Invoice Generation
+    function generateInvoiceHTML(list) {
+        let logoHtml = schoolProfile.logoData ? `<img src="${schoolProfile.logoData}" style="height:45px; margin-bottom:5px;">` : '<span style="font-size:35px;">🏫</span>';
+        return `<div class="print-section"><div class="invoice-grid">${list.map(s => {
+            let feeRows = s.selectedFees.map(f => `<tr><td>${f.name}</td><td style="text-align:center;">₹${f.monthlyAmount}</td><td style="text-align:center;">${f.months} mo</td><td style="text-align:right;">₹${f.total}</td></tr>`).join("");
+            return `<div class="invoice-card"><div style="text-align:center;">${logoHtml}<h4 style="color:#f97316;">${schoolProfile.name}</h4><p style="font-size:9px;">${schoolProfile.address}</p><hr></div><h5 style="text-align:center;">FEE INVOICE</h5><div style="font-size:10px;"><p><strong>${s.name}</strong> (${s.gender}) | Class: ${s.class}</p><p>Period: ${formatMonth(s.fromMonth)} → ${formatMonth(s.toMonth)} (${s.monthsCount} months)</p></div><table class="fee-table"><tr><th>Head</th><th>Monthly</th><th>Duration</th><th>Total</th></tr>${feeRows}<tr style="background:#fef3c7; font-weight:bold;"><td colspan="3">TOTAL</td><td style="text-align:right;">₹${s.totalAmount}</td></tr></table><div style="text-align:center; font-size:9px; margin-top:6px;">${s.paidStatus ? "✅ PAID" : "⚠️ PENDING"} | Thank you!</div></div>`;
+        }).join("")}</div></div>`;
+    }
+
+    window.printA4Invoices = function() { if(!students.length) { alert("No students"); return; } printInvoice(students); };
+    window.printSelectedInvoices = function() {
+        let selected = Array.from(document.querySelectorAll(".batchCheck:checked")).map(cb => students.find(s => s.id == cb.value)).filter(s => s);
+        if(!selected.length) { alert("Select students"); return; } printInvoice(selected);
+    };
+    function printInvoice(list) { let w = window.open('', '_blank', 'width=900,height=800'); w.document.write(`<html><head><title>Invoices</title><style>.invoice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;} .invoice-card{border:1px solid #ddd;border-radius:12px;padding:12px;page-break-inside:avoid;} .fee-table{width:100%;font-size:9px;border-collapse:collapse;} .fee-table td,.fee-table th{border:1px solid #ccc;padding:4px;} @media print{@page{size:A4;margin:1cm;}}</style></head><body>${generateInvoiceHTML(list)}</body></html>`); w.document.close(); w.print(); }
+
+    window.printSingleInvoice = function(id) { let s = students.find(s => s.id === id); if(s) printInvoice([s]); };
+
+    // Table render
+    let filter = "";
+    function filterTable() { filter = document.getElementById("searchInput").value.toLowerCase(); renderStudentTable(); }
+    function renderStudentTable() {
+        let tbody = document.getElementById("studentTableBody");
+        let filtered = students.filter(s => s.name.toLowerCase().includes(filter) || s.class.toLowerCase().includes(filter));
+        if(!filtered.length) { tbody.innerHTML = ""; document.getElementById("emptyMsg").style.display = "block"; return; }
+        document.getElementById("emptyMsg").style.display = "none";
+        tbody.innerHTML = filtered.map(s => `<tr><td><strong>${s.name}</strong><br><button class="delete-btn" style="padding:2px 8px; font-size:10px;" onclick="deleteStudent(${s.id})">🗑 Remove</button></td><td>${s.gender}</td><td>${s.class}</td><td>${formatMonth(s.fromMonth)}→${formatMonth(s.toMonth)}<br><span class="month-badge">${s.monthsCount} mo</span></td><td style="font-size:10px;">${s.selectedFees.map(f=>f.name).join(", ")}</td><td>₹${s.totalAmount}</td><td>${s.paidStatus ? '<span class="badge-paid">PAID</span>' : '<span class="badge-unpaid">UNPAID</span>'}<br><button onclick="togglePaid(${s.id})" style="background:#334155; padding:2px 8px; margin-top:3px; font-size:10px;">${s.paidStatus ? 'Unpaid' : 'Paid'}</button></td><td><button onclick="printSingleInvoice(${s.id})" style="background:#3b82f6; padding:5px 10px;">🧾 Print</button></td></tr>`).join("");
+    }
+
+    window.exportCSV = function() {
+        let headers = ["Name","Gender","Class","From","To","Months","Fees","Total","Status"];
+        let rows = students.map(s => [s.name, s.gender, s.class, s.fromMonth, s.toMonth, s.monthsCount, s.selectedFees.map(f=>f.name).join(";"), s.totalAmount, s.paidStatus?"Paid":"Unpaid"]);
+        let csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(",")).join("\n");
+        let a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv])); a.download = "school_billing.csv"; a.click();
+    };
+
+    window.resetAllData = function() { if(confirm("Delete ALL data?")) { feeHeads = []; students = []; saveAll(); } };
+
+    function init() { updateSchoolDisplay(); renderFeeHeads(); renderStudentTable(); updateDropdowns(); updateRevenue(); }
+    init();
 </script>
-
 </body>
 </html>
-
