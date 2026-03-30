@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-   <link rel="icon" type="image/png" href="Brp Digital Institute logo.png">
+    <link rel="icon" type="image/png" href="Brp Digital Institute logo.png">
     <title>School Billing-Brp Digital Institute</title>
     <style>
         * {
@@ -401,20 +401,117 @@
             font-size: 0.7rem;
             padding: 15px;
         }
+        /* PRINT STYLES - 4 Bills per A4 page with individual headings */
         @media print {
             body * { visibility: hidden; }
             .print-section, .print-section * { visibility: visible; }
-            .print-section { position: absolute; top: 0; left: 0; width: 100%; }
-            .invoice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .invoice-card { border: 1px solid #ddd; border-radius: 12px; padding: 12px; page-break-inside: avoid; }
-            .fee-table { width: 100%; border-collapse: collapse; }
-            .fee-table td, .fee-table th { border: 1px solid #ccc; padding: 4px; }
-            @page { size: A4; margin: 1cm; }
+            .print-section { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100%; 
+                background: white;
+            }
+            .print-bill-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 15px;
+            }
+            .print-bill-card {
+                border: 2px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 15px;
+                page-break-inside: avoid;
+                background: white;
+                box-shadow: none;
+            }
+            .print-bill-header {
+                text-align: center;
+                border-bottom: 2px solid #f97316;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+            .print-bill-header h2 {
+                color: #f97316;
+                font-size: 16px;
+                margin: 5px 0;
+            }
+            .print-bill-header p {
+                font-size: 10px;
+                color: #475569;
+                margin: 3px 0;
+            }
+            .print-bill-title {
+                text-align: center;
+                background: #fef3c7;
+                padding: 5px;
+                margin: 8px 0;
+                font-weight: bold;
+                font-size: 12px;
+            }
+            .print-student-info {
+                font-size: 11px;
+                margin: 8px 0;
+                padding: 5px;
+                background: #f8fafc;
+                border-radius: 6px;
+            }
+            .print-fee-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 9px;
+                margin: 8px 0;
+            }
+            .print-fee-table th, .print-fee-table td {
+                border: 1px solid #cbd5e1;
+                padding: 4px;
+                text-align: left;
+            }
+            .print-fee-table th {
+                background: #f1f5f9;
+                font-weight: bold;
+            }
+            .print-total {
+                text-align: right;
+                font-weight: bold;
+                margin: 8px 0;
+                padding-top: 5px;
+                border-top: 1px dashed #cbd5e1;
+                font-size: 11px;
+            }
+            .print-status {
+                text-align: center;
+                margin: 8px 0;
+                padding: 4px;
+                border-radius: 20px;
+                font-size: 9px;
+                font-weight: bold;
+            }
+            .print-status.paid {
+                background: #d1fae5;
+                color: #065f46;
+            }
+            .print-status.unpaid {
+                background: #fee2e2;
+                color: #991b1b;
+            }
+            .print-footer {
+                text-align: center;
+                font-size: 8px;
+                margin-top: 10px;
+                padding-top: 5px;
+                border-top: 1px solid #e2e8f0;
+                color: #94a3b8;
+            }
+            @page {
+                size: A4;
+                margin: 0.8cm;
+            }
         }
     </style>
 </head>
 <body>
-
 
 
 <script type="module">
@@ -444,12 +541,6 @@ onAuthStateChanged(auth, user => {
     }
 });
 </script>
-
-
-
-
-
-
 
 
 <div class="main-container">
@@ -533,7 +624,7 @@ onAuthStateChanged(auth, user => {
         <div class="action-bar">
             <span style="font-weight:bold;">📋 STUDENT LEDGER</span>
             <input type="text" id="searchInput" placeholder="🔍 Search" onkeyup="filterTable()">
-            <button onclick="printAllInvoices()" class="print-btn">🖨️ Print All</button>
+            <button onclick="printAllInvoices()" class="print-btn">🖨️ Print All (4 per page)</button>
             <button onclick="shareSelectedWhatsApp()" class="whatsapp-btn">📱 Share Selected</button>
             <button onclick="exportCSV()">📎 Quick Export</button>
             <button onclick="resetAllData()" style="background:#ef4444;">⚠️ Reset</button>
@@ -548,7 +639,7 @@ onAuthStateChanged(auth, user => {
         </div>
         <div id="emptyMsg" style="text-align:center; padding:30px;">No students yet. Add your first student!</div>
     </div>
-    <footer>© 2026  2026 Brp Digital Institute | All Rights Reserved</footer>
+    <footer>© 2026 Brp Digital Institute | All Rights Reserved</footer>
 </div>
 
 <!-- Profile Modal -->
@@ -967,24 +1058,216 @@ onAuthStateChanged(auth, user => {
         selected.forEach(s => shareBillWhatsApp(s.id));
     };
 
-    // Print Functions
-    function generateInvoiceHTML(studentsList, title = "FEE INVOICES") {
-        let logoHtml = schoolProfile.logoData ? `<img src="${schoolProfile.logoData}" style="height:60px; margin-bottom:5px;">` : '<span style="font-size:40px;">🏫</span>';
-        return `<div class="print-section"><div style="text-align:center; margin-bottom:20px;">${logoHtml}<h2>${schoolProfile.name}</h2><p>${schoolProfile.address}</p><hr><h3>${title}</h3></div><div class="invoice-grid">${studentsList.map(s => {
-            let feeRows = s.selectedFees.map(f => `<tr><td>${f.name}</td><td style="text-align:center;">₹${f.monthlyAmount}</td><td style="text-align:center;">${f.months} mo</td><td style="text-align:right;">₹${f.total}</td></tr>`).join("");
-            return `<div class="invoice-card"><h4 style="text-align:center;">${s.name} (${s.class})</h4><p style="font-size:10px; text-align:center;">Period: ${s.fromMonth} to ${s.toMonth} (${s.monthsCount} months)</p><table class="fee-table"><tr><th>Fee Head</th><th>Monthly</th><th>Duration</th><th>Total</th></tr>${feeRows}<tr style="background:#fef3c7; font-weight:bold;"><td colspan="3">TOTAL</td><td style="text-align:right;">₹${s.totalAmount}</td></tr></table><div style="text-align:center; margin-top:8px; font-size:10px;">${s.paidStatus ? '✅ PAID ✓' : '⚠️ PENDING'}<br>${s.paidDate ? `Paid on: ${s.paidDate}` : ''}</div></div>`;
-        }).join("")}</div><div style="text-align:center; margin-top:20px; font-size:10px;">Generated on: ${new Date().toLocaleString()}</div></div>`;
+    // NEW PRINT FUNCTION - 4 Bills per A4 page with individual headings
+    function generateBillCardHTML(student) {
+        const logoHtml = schoolProfile.logoData ? 
+            `<img src="${schoolProfile.logoData}" style="height:40px; margin-bottom:5px;">` : 
+            '<span style="font-size:30px;">🏫</span>';
+        
+        const feeRows = student.selectedFees.map(f => `
+            <tr>
+                <td>${f.name}</td>
+                <td style="text-align:center;">₹${f.monthlyAmount}</td>
+                <td style="text-align:center;">${f.months} mo</td>
+                <td style="text-align:right;">₹${f.total}</td>
+            </tr>
+        `).join('');
+        
+        const statusClass = student.paidStatus ? 'paid' : 'unpaid';
+        const statusText = student.paidStatus ? '✅ Payment Received <br> Thank You for Your Co-operation! PAID' : '⚠️ PENDING <br> Please make payment soon ';
+        
+        return `
+            <div class="print-bill-card">
+                <div class="print-bill-header">
+                    ${logoHtml}
+                    <h2>${schoolProfile.name}</h2>
+                    <p>${schoolProfile.address}</p>
+                </div>
+                <div class="print-bill-title">
+                    📄 FEE INVOICE
+                </div>
+                <div class="print-student-info">
+                    <strong>👤 Name:</strong> ${student.name}<br>
+                    <strong>📚 Class:</strong> ${student.class}<br>
+                    <strong>👥 Gender:</strong> ${student.gender}<br>
+                    <strong>📅 Period:</strong> ${student.fromMonth} to ${student.toMonth} (${student.monthsCount} months)
+                </div>
+                <table class="print-fee-table">
+                    <thead>
+                        <tr><th>Fee Head</th><th>Monthly (₹)</th><th>Duration</th><th>Total (₹)</th></tr>
+                    </thead>
+                    <tbody>
+                        ${feeRows}
+                        <tr style="background:#fef3c7; font-weight:bold;">
+                            <td colspan="3" style="text-align:right;">TOTAL</td>
+                            <td style="text-align:right;">₹${student.totalAmount}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="print-status ${statusClass}">
+                    ${statusText} ${student.paidDate ? `on ${student.paidDate}` : ''}
+                </div>
+                <div class="print-footer">  
+                   📌 Please keep this bill safely for future reference.
+                </div>
+            </div>
+        `;
     }
 
-    window.printAllInvoices = function() { if(!students.length) { alert("No students"); return; } printInvoice(students, "ALL STUDENTS INVOICES"); };
-    window.printPaidStudentsInvoices = function() { let paid = students.filter(s => s.paidStatus); if(!paid.length) { alert("No paid students"); return; } printInvoice(paid, "PAID STUDENTS INVOICES"); };
-    window.printSingleInvoice = function(id) { let s = students.find(s => s.id === id); if(s) printInvoice([s], `${s.name} - INVOICE`); };
+    window.printAllInvoices = function() { 
+        if(!students.length) { alert("No students"); return; } 
+        printInvoices4PerPage(students, "ALL STUDENTS INVOICES");
+    };
     
-    function printInvoice(list, title) {
+    window.printPaidStudentsInvoices = function() { 
+        let paid = students.filter(s => s.paidStatus); 
+        if(!paid.length) { alert("No paid students"); return; } 
+        printInvoices4PerPage(paid, "PAID STUDENTS INVOICES");
+    };
+    
+    window.printSingleInvoice = function(id) { 
+        let s = students.find(s => s.id === id); 
+        if(s) printInvoices4PerPage([s], `${s.name} - INVOICE`);
+    };
+    
+    function printInvoices4PerPage(studentsList, title) {
         let w = window.open('', '_blank', 'width=900,height=800');
-        w.document.write(`<html><head><title>${title}</title><style>body{font-family:Arial,sans-serif;padding:20px;} .invoice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;} .invoice-card{border:1px solid #ddd;border-radius:12px;padding:15px;page-break-inside:avoid;} .fee-table{width:100%;border-collapse:collapse;margin-top:10px;} .fee-table td,.fee-table th{border:1px solid #ccc;padding:6px;font-size:11px;} @media print{@page{size:A4;margin:1cm;}}</style></head><body>${generateInvoiceHTML(list, title)}</body></html>`);
+        let allCardsHTML = '';
+        
+        // Arrange in groups of 4 for grid layout
+        for(let i = 0; i < studentsList.length; i += 4) {
+            const batch = studentsList.slice(i, i + 4);
+            allCardsHTML += `<div class="print-bill-grid">${batch.map(s => generateBillCardHTML(s)).join('')}</div>`;
+            if(i + 4 < studentsList.length) {
+                allCardsHTML += '<div style="page-break-after: always;"></div>';
+            }
+        }
+        
+        w.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${title}</title>
+                <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+                    body {
+                        font-family: 'Segoe UI', Arial, sans-serif;
+                        background: white;
+                        padding: 15px;
+                    }
+                    .print-bill-grid {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 20px;
+                        margin-bottom: 20px;
+                    }
+                    .print-bill-card {
+                        border: 2px solid #e2e8f0;
+                        border-radius: 12px;
+                        padding: 15px;
+                        page-break-inside: avoid;
+                        background: white;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                    }
+                    .print-bill-header {
+                        text-align: center;
+                        border-bottom: 2px solid #f97316;
+                        padding-bottom: 10px;
+                        margin-bottom: 10px;
+                    }
+                    .print-bill-header h2 {
+                        color: #f97316;
+                        font-size: 16px;
+                        margin: 5px 0;
+                    }
+                    .print-bill-header p {
+                        font-size: 10px;
+                        color: #475569;
+                        margin: 3px 0;
+                    }
+                    .print-bill-title {
+                        text-align: center;
+                        background: #fef3c7;
+                        padding: 5px;
+                        margin: 8px 0;
+                        font-weight: bold;
+                        font-size: 12px;
+                    }
+                    .print-student-info {
+                        font-size: 11px;
+                        margin: 8px 0;
+                        padding: 5px;
+                        background: #f8fafc;
+                        border-radius: 6px;
+                    }
+                    .print-fee-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        font-size: 9px;
+                        margin: 8px 0;
+                    }
+                    .print-fee-table th, .print-fee-table td {
+                        border: 1px solid #cbd5e1;
+                        padding: 4px;
+                        text-align: left;
+                    }
+                    .print-fee-table th {
+                        background: #f1f5f9;
+                        font-weight: bold;
+                    }
+                    .print-status {
+                        text-align: center;
+                        margin: 8px 0;
+                        padding: 4px;
+                        border-radius: 20px;
+                        font-size: 9px;
+                        font-weight: bold;
+                    }
+                    .print-status.paid {
+                        background: #d1fae5;
+                        color: #065f46;
+                    }
+                    .print-status.unpaid {
+                        background: #fee2e2;
+                        color: #991b1b;
+                    }
+                    .print-footer {
+                        text-align: center;
+                        font-size: 8px;
+                        margin-top: 10px;
+                        padding-top: 5px;
+                        border-top: 1px solid #e2e8f0;
+                        color: #94a3b8;
+                    }
+                    @media print {
+                        body {
+                            padding: 0;
+                            margin: 0;
+                        }
+                        .print-bill-grid {
+                            gap: 15px;
+                            margin-bottom: 15px;
+                        }
+                        @page {
+                            size: A4;
+                            margin: 0.6cm;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                ${allCardsHTML}
+                <script>
+                    window.onload = function() { window.print(); setTimeout(() => window.close(), 500); };
+                <\/script>
+            </body>
+            </html>
+        `);
         w.document.close();
-        w.print();
     }
 
     // Import/Export Functions
