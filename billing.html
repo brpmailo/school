@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-<link rel="icon" type="image/png" href="Brp Digital Institute logo.png">
+   <link rel="icon" type="image/png" href="Brp Digital Institute logo.png">
     <title>School Billing-Brp Digital Institute</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Poppins', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            font-family: 'Segoe UI', 'Poppins', -apple-system, 'Roboto', sans-serif;
         }
         body {
             background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
@@ -21,7 +21,6 @@
             max-width: 1400px;
             margin: 0 auto;
         }
-        /* Mobile First Header */
         .school-header {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             border-radius: 24px;
@@ -41,9 +40,7 @@
                 align-items: center;
                 padding: 20px 28px;
             }
-            body {
-                padding: 20px;
-            }
+            body { padding: 20px; }
         }
         .school-info {
             display: flex;
@@ -63,22 +60,10 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            position: relative;
         }
-        @media (min-width: 768px) {
-            .school-logo {
-                width: 70px;
-                height: 70px;
-            }
-        }
-        .school-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .school-logo span {
-            font-size: 32px;
-        }
+        @media (min-width: 768px) { .school-logo { width: 70px; height: 70px; } }
+        .school-logo img { width: 100%; height: 100%; object-fit: cover; }
+        .school-logo span { font-size: 32px; }
         .school-text h2 {
             font-size: 1.3rem;
             background: linear-gradient(135deg, #FDE68A, #F97316);
@@ -86,20 +71,9 @@
             background-clip: text;
             color: transparent;
         }
-        @media (min-width: 768px) {
-            .school-text h2 {
-                font-size: 1.6rem;
-            }
-        }
-        .school-text p {
-            font-size: 0.7rem;
-            color: #cbd5e1;
-        }
-        @media (min-width: 768px) {
-            .school-text p {
-                font-size: 0.85rem;
-            }
-        }
+        @media (min-width: 768px) { .school-text h2 { font-size: 1.6rem; } }
+        .school-text p { font-size: 0.7rem; color: #cbd5e1; }
+        @media (min-width: 768px) { .school-text p { font-size: 0.85rem; } }
         .edit-profile-btn {
             background: #334155;
             padding: 8px 16px;
@@ -110,18 +84,36 @@
             color: white;
             font-weight: 500;
         }
-        /* Stats Cards - Mobile Friendly */
+        .stats-section {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .toggle-revenue-btn {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            background: #334155;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            z-index: 10;
+            border: none;
+            color: white;
+        }
+        @media (min-width: 768px) {
+            .toggle-revenue-btn {
+                top: -12px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
         .stats-badge {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-bottom: 20px;
         }
-        @media (min-width: 640px) {
-            .stats-badge {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
+        @media (min-width: 640px) { .stats-badge { grid-template-columns: repeat(4, 1fr); } }
         .stat-card {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -129,57 +121,31 @@
             border-radius: 20px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
         }
-        .stat-card h4 {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-bottom: 5px;
-        }
-        .stat-card .amount {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #f97316;
-        }
+        .stat-card.hidden-stat { display: none; }
+        .stat-card h4 { font-size: 0.7rem; color: #94a3b8; margin-bottom: 5px; }
+        .stat-card .amount { font-size: 1.3rem; font-weight: bold; color: #f97316; }
         @media (min-width: 768px) {
-            .stat-card {
-                padding: 12px 24px;
-            }
-            .stat-card h4 {
-                font-size: 0.85rem;
-            }
-            .stat-card .amount {
-                font-size: 1.8rem;
-            }
+            .stat-card { padding: 12px 24px; }
+            .stat-card h4 { font-size: 0.85rem; }
+            .stat-card .amount { font-size: 1.8rem; }
         }
-        /* Grid Layout */
         .grid-3col {
             display: grid;
             grid-template-columns: 1fr;
             gap: 16px;
             margin-bottom: 20px;
         }
-        @media (min-width: 768px) {
-            .grid-3col {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 1024px) {
-            .grid-3col {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+        @media (min-width: 768px) { .grid-3col { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .grid-3col { grid-template-columns: repeat(3, 1fr); } }
         .card {
             background: white;
             border-radius: 24px;
             padding: 16px;
             box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
         }
-        @media (min-width: 768px) {
-            .card {
-                padding: 20px 24px;
-            }
-        }
+        @media (min-width: 768px) { .card { padding: 20px 24px; } }
         .card h3 {
             font-size: 1.2rem;
             margin-bottom: 15px;
@@ -187,20 +153,14 @@
             padding-left: 12px;
             color: #1e293b;
         }
-        @media (min-width: 768px) {
-            .card h3 {
-                font-size: 1.4rem;
-                margin-bottom: 18px;
-                border-left-width: 6px;
-            }
-        }
+        @media (min-width: 768px) { .card h3 { font-size: 1.4rem; margin-bottom: 18px; border-left-width: 6px; } }
         .input-group {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 15px;
         }
-        input, select {
+        input, select, textarea {
             padding: 10px 14px;
             border-radius: 50px;
             border: 1px solid #cbd5e1;
@@ -209,12 +169,7 @@
             min-width: 120px;
             background: #f8fafc;
         }
-        @media (min-width: 768px) {
-            input, select {
-                padding: 12px 16px;
-                font-size: 0.9rem;
-            }
-        }
+        @media (min-width: 768px) { input, select, textarea { padding: 12px 16px; font-size: 0.9rem; } }
         button {
             background: linear-gradient(95deg, #f97316, #ea580c);
             border: none;
@@ -226,24 +181,13 @@
             transition: 0.2s;
             font-size: 0.85rem;
         }
-        @media (min-width: 768px) {
-            button {
-                padding: 10px 22px;
-                font-size: 0.9rem;
-            }
-        }
-        button:active {
-            transform: scale(0.96);
-        }
-        .delete-btn {
-            background: #475569;
-        }
-        .primary-btn {
-            background: linear-gradient(95deg, #3b82f6, #2563eb);
-        }
-        .edit-btn {
-            background: linear-gradient(95deg, #8b5cf6, #7c3aed);
-        }
+        @media (min-width: 768px) { button { padding: 10px 22px; font-size: 0.9rem; } }
+        button:active { transform: scale(0.96); }
+        .delete-btn { background: #475569; }
+        .primary-btn { background: linear-gradient(95deg, #3b82f6, #2563eb); }
+        .whatsapp-btn { background: linear-gradient(95deg, #25D366, #128C7E); }
+        .success-btn { background: linear-gradient(95deg, #10b981, #059669); }
+        .print-btn { background: linear-gradient(95deg, #6366f1, #4f46e5); }
         .fee-list {
             background: #f1f5f9;
             border-radius: 16px;
@@ -273,13 +217,7 @@
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-        .gender-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-        }
-        /* Modal Styles */
+        .gender-group label { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; }
         .modal {
             display: none;
             position: fixed;
@@ -293,19 +231,14 @@
         }
         .modal-content {
             background: white;
-            max-width: 500px;
+            max-width: 750px;
             width: 100%;
             border-radius: 28px;
             padding: 20px;
             max-height: 85vh;
             overflow-y: auto;
         }
-        @media (min-width: 768px) {
-            .modal-content {
-                max-width: 550px;
-                padding: 25px;
-            }
-        }
+        @media (min-width: 768px) { .modal-content { max-width: 800px; padding: 25px; } }
         .fee-checkbox-group {
             display: grid;
             gap: 10px;
@@ -323,37 +256,7 @@
             border-radius: 50px;
             border: 1px solid #e2e8f0;
         }
-        .fee-check input {
-            width: 18px;
-            height: 18px;
-            margin: 0;
-        }
-        .logo-upload-area {
-            border: 2px dashed #cbd5e1;
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            margin: 15px 0;
-            cursor: pointer;
-            background: #f8fafc;
-        }
-        .logo-preview {
-            width: 80px;
-            height: 80px;
-            margin: 10px auto;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .logo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        /* Table - Mobile Friendly */
+        .fee-check input { width: 18px; height: 18px; margin: 0; }
         .table-wrapper {
             background: white;
             border-radius: 24px;
@@ -374,20 +277,15 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 18px 24px;
+                flex-wrap: wrap;
             }
         }
-        .action-bar input {
-            max-width: 100%;
-        }
-        @media (min-width: 640px) {
-            .action-bar input {
-                max-width: 250px;
-            }
-        }
+        .action-bar input { max-width: 100%; }
+        @media (min-width: 640px) { .action-bar input { max-width: 250px; } }
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px;
+            min-width: 800px;
         }
         th {
             background: #1e293b;
@@ -396,77 +294,89 @@
             text-align: center;
             font-size: 0.75rem;
         }
-        @media (min-width: 768px) {
-            th {
-                padding: 14px 10px;
-                font-size: 0.9rem;
-            }
-        }
+        @media (min-width: 768px) { th { padding: 14px 10px; font-size: 0.9rem; } }
         td {
             padding: 8px 4px;
             text-align: center;
             border-bottom: 1px solid #e2e8f0;
             font-size: 0.7rem;
         }
-        @media (min-width: 768px) {
-            td {
-                padding: 12px 8px;
-                font-size: 0.85rem;
-            }
-        }
+        @media (min-width: 768px) { td { padding: 12px 8px; font-size: 0.85rem; } }
         .badge-paid, .badge-unpaid {
             padding: 3px 8px;
             border-radius: 40px;
             font-size: 0.65rem;
             display: inline-block;
         }
+        .badge-paid { background: #d1fae5; color: #065f46; }
+        .badge-unpaid { background: #fee2e2; color: #991b1b; }
         .month-badge {
             background: #e0f2fe;
             padding: 2px 6px;
             border-radius: 20px;
             font-size: 0.6rem;
         }
-        /* Invoice Print Styles */
-        .invoice-card {
+        .whatsapp-input-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            align-items: center;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .bill-history {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 10px;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .history-item {
             background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border-left: 3px solid #f97316;
+            font-size: 11px;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
             margin-bottom: 15px;
-            page-break-inside: avoid;
+            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
         }
-        .invoice-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
+        .tab {
+            padding: 8px 16px;
+            cursor: pointer;
+            background: none;
+            color: #64748b;
+            border-radius: 0;
+            border: none;
         }
-        @media (min-width: 768px) {
-            .invoice-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .tab.active {
+            color: #f97316;
+            border-bottom: 2px solid #f97316;
         }
-        .fee-table {
-            width: 100%;
-            font-size: 9px;
-            border-collapse: collapse;
-        }
-        .fee-table th, .fee-table td {
-            border: 1px solid #cbd5e1;
-            padding: 4px;
-        }
-        @media print {
-            body * { visibility: hidden; }
-            .print-section, .print-section * { visibility: visible; }
-            .print-section { position: absolute; top: 0; left: 0; width: 100%; }
-            .invoice-grid { gap: 12px; }
-            @page { size: A4; margin: 1cm; }
-        }
-        footer {
-            text-align: center;
-            color: #94a3b8;
-            margin-top: 20px;
-            font-size: 0.7rem;
+        .google-sheets-section {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
             padding: 15px;
+            border-radius: 16px;
+            margin-top: 10px;
         }
         .batch-select {
             max-height: 150px;
@@ -477,10 +387,6 @@
             margin-top: 8px;
             background: #f8fafc;
         }
-        .batch-select div {
-            margin: 5px 0;
-            font-size: 0.75rem;
-        }
         .student-select {
             width: 100%;
             padding: 10px;
@@ -488,14 +394,26 @@
             margin-bottom: 10px;
             border: 1px solid #cbd5e1;
         }
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        footer {
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            padding: 15px;
+        }
+        @media print {
+            body * { visibility: hidden; }
+            .print-section, .print-section * { visibility: visible; }
+            .print-section { position: absolute; top: 0; left: 0; width: 100%; }
+            .invoice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .invoice-card { border: 1px solid #ddd; border-radius: 12px; padding: 12px; page-break-inside: avoid; }
+            .fee-table { width: 100%; border-collapse: collapse; }
+            .fee-table td, .fee-table th { border: 1px solid #ccc; padding: 4px; }
+            @page { size: A4; margin: 1cm; }
         }
     </style>
 </head>
 <body>
-
 
 
 
@@ -533,8 +451,8 @@ onAuthStateChanged(auth, user => {
 
 
 
+
 <div class="main-container">
-    <!-- School Header with Logo Upload -->
     <div class="school-header">
         <div class="school-info">
             <div class="school-logo" id="logoClickArea">
@@ -549,26 +467,25 @@ onAuthStateChanged(auth, user => {
         <button class="edit-profile-btn" onclick="openProfileModal()">✏️ Edit School</button>
     </div>
 
-
-    <!-- Stats Cards - Mobile Friendly -->
-    <div class="stats-badge">
-        <div class="stat-card"><h4>📚 Total Students</h4><div class="amount" id="totalStudents">0</div></div>
-        <div class="stat-card"><h4>💰 Total Revenue</h4><div class="amount" id="totalRevenue">0</div></div>
-        <div class="stat-card"><h4>📅 Today's Collection</h4><div class="amount" id="todayRevenue">0</div></div>
-        <div class="stat-card"><h4>💵 Pending Amount</h4><div class="amount" id="pendingAmount">0</div></div>
+    <div class="stats-section">
+        <button class="toggle-revenue-btn" onclick="toggleRevenueVisibility()" id="toggleRevenueBtn">👁️ Hide Revenue</button>
+        <div class="stats-badge">
+            <div class="stat-card"><h4>📚 Students</h4><div class="amount" id="totalStudents">0</div></div>
+            <div class="stat-card revenue-stat"><h4>💰 Total Revenue</h4><div class="amount" id="totalRevenue">0</div></div>
+            <div class="stat-card revenue-stat"><h4>📅 Today's Collection</h4><div class="amount" id="todayRevenue">0</div></div>
+            <div class="stat-card revenue-stat"><h4>💵 Pending</h4><div class="amount" id="pendingAmount">0</div></div>
+        </div>
     </div>
 
-    <!-- 3 Column Grid -->
     <div class="grid-3col">
         <div class="card">
-            <h3>📋 FEE SET-UP</h3>
+            <h3>📋 FEE HEADS</h3>
             <div class="input-group">
-                <input type="text" id="feeHeadName" placeholder="Fee Name (e.g., Tuition)">
+                <input type="text" id="feeHeadName" placeholder="Fee Name">
                 <input type="number" id="feeHeadAmount" placeholder="Monthly Amount ₹">
                 <button onclick="addFeeHead()">➕ Add</button>
             </div>
             <div class="fee-list" id="feeHeadsList"></div>
-            <p style="font-size:11px; margin-top:8px;">💡 Monthly fee × number of months</p>
         </div>
 
         <div class="card">
@@ -576,6 +493,9 @@ onAuthStateChanged(auth, user => {
             <div class="input-group">
                 <input type="text" id="studentName" placeholder="Full Name">
                 <input type="text" id="studentClass" placeholder="Class">
+            </div>
+            <div class="whatsapp-input-group">
+                <input type="tel" id="studentWhatsApp" placeholder="WhatsApp Number">
             </div>
             <div class="gender-group">
                 <label><input type="radio" name="gender" value="Male" checked> 👨 Male</label>
@@ -590,60 +510,102 @@ onAuthStateChanged(auth, user => {
         </div>
 
         <div class="card">
-            <h3>EDIT & PRINT</h3>
+            <h3>📊 ADVANCED TOOLS</h3>
             <select id="editStudentSelect" class="student-select"><option value="">-- Select Student --</option></select>
-            <button onclick="openEditStudentModal()" class="edit-btn" style="width:100%; margin-bottom:8px;">📝 Edit Student Fees</button>
-            <button onclick="printA4Invoices()" class="primary-btn" style="width:100%; margin-bottom:8px;">🖨️ Print All Invoices</button>
-            <div class="batch-select">
-                <div style="font-weight:bold; font-size:12px;">Select for batch print:</div>
-                <div id="studentChecklist"></div>
+            <button onclick="openFullEditModal()" class="edit-btn" style="width:100%; margin-bottom:6px;">📝 Edit Student (All Details)</button>
+            <button onclick="generateNextMonthBill()" class="success-btn" style="width:100%; margin-bottom:6px;">📅 Generate Next Month Bill</button>
+            <button onclick="printPaidStudentsInvoices()" class="print-btn" style="width:100%; margin-bottom:6px;">🖨️ Print Paid Students Bills</button>
+            <button onclick="downloadTemplate()" class="primary-btn" style="width:100%; margin-bottom:6px;">📥 Download CSV Template</button>
+            <input type="file" id="importFile" accept=".csv" style="display:none;" onchange="importCSV()">
+            <button onclick="document.getElementById('importFile').click()" style="width:100%; margin-bottom:6px;">📂 Import Students (CSV)</button>
+            <button onclick="exportAllData()" class="whatsapp-btn" style="width:100%; margin-bottom:6px;">💾 Export All Data</button>
+            
+            <div class="google-sheets-section">
+                <h4 style="font-size:14px; margin-bottom:8px;">🔄 Google Sheets Sync</h4>
+                <textarea id="googleSheetsUrl" placeholder="Paste Google Sheets CSV URL here..." style="width:100%; border-radius:12px; margin-bottom:8px; font-size:11px;" rows="2"></textarea>
+                <button onclick="syncWithGoogleSheets()" style="width:100%; background:#0F9D58;">🔄 Sync from Google Sheets</button>
+                <div id="syncStatus" style="font-size:11px; margin-top:6px;"></div>
             </div>
-            <button onclick="printSelectedInvoices()" style="width:100%; margin-top:8px;">✅ Print Selected</button>
         </div>
     </div>
 
-    <!-- Student Table -->
     <div class="table-wrapper">
         <div class="action-bar">
             <span style="font-weight:bold;">📋 STUDENT LEDGER</span>
-            <input type="text" id="searchInput" placeholder="🔍 Search by Name/Class" onkeyup="filterTable()">
-            <button onclick="exportCSV()">📎 Export CSV</button>
+            <input type="text" id="searchInput" placeholder="🔍 Search" onkeyup="filterTable()">
+            <button onclick="printAllInvoices()" class="print-btn">🖨️ Print All</button>
+            <button onclick="shareSelectedWhatsApp()" class="whatsapp-btn">📱 Share Selected</button>
+            <button onclick="exportCSV()">📎 Quick Export</button>
             <button onclick="resetAllData()" style="background:#ef4444;">⚠️ Reset</button>
         </div>
         <div style="overflow-x: auto;">
-            <table>
+            <table id="studentTable">
                 <thead>
-                    <tr><th>Name</th><th>Gender</th><th>Class</th><th>Duration</th><th>Fees</th><th>Total</th><th>Status</th><th>Actions</th></tr>
+                    <tr><th>Select</th><th>Name</th><th>Class</th><th>Period</th><th>Fees</th><th>Total</th><th>Status</th><th>WhatsApp</th><th>Actions</th></tr>
                 </thead>
                 <tbody id="studentTableBody"></tbody>
             </table>
         </div>
         <div id="emptyMsg" style="text-align:center; padding:30px;">No students yet. Add your first student!</div>
     </div>
-    <footer>© 2026 Brp Digital Institute|All Rights Reserved</footer>
+    <footer>© 2026  2026 Brp Digital Institute | All Rights Reserved</footer>
 </div>
 
-<!-- School Profile Modal with Image Upload -->
+<!-- Profile Modal -->
 <div id="profileModal" class="modal">
     <div class="modal-content">
         <h3>🏫 Edit School Profile</h3>
-        <div class="input-group">
-            <input type="text" id="schoolNameInput" placeholder="School Name">
-        </div>
-        <div class="input-group">
-            <input type="text" id="schoolAddressInput" placeholder="Address & Contact">
-        </div>
-        <div class="logo-upload-area" onclick="document.getElementById('logoFileInput').click()">
+        <div class="input-group"><input type="text" id="schoolNameInput" placeholder="School Name"></div>
+        <div class="input-group"><input type="text" id="schoolAddressInput" placeholder="Address & Contact"></div>
+        <div class="logo-upload-area" onclick="document.getElementById('logoFileInput').click()" style="border:2px dashed #cbd5e1; border-radius:16px; padding:20px; text-align:center; cursor:pointer;">
             <div>📸 Click to Upload Logo</div>
-            <div class="logo-preview" id="logoPreview">
-                <span style="color:#94a3b8;">Preview</span>
-            </div>
-            <p style="font-size:11px; margin-top:5px;">Supports JPG, PNG, GIF (Max 2MB)</p>
+            <div class="logo-preview" id="logoPreview" style="width:80px; height:80px; margin:10px auto; border-radius:16px; overflow:hidden;"><span>Preview</span></div>
         </div>
         <input type="file" id="logoFileInput" accept="image/*" style="display:none;" onchange="handleLogoUpload(event)">
+        <button onclick="saveSchoolProfile()">💾 Save Profile</button>
+        <button onclick="closeProfileModal()" class="delete-btn">Cancel</button>
+    </div>
+</div>
+
+<!-- Full Edit Modal -->
+<div id="fullEditModal" class="modal">
+    <div class="modal-content">
+        <h3>✏️ Complete Student Edit: <span id="fullEditStudentName"></span></h3>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('basic')">📝 Basic Info</div>
+            <div class="tab" onclick="switchTab('period')">📅 Period & Months</div>
+            <div class="tab" onclick="switchTab('fees')">💰 Fee Heads</div>
+            <div class="tab" onclick="switchTab('history')">📜 Bill History</div>
+        </div>
+        <div id="basicTab">
+            <div class="input-group"><input type="text" id="editName" placeholder="Student Name"></div>
+            <div class="input-group"><input type="text" id="editClass" placeholder="Class"></div>
+            <div class="gender-group">
+                <label><input type="radio" name="editGender" value="Male"> 👨 Male</label>
+                <label><input type="radio" name="editGender" value="Female"> 👩 Female</label>
+                <label><input type="radio" name="editGender" value="Other"> 🌈 Other</label>
+            </div>
+            <div class="input-group"><input type="tel" id="editWhatsapp" placeholder="WhatsApp Number"></div>
+        </div>
+        <div id="periodTab" style="display:none;">
+            <div class="input-group">
+                <input type="month" id="editFromMonth" placeholder="From Month">
+                <input type="month" id="editToMonth" placeholder="To Month">
+            </div>
+            <div id="monthPreview" style="background:#fef3c7; padding:10px; border-radius:12px; margin-top:10px; font-size:12px;"></div>
+            <button onclick="updatePeriodAndRecalculate()" class="success-btn" style="width:100%; margin-top:10px;">🔄 Update Period & Recalculate</button>
+        </div>
+        <div id="feesTab" style="display:none;">
+            <div id="editFeeChecklist" class="fee-checkbox-group"></div>
+            <button onclick="saveEditedFeesOnly()" class="primary-btn" style="width:100%; margin-top:10px;">💾 Save Fee Changes</button>
+        </div>
+        <div id="historyTab" style="display:none;">
+            <div id="billHistoryList" class="bill-history"></div>
+            <button onclick="generateNewBillFromHistory()" class="success-btn" style="width:100%; margin-top:10px;">📄 Generate New Bill</button>
+        </div>
         <div class="input-group" style="margin-top:15px;">
-            <button onclick="saveSchoolProfile()">💾 Save Profile</button>
-            <button onclick="closeProfileModal()" class="delete-btn">Cancel</button>
+            <button onclick="saveAllStudentEdits()">💾 Save All Changes</button>
+            <button onclick="closeFullEditModal()" class="delete-btn">Cancel</button>
         </div>
     </div>
 </div>
@@ -652,41 +614,34 @@ onAuthStateChanged(auth, user => {
 <div id="feeModal" class="modal">
     <div class="modal-content">
         <h3>🎯 Select Fees for <span id="modalStudentName"></span></h3>
-        <div style="background:#fef3c7; padding:10px; border-radius:30px; margin:10px 0; text-align:center; font-size:13px;">
-            📅 <strong id="displayFromMonth"></strong> → <strong id="displayToMonth"></strong><br>
-            (<span id="monthCount"></span> months)
-        </div>
         <div id="feeChecklist" class="fee-checkbox-group"></div>
-        <div class="input-group">
-            <button onclick="confirmAddStudent()">✅ Confirm</button>
-            <button onclick="closeFeeModal()" class="delete-btn">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Student Modal -->
-<div id="editModal" class="modal">
-    <div class="modal-content">
-        <h3>✏️ Edit Fees: <span id="editStudentName"></span></h3>
-        <div style="background:#fef3c7; padding:10px; border-radius:30px; margin:10px 0; text-align:center; font-size:13px;">
-            📅 <strong id="editFromMonth"></strong> → <strong id="editToMonth"></strong><br>
-            (<span id="editMonthCount"></span> months)
-        </div>
-        <div id="editFeeChecklist" class="fee-checkbox-group"></div>
-        <button onclick="saveEditedStudentFees()">💾 Save Changes</button>
-        <button onclick="closeEditModal()" class="delete-btn">Cancel</button>
+        <button onclick="confirmAddStudent()">✅ Confirm</button>
+        <button onclick="closeFeeModal()" class="delete-btn">Cancel</button>
     </div>
 </div>
 
 <script>
-    // Data
-    let schoolProfile = JSON.parse(localStorage.getItem("school_profile_final")) || {
-        name: "SCHOOL NAME",
-        address: "School Address | Contact: 0000000000",
-        logo: ""
-    };
-    let feeHeads = JSON.parse(localStorage.getItem("school_feeHeads_final")) || [];
-    let students = JSON.parse(localStorage.getItem("school_students_final")) || [];
+    // Data Storage
+    let schoolProfile = JSON.parse(localStorage.getItem("school_complete_v1")) || { name: "SCHOOL NAME", address: "School Address | Contact: 0000000000", logoData: "" };
+    let feeHeads = JSON.parse(localStorage.getItem("feeHeads_complete_v1")) || [];
+    let students = JSON.parse(localStorage.getItem("students_complete_v1")) || [];
+    let revenueHidden = localStorage.getItem("revenue_hidden_complete_v1") === "true";
+    let currentEditStudentId = null;
+
+    function showToast(msg, isError = false) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.style.backgroundColor = isError ? '#dc2626' : '#10b981';
+        toast.innerHTML = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function calculateMonths(from, to) {
+        if (!from || !to) return 1;
+        let fromDate = new Date(from + "-01"), toDate = new Date(to + "-01");
+        return Math.max(1, (toDate.getFullYear() - fromDate.getFullYear()) * 12 + (toDate.getMonth() - fromDate.getMonth()) + 1);
+    }
 
     function getTodayKey() { return new Date().toISOString().slice(0, 10); }
 
@@ -695,41 +650,30 @@ onAuthStateChanged(auth, user => {
         let paidToday = students.filter(s => s.paidStatus && s.paidDate === todayKey).reduce((sum, s) => sum + s.totalAmount, 0);
         let allTimeRevenue = students.filter(s => s.paidStatus).reduce((sum, s) => sum + s.totalAmount, 0);
         let pendingTotal = students.filter(s => !s.paidStatus).reduce((sum, s) => sum + s.totalAmount, 0);
-        document.getElementById("todayRevenue").innerText = "₹" + paidToday.toLocaleString();
-        document.getElementById("totalRevenue").innerText = "₹" + allTimeRevenue.toLocaleString();
-        document.getElementById("pendingAmount").innerText = "₹" + pendingTotal.toLocaleString();
-        document.getElementById("totalStudents").innerText = students.length;
+        document.getElementById("todayRevenue").innerHTML = "₹" + paidToday.toLocaleString();
+        document.getElementById("totalRevenue").innerHTML = "₹" + allTimeRevenue.toLocaleString();
+        document.getElementById("pendingAmount").innerHTML = "₹" + pendingTotal.toLocaleString();
+        document.getElementById("totalStudents").innerHTML = students.length;
+    }
+
+    function toggleRevenueVisibility() {
+        revenueHidden = !revenueHidden;
+        localStorage.setItem("revenue_hidden_complete_v1", revenueHidden);
+        document.querySelectorAll('.revenue-stat').forEach(stat => revenueHidden ? stat.classList.add('hidden-stat') : stat.classList.remove('hidden-stat'));
+        let btn = document.getElementById("toggleRevenueBtn");
+        btn.innerHTML = revenueHidden ? "👁️ Show Revenue" : "👁️ Hide Revenue";
+        btn.style.background = revenueHidden ? "#22c55e" : "#334155";
     }
 
     function saveAll() {
-        localStorage.setItem("school_profile_final", JSON.stringify(schoolProfile));
-        localStorage.setItem("school_feeHeads_final", JSON.stringify(feeHeads));
-        localStorage.setItem("school_students_final", JSON.stringify(students));
-        updateSchoolDisplay();
+        localStorage.setItem("school_complete_v1", JSON.stringify(schoolProfile));
+        localStorage.setItem("feeHeads_complete_v1", JSON.stringify(feeHeads));
+        localStorage.setItem("students_complete_v1", JSON.stringify(students));
         renderFeeHeads();
         renderStudentTable();
         updateDropdowns();
         updateRevenue();
-    }
-
-    // Image Upload
-    function handleLogoUpload(event) {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            if (file.size > 2 * 1024 * 1024) {
-                alert("Image too large! Max 2MB");
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById("logoPreview");
-                preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`;
-                schoolProfile.logoData = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert("Please select a valid image file");
-        }
+        updateSchoolDisplay();
     }
 
     function updateSchoolDisplay() {
@@ -739,54 +683,47 @@ onAuthStateChanged(auth, user => {
             document.getElementById("schoolLogoImg").src = schoolProfile.logoData;
             document.getElementById("schoolLogoImg").style.display = "block";
             document.getElementById("schoolLogoPlaceholder").style.display = "none";
-        } else if (schoolProfile.logo) {
-            document.getElementById("schoolLogoImg").src = schoolProfile.logo;
-            document.getElementById("schoolLogoImg").style.display = "block";
-            document.getElementById("schoolLogoPlaceholder").style.display = "none";
         } else {
             document.getElementById("schoolLogoImg").style.display = "none";
             document.getElementById("schoolLogoPlaceholder").style.display = "block";
         }
     }
 
+    function handleLogoUpload(event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById("logoPreview").innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`;
+                schoolProfile.logoData = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
     window.openProfileModal = function() {
         document.getElementById("schoolNameInput").value = schoolProfile.name;
         document.getElementById("schoolAddressInput").value = schoolProfile.address;
-        const preview = document.getElementById("logoPreview");
-        if (schoolProfile.logoData) {
-            preview.innerHTML = `<img src="${schoolProfile.logoData}" style="width:100%;height:100%;object-fit:cover;">`;
-        } else if (schoolProfile.logo) {
-            preview.innerHTML = `<img src="${schoolProfile.logo}" style="width:100%;height:100%;object-fit:cover;">`;
-        } else {
-            preview.innerHTML = `<span style="color:#94a3b8;">Preview</span>`;
-        }
         document.getElementById("profileModal").style.display = "flex";
     };
-
     window.saveSchoolProfile = function() {
         schoolProfile.name = document.getElementById("schoolNameInput").value || "SCHOOL NAME";
         schoolProfile.address = document.getElementById("schoolAddressInput").value || "School Address";
-        const previewImg = document.querySelector("#logoPreview img");
-        if (previewImg) {
-            schoolProfile.logoData = previewImg.src;
-            schoolProfile.logo = "";
-        }
         saveAll();
         closeProfileModal();
+        showToast("Profile saved!");
     };
-
     window.closeProfileModal = function() { document.getElementById("profileModal").style.display = "none"; };
 
-    // Fee Heads
     window.addFeeHead = function() {
         let name = document.getElementById("feeHeadName").value.trim();
         let amount = parseFloat(document.getElementById("feeHeadAmount").value);
         if (!name || isNaN(amount) || amount <= 0) { alert("Enter valid fee name and amount"); return; }
-        if (feeHeads.some(f => f.name.toLowerCase() === name.toLowerCase())) { alert("Fee head exists!"); return; }
         feeHeads.push({ id: Date.now(), name: name, monthlyAmount: amount });
         saveAll();
         document.getElementById("feeHeadName").value = "";
         document.getElementById("feeHeadAmount").value = "";
+        showToast("Fee head added!");
     };
 
     window.deleteFeeHead = function(id) {
@@ -799,29 +736,20 @@ onAuthStateChanged(auth, user => {
         container.innerHTML = feeHeads.map(f => `<div class="fee-item"><span><strong>${f.name}</strong> ₹${f.monthlyAmount}/month</span><button class="delete-btn" style="padding:4px 12px;" onclick="deleteFeeHead(${f.id})">🗑</button></div>`).join("");
     }
 
-    function calculateMonths(from, to) {
-        let fromDate = new Date(from + "-01"), toDate = new Date(to + "-01");
-        return (toDate.getFullYear() - fromDate.getFullYear()) * 12 + (toDate.getMonth() - fromDate.getMonth()) + 1;
-    }
-
     function formatMonth(m) { if(!m) return ""; let d = new Date(m + "-01"); return d.toLocaleString('default', { month: 'short', year: 'numeric' }); }
 
-    // Add Student
     let pendingStudent = {};
     window.openFeeSelectionModal = function() {
         let name = document.getElementById("studentName").value.trim();
         let cls = document.getElementById("studentClass").value.trim();
         let gender = document.querySelector('input[name="gender"]:checked').value;
+        let whatsapp = document.getElementById("studentWhatsApp").value.trim();
         let from = document.getElementById("fromMonth").value;
         let to = document.getElementById("toMonth").value;
         if (!name || !cls) { alert("Enter name and class"); return; }
         if (!from || !to) { alert("Select billing period"); return; }
-        if (new Date(from + "-01") > new Date(to + "-01")) { alert("From month must be earlier"); return; }
-        pendingStudent = { name, class: cls, gender, fromMonth: from, toMonth: to };
+        pendingStudent = { name, class: cls, gender, whatsapp, fromMonth: from, toMonth: to };
         document.getElementById("modalStudentName").innerText = name;
-        document.getElementById("displayFromMonth").innerText = formatMonth(from);
-        document.getElementById("displayToMonth").innerText = formatMonth(to);
-        document.getElementById("monthCount").innerHTML = calculateMonths(from, to);
         renderChecklist("feeChecklist", []);
         document.getElementById("feeModal").style.display = "flex";
     };
@@ -843,45 +771,72 @@ onAuthStateChanged(auth, user => {
         let feeDetails = selected.map(f => ({ name: f.name, monthlyAmount: f.monthlyAmount, months: months, total: f.monthlyAmount * months }));
         students.push({
             id: Date.now(), name: pendingStudent.name, gender: pendingStudent.gender, class: pendingStudent.class,
+            whatsappNumber: pendingStudent.whatsapp || "",
             fromMonth: pendingStudent.fromMonth, toMonth: pendingStudent.toMonth, monthsCount: months,
             selectedFees: feeDetails, totalAmount: feeDetails.reduce((s, f) => s + f.total, 0),
-            paidStatus: false, paidDate: null
+            paidStatus: false, paidDate: null,
+            billHistory: [{ month: `${pendingStudent.fromMonth} to ${pendingStudent.toMonth}`, amount: feeDetails.reduce((s, f) => s + f.total, 0), date: new Date().toISOString() }]
         });
         saveAll();
         closeFeeModal();
         document.getElementById("studentName").value = "";
         document.getElementById("studentClass").value = "";
+        document.getElementById("studentWhatsApp").value = "";
         document.getElementById("fromMonth").value = "";
         document.getElementById("toMonth").value = "";
-        alert("Student added!");
+        showToast("Student added successfully!");
     };
-
     window.closeFeeModal = function() { document.getElementById("feeModal").style.display = "none"; };
 
-    // Edit Student
-    function updateDropdowns() {
-        let select = document.getElementById("editStudentSelect");
-        select.innerHTML = '<option value="">-- Select Student --</option>' + students.map(s => `<option value="${s.id}">${s.name} (${s.class})</option>`).join("");
-        let checklist = document.getElementById("studentChecklist");
-        checklist.innerHTML = students.map(s => `<div><input type="checkbox" class="batchCheck" value="${s.id}"> <label style="font-size:11px;">${s.name} (${s.class})</label></div>`).join("");
-    }
-
-    window.openEditStudentModal = function() {
+    // Full Edit Functions
+    window.openFullEditModal = function() {
         let id = parseInt(document.getElementById("editStudentSelect").value);
         let student = students.find(s => s.id === id);
-        if (!student) { alert("Select a student"); return; }
-        document.getElementById("editStudentName").innerText = student.name;
-        document.getElementById("editFromMonth").innerText = formatMonth(student.fromMonth);
-        document.getElementById("editToMonth").innerText = formatMonth(student.toMonth);
-        document.getElementById("editMonthCount").innerHTML = student.monthsCount;
+        if (!student) { alert("Select a student first!"); return; }
+        currentEditStudentId = id;
+        document.getElementById("fullEditStudentName").innerText = student.name;
+        document.getElementById("editName").value = student.name;
+        document.getElementById("editClass").value = student.class;
+        document.querySelectorAll('input[name="editGender"]').forEach(radio => { if (radio.value === student.gender) radio.checked = true; });
+        document.getElementById("editWhatsapp").value = student.whatsappNumber || "";
+        document.getElementById("editFromMonth").value = student.fromMonth;
+        document.getElementById("editToMonth").value = student.toMonth;
+        updateMonthPreview();
         let preselected = student.selectedFees.map(f => { let fee = feeHeads.find(fh => fh.name === f.name); return fee ? fee.id : null; }).filter(id => id);
         renderChecklist("editFeeChecklist", preselected);
-        window.editId = id;
-        document.getElementById("editModal").style.display = "flex";
+        renderBillHistory(student);
+        document.getElementById("fullEditModal").style.display = "flex";
+        switchTab('basic');
     };
 
-    window.saveEditedStudentFees = function() {
-        let student = students.find(s => s.id === window.editId);
+    function updateMonthPreview() {
+        let from = document.getElementById("editFromMonth").value;
+        let to = document.getElementById("editToMonth").value;
+        if (from && to) {
+            let months = calculateMonths(from, to);
+            document.getElementById("monthPreview").innerHTML = `📅 ${formatMonth(from)} → ${formatMonth(to)} (${months} months) | Total months: ${months}`;
+        }
+    }
+
+    window.updatePeriodAndRecalculate = function() {
+        let student = students.find(s => s.id === currentEditStudentId);
+        if (!student) return;
+        let newFrom = document.getElementById("editFromMonth").value;
+        let newTo = document.getElementById("editToMonth").value;
+        if (!newFrom || !newTo) { alert("Select both months"); return; }
+        let newMonths = calculateMonths(newFrom, newTo);
+        student.fromMonth = newFrom;
+        student.toMonth = newTo;
+        student.monthsCount = newMonths;
+        student.selectedFees = student.selectedFees.map(f => ({ ...f, months: newMonths, total: f.monthlyAmount * newMonths }));
+        student.totalAmount = student.selectedFees.reduce((sum, f) => sum + f.total, 0);
+        saveAll();
+        updateMonthPreview();
+        showToast("Period updated and fees recalculated!");
+    };
+
+    window.saveEditedFeesOnly = function() {
+        let student = students.find(s => s.id === currentEditStudentId);
         if (!student) return;
         let selected = [];
         document.querySelectorAll("#editFeeChecklist input:checked").forEach(cb => {
@@ -890,64 +845,297 @@ onAuthStateChanged(auth, user => {
         });
         if (!selected.length) { alert("Select at least one fee"); return; }
         student.selectedFees = selected.map(f => ({ name: f.name, monthlyAmount: f.monthlyAmount, months: student.monthsCount, total: f.monthlyAmount * student.monthsCount }));
-        student.totalAmount = student.selectedFees.reduce((s, f) => s + f.total, 0);
+        student.totalAmount = student.selectedFees.reduce((sum, f) => sum + f.total, 0);
         saveAll();
-        closeEditModal();
-        alert("Fees updated!");
+        showToast("Fees updated successfully!");
     };
 
-    window.closeEditModal = function() { document.getElementById("editModal").style.display = "none"; };
+    window.saveAllStudentEdits = function() {
+        let student = students.find(s => s.id === currentEditStudentId);
+        if (!student) return;
+        student.name = document.getElementById("editName").value;
+        student.class = document.getElementById("editClass").value;
+        let gender = document.querySelector('input[name="editGender"]:checked');
+        if (gender) student.gender = gender.value;
+        student.whatsappNumber = document.getElementById("editWhatsapp").value;
+        saveAll();
+        showToast("All changes saved!");
+        closeFullEditModal();
+    };
 
-    window.togglePaid = function(id) {
-        let s = students.find(s => s.id === id);
-        if (s) {
-            if (!s.paidStatus) { s.paidStatus = true; s.paidDate = getTodayKey(); }
-            else { s.paidStatus = false; s.paidDate = null; }
+    function renderBillHistory(student) {
+        let container = document.getElementById("billHistoryList");
+        if (!student.billHistory || student.billHistory.length === 0) {
+            container.innerHTML = "<p style='color:gray; text-align:center;'>No bill history yet</p>";
+            return;
+        }
+        container.innerHTML = student.billHistory.map((bill, idx) => `<div class="history-item"><strong>📄 Bill #${idx + 1}</strong><br>Period: ${bill.month}<br>Amount: ₹${bill.amount}<br>Date: ${new Date(bill.date).toLocaleDateString()}</div>`).join("");
+    }
+
+    window.generateNewBillFromHistory = function() {
+        let student = students.find(s => s.id === currentEditStudentId);
+        if (!student) return;
+        let currentTo = new Date(student.toMonth + "-01");
+        let nextFrom = new Date(currentTo.setMonth(currentTo.getMonth() + 1));
+        let nextTo = new Date(nextFrom);
+        nextTo.setMonth(nextTo.getMonth() + (student.monthsCount - 1));
+        let nextFromStr = nextFrom.toISOString().slice(0, 7);
+        let nextToStr = nextTo.toISOString().slice(0, 7);
+        if (!student.billHistory) student.billHistory = [];
+        student.billHistory.push({ month: `${student.fromMonth} to ${student.toMonth}`, amount: student.totalAmount, date: new Date().toISOString() });
+        student.fromMonth = nextFromStr;
+        student.toMonth = nextToStr;
+        student.paidStatus = false;
+        student.paidDate = null;
+        saveAll();
+        renderBillHistory(student);
+        showToast(`New bill generated for ${nextFromStr} to ${nextToStr}!`);
+    };
+
+    window.generateNextMonthBill = function() {
+        let id = parseInt(document.getElementById("editStudentSelect").value);
+        let student = students.find(s => s.id === id);
+        if (!student) { alert("Select a student first!"); return; }
+        let currentTo = new Date(student.toMonth + "-01");
+        let nextFrom = new Date(currentTo.setMonth(currentTo.getMonth() + 1));
+        let nextTo = new Date(nextFrom);
+        nextTo.setMonth(nextTo.getMonth() + (student.monthsCount - 1));
+        let nextFromStr = nextFrom.toISOString().slice(0, 7);
+        let nextToStr = nextTo.toISOString().slice(0, 7);
+        if (confirm(`Generate next bill for ${student.name}?\nPeriod: ${nextFromStr} to ${nextToStr}\nAmount: ₹${student.totalAmount}`)) {
+            if (!student.billHistory) student.billHistory = [];
+            student.billHistory.push({ month: `${student.fromMonth} to ${student.toMonth}`, amount: student.totalAmount, date: new Date().toISOString() });
+            student.fromMonth = nextFromStr;
+            student.toMonth = nextToStr;
+            student.paidStatus = false;
+            student.paidDate = null;
             saveAll();
+            showToast(`Next month's bill generated for ${student.name}!`);
         }
     };
 
-    window.deleteStudent = function(id) { if(confirm("Remove student?")) { students = students.filter(s => s.id !== id); saveAll(); } };
+    window.switchTab = function(tab) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('basicTab').style.display = 'none';
+        document.getElementById('periodTab').style.display = 'none';
+        document.getElementById('feesTab').style.display = 'none';
+        document.getElementById('historyTab').style.display = 'none';
+        if (tab === 'basic') { document.querySelector('.tab:nth-child(1)').classList.add('active'); document.getElementById('basicTab').style.display = 'block'; }
+        else if (tab === 'period') { document.querySelector('.tab:nth-child(2)').classList.add('active'); document.getElementById('periodTab').style.display = 'block'; }
+        else if (tab === 'fees') { document.querySelector('.tab:nth-child(3)').classList.add('active'); document.getElementById('feesTab').style.display = 'block'; }
+        else if (tab === 'history') { document.querySelector('.tab:nth-child(4)').classList.add('active'); document.getElementById('historyTab').style.display = 'block'; }
+    };
+    window.closeFullEditModal = function() { document.getElementById("fullEditModal").style.display = "none"; };
 
-    // Invoice Generation
-    function generateInvoiceHTML(list) {
-        let logoHtml = schoolProfile.logoData ? `<img src="${schoolProfile.logoData}" style="height:45px; margin-bottom:5px;">` : '<span style="font-size:35px;">🏫</span>';
-        return `<div class="print-section"><div class="invoice-grid">${list.map(s => {
-            let feeRows = s.selectedFees.map(f => `<tr><td>${f.name}</td><td style="text-align:center;">₹${f.monthlyAmount}</td><td style="text-align:center;">${f.months} mo</td><td style="text-align:right;">₹${f.total}</td></tr>`).join("");
-            return `<div class="invoice-card"><div style="text-align:center;">${logoHtml}<h4 style="color:#f97316;">${schoolProfile.name}</h4><p style="font-size:9px;">${schoolProfile.address}</p><hr></div><h5 style="text-align:center;">FEE INVOICE</h5><div style="font-size:10px;"><p><strong>${s.name}</strong> (${s.gender}) | Class: ${s.class}</p><p>Period: ${formatMonth(s.fromMonth)} → ${formatMonth(s.toMonth)} (${s.monthsCount} months)</p></div><table class="fee-table"><tr><th>Head</th><th>Monthly</th><th>Duration</th><th>Total</th></tr>${feeRows}<tr style="background:#fef3c7; font-weight:bold;"><td colspan="3">TOTAL</td><td style="text-align:right;">₹${s.totalAmount}</td></tr></table><div style="text-align:center; font-size:9px; margin-top:6px;">${s.paidStatus ? "✅ PAID" : "⚠️ PENDING"} | Thank you!</div></div>`;
-        }).join("")}</div></div>`;
+    function updateDropdowns() {
+        let select = document.getElementById("editStudentSelect");
+        select.innerHTML = '<option value="">-- Select Student --</option>' + students.map(s => `<option value="${s.id}">${s.name} (${s.class})</option>`).join("");
+        let checklist = document.getElementById("studentChecklist");
+        if(checklist) checklist.innerHTML = students.map(s => `<div><input type="checkbox" class="batchCheck" value="${s.id}"> <label style="font-size:11px;">${s.name} (${s.class})</label></div>`).join("");
     }
 
-    window.printA4Invoices = function() { if(!students.length) { alert("No students"); return; } printInvoice(students); };
-    window.printSelectedInvoices = function() {
-        let selected = Array.from(document.querySelectorAll(".batchCheck:checked")).map(cb => students.find(s => s.id == cb.value)).filter(s => s);
-        if(!selected.length) { alert("Select students"); return; } printInvoice(selected);
+    window.togglePaid = function(id) {
+        let s = students.find(s => s.id === id);
+        if (s) { s.paidStatus = !s.paidStatus; s.paidDate = s.paidStatus ? getTodayKey() : null; saveAll(); showToast(`${s.name} marked as ${s.paidStatus ? 'PAID' : 'UNPAID'}`); }
     };
-    function printInvoice(list) { let w = window.open('', '_blank', 'width=900,height=800'); w.document.write(`<html><head><title>Invoices</title><style>.invoice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;} .invoice-card{border:1px solid #ddd;border-radius:12px;padding:12px;page-break-inside:avoid;} .fee-table{width:100%;font-size:9px;border-collapse:collapse;} .fee-table td,.fee-table th{border:1px solid #ccc;padding:4px;} @media print{@page{size:A4;margin:1cm;}}</style></head><body>${generateInvoiceHTML(list)}</body></html>`); w.document.close(); w.print(); }
 
-    window.printSingleInvoice = function(id) { let s = students.find(s => s.id === id); if(s) printInvoice([s]); };
+    window.deleteStudent = function(id) { if(confirm("Remove student?")) { students = students.filter(s => s.id !== id); saveAll(); } };
+    window.updateWhatsApp = function(id) {
+        let newNumber = prompt("Enter WhatsApp number:");
+        if (newNumber) { let student = students.find(s => s.id === id); if (student) { student.whatsappNumber = newNumber; saveAll(); showToast("WhatsApp updated!"); } }
+    };
 
-    // Table render
+    function generateBillText(student) {
+        const feeDetails = student.selectedFees.map(f => `${f.name}: ₹${f.monthlyAmount} × ${f.months} = ₹${f.total}`).join('\n');
+        const status = student.paidStatus ? '✅ PAID' : '⚠️ PENDING';
+        return `🏫 *${schoolProfile.name}*\n📄 *FEE INVOICE*\n━━━━━━━━━━━━━━━━\n👤 ${student.name}\n📚 ${student.class}\n📅 ${student.fromMonth} to ${student.toMonth}\n━━━━━━━━━━━━━━━━\n${feeDetails}\n━━━━━━━━━━━━━━━━\n💰 Total: ₹${student.totalAmount}\n📌 ${status}\n${schoolProfile.address}`;
+    }
+
+    window.shareBillWhatsApp = function(id) {
+        let student = students.find(s => s.id === id);
+        if (!student) return;
+        if (!student.whatsappNumber) { showToast("WhatsApp number missing!", true); return; }
+        let number = student.whatsappNumber.replace(/\D/g, '');
+        if (number.length === 10) number = '91' + number;
+        window.open(`https://wa.me/${number}?text=${encodeURIComponent(generateBillText(student))}`, '_blank');
+        showToast(`Opening WhatsApp for ${student.name}...`);
+    };
+
+    window.shareSelectedWhatsApp = function() {
+        let selected = Array.from(document.querySelectorAll(".batchCheck:checked")).map(cb => students.find(s => s.id == cb.value)).filter(s => s && s.whatsappNumber);
+        if(!selected.length) { showToast("Select students with WhatsApp numbers!", true); return; }
+        selected.forEach(s => shareBillWhatsApp(s.id));
+    };
+
+    // Print Functions
+    function generateInvoiceHTML(studentsList, title = "FEE INVOICES") {
+        let logoHtml = schoolProfile.logoData ? `<img src="${schoolProfile.logoData}" style="height:60px; margin-bottom:5px;">` : '<span style="font-size:40px;">🏫</span>';
+        return `<div class="print-section"><div style="text-align:center; margin-bottom:20px;">${logoHtml}<h2>${schoolProfile.name}</h2><p>${schoolProfile.address}</p><hr><h3>${title}</h3></div><div class="invoice-grid">${studentsList.map(s => {
+            let feeRows = s.selectedFees.map(f => `<tr><td>${f.name}</td><td style="text-align:center;">₹${f.monthlyAmount}</td><td style="text-align:center;">${f.months} mo</td><td style="text-align:right;">₹${f.total}</td></tr>`).join("");
+            return `<div class="invoice-card"><h4 style="text-align:center;">${s.name} (${s.class})</h4><p style="font-size:10px; text-align:center;">Period: ${s.fromMonth} to ${s.toMonth} (${s.monthsCount} months)</p><table class="fee-table"><tr><th>Fee Head</th><th>Monthly</th><th>Duration</th><th>Total</th></tr>${feeRows}<tr style="background:#fef3c7; font-weight:bold;"><td colspan="3">TOTAL</td><td style="text-align:right;">₹${s.totalAmount}</td></tr></table><div style="text-align:center; margin-top:8px; font-size:10px;">${s.paidStatus ? '✅ PAID ✓' : '⚠️ PENDING'}<br>${s.paidDate ? `Paid on: ${s.paidDate}` : ''}</div></div>`;
+        }).join("")}</div><div style="text-align:center; margin-top:20px; font-size:10px;">Generated on: ${new Date().toLocaleString()}</div></div>`;
+    }
+
+    window.printAllInvoices = function() { if(!students.length) { alert("No students"); return; } printInvoice(students, "ALL STUDENTS INVOICES"); };
+    window.printPaidStudentsInvoices = function() { let paid = students.filter(s => s.paidStatus); if(!paid.length) { alert("No paid students"); return; } printInvoice(paid, "PAID STUDENTS INVOICES"); };
+    window.printSingleInvoice = function(id) { let s = students.find(s => s.id === id); if(s) printInvoice([s], `${s.name} - INVOICE`); };
+    
+    function printInvoice(list, title) {
+        let w = window.open('', '_blank', 'width=900,height=800');
+        w.document.write(`<html><head><title>${title}</title><style>body{font-family:Arial,sans-serif;padding:20px;} .invoice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;} .invoice-card{border:1px solid #ddd;border-radius:12px;padding:15px;page-break-inside:avoid;} .fee-table{width:100%;border-collapse:collapse;margin-top:10px;} .fee-table td,.fee-table th{border:1px solid #ccc;padding:6px;font-size:11px;} @media print{@page{size:A4;margin:1cm;}}</style></head><body>${generateInvoiceHTML(list, title)}</body></html>`);
+        w.document.close();
+        w.print();
+    }
+
+    // Import/Export Functions
+    window.downloadTemplate = function() {
+        const headers = ['Name', 'Gender', 'Class', 'WhatsAppNumber', 'FromMonth', 'ToMonth'];
+        const sampleRow = ['John Doe', 'Male', 'Grade 10', '9876543210', '2024-01', '2024-03'];
+        const csvContent = [headers, sampleRow].map(row => row.join(',')).join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'student_import_template.csv';
+        link.click();
+        showToast('Template downloaded!');
+    };
+
+    window.importCSV = function() {
+        const file = document.getElementById('importFile').files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const rows = e.target.result.split('\n').filter(row => row.trim());
+            let imported = 0;
+            for (let i = 1; i < rows.length; i++) {
+                const cols = rows[i].split(',').map(c => c.trim());
+                if (cols.length < 4) continue;
+                try {
+                    const months = calculateMonths(cols[4] || '2024-01', cols[5] || '2024-12');
+                    const newStudent = {
+                        id: Date.now() + i,
+                        name: cols[0],
+                        gender: cols[1] || 'Male',
+                        class: cols[2],
+                        whatsappNumber: cols[3] || '',
+                        fromMonth: cols[4] || '2024-01',
+                        toMonth: cols[5] || '2024-12',
+                        monthsCount: months,
+                        selectedFees: feeHeads.map(f => ({ name: f.name, monthlyAmount: f.monthlyAmount, months: months, total: f.monthlyAmount * months })),
+                        totalAmount: feeHeads.reduce((sum, f) => sum + (f.monthlyAmount * months), 0),
+                        paidStatus: false,
+                        paidDate: null,
+                        billHistory: []
+                    };
+                    students.push(newStudent);
+                    imported++;
+                } catch(e) { console.error(e); }
+            }
+            saveAll();
+            showToast(`✅ Imported ${imported} students!`);
+            document.getElementById('importFile').value = '';
+        };
+        reader.readAsText(file);
+    };
+
+    window.exportAllData = function() {
+        const studentData = students.map(s => ({ Name: s.name, Gender: s.gender, Class: s.class, WhatsApp: s.whatsappNumber || '', FromMonth: s.fromMonth, ToMonth: s.toMonth, TotalAmount: s.totalAmount, PaidStatus: s.paidStatus ? "Paid" : "Unpaid", PaidDate: s.paidDate || '' }));
+        const headers = ['Name', 'Gender', 'Class', 'WhatsApp', 'FromMonth', 'ToMonth', 'TotalAmount', 'PaidStatus', 'PaidDate'];
+        const csvRows = [headers];
+        studentData.forEach(s => { csvRows.push(Object.values(s).map(v => `"${v}"`).join(',')); });
+        const blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `school_data_${new Date().toISOString().slice(0,19)}.csv`;
+        link.click();
+        showToast('All data exported!');
+    };
+
+    window.exportCSV = function() {
+        let headers = ["Name","Gender","Class","WhatsApp","From","To","Months","Total","Status"];
+        let rows = students.map(s => [s.name, s.gender, s.class, s.whatsappNumber || "", s.fromMonth, s.toMonth, s.monthsCount, s.totalAmount, s.paidStatus?"Paid":"Unpaid"]);
+        let csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(",")).join("\n");
+        let a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv])); a.download = "students.csv"; a.click();
+        showToast("Quick export done!");
+    };
+
+    // Google Sheets Sync
+    window.syncWithGoogleSheets = async function() {
+        const url = document.getElementById('googleSheetsUrl').value.trim();
+        if (!url) { showToast('Please paste Google Sheets CSV URL', true); return; }
+        const statusDiv = document.getElementById('syncStatus');
+        statusDiv.innerHTML = '🔄 Syncing...';
+        try {
+            const response = await fetch(url);
+            const csvText = await response.text();
+            const rows = csvText.split('\n').filter(row => row.trim());
+            let synced = 0;
+            for (let i = 1; i < Math.min(rows.length, 100); i++) {
+                const cols = rows[i].split(',').map(c => c.trim());
+                if (cols.length < 2) continue;
+                const name = cols[0];
+                const className = cols[1];
+                const whatsapp = cols[2] || '';
+                const fromMonth = cols[3] || '2024-01';
+                const toMonth = cols[4] || '2024-12';
+                if (name && className) {
+                    const months = calculateMonths(fromMonth, toMonth);
+                    students.push({
+                        id: Date.now() + i, name: name, gender: 'Other', class: className, whatsappNumber: whatsapp,
+                        fromMonth: fromMonth, toMonth: toMonth, monthsCount: months,
+                        selectedFees: feeHeads.map(f => ({ name: f.name, monthlyAmount: f.monthlyAmount, months: months, total: f.monthlyAmount * months })),
+                        totalAmount: feeHeads.reduce((sum, f) => sum + (f.monthlyAmount * months), 0),
+                        paidStatus: false, paidDate: null, billHistory: []
+                    });
+                    synced++;
+                }
+            }
+            saveAll();
+            statusDiv.innerHTML = `✅ Synced ${synced} students!`;
+            showToast(`Synced ${synced} students!`);
+        } catch (error) {
+            statusDiv.innerHTML = '❌ Sync failed! Check URL';
+            showToast('Sync failed!', true);
+        }
+        setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
+    };
+
+    window.resetAllData = function() { if(confirm("Delete ALL data?")) { students = []; feeHeads = []; saveAll(); showToast("All data reset!"); } };
+
     let filter = "";
     function filterTable() { filter = document.getElementById("searchInput").value.toLowerCase(); renderStudentTable(); }
+    
     function renderStudentTable() {
         let tbody = document.getElementById("studentTableBody");
         let filtered = students.filter(s => s.name.toLowerCase().includes(filter) || s.class.toLowerCase().includes(filter));
         if(!filtered.length) { tbody.innerHTML = ""; document.getElementById("emptyMsg").style.display = "block"; return; }
         document.getElementById("emptyMsg").style.display = "none";
-        tbody.innerHTML = filtered.map(s => `<tr><td><strong>${s.name}</strong><br><button class="delete-btn" style="padding:2px 8px; font-size:10px;" onclick="deleteStudent(${s.id})">🗑 Remove</button></td><td>${s.gender}</td><td>${s.class}</td><td>${formatMonth(s.fromMonth)}→${formatMonth(s.toMonth)}<br><span class="month-badge">${s.monthsCount} mo</span></td><td style="font-size:10px;">${s.selectedFees.map(f=>f.name).join(", ")}</td><td>₹${s.totalAmount}</td><td>${s.paidStatus ? '<span class="badge-paid">PAID</span>' : '<span class="badge-unpaid">UNPAID</span>'}<br><button onclick="togglePaid(${s.id})" style="background:#334155; padding:2px 8px; margin-top:3px; font-size:10px;">${s.paidStatus ? 'Unpaid' : 'Paid'}</button></td><td><button onclick="printSingleInvoice(${s.id})" style="background:#3b82f6; padding:5px 10px;">🧾 Print</button></td></tr>`).join("");
+        tbody.innerHTML = filtered.map(s => `<tr>
+            <td><input type="checkbox" class="batchCheck" value="${s.id}"></td>
+            <td><strong>${s.name}</strong><br><button onclick="deleteStudent(${s.id})" style="padding:2px 6px; font-size:9px;" class="delete-btn">🗑</button></td>
+            <td>${s.class}</td>
+            <td>${formatMonth(s.fromMonth)}→${formatMonth(s.toMonth)}<br><span class="month-badge">${s.monthsCount} mo</span></td>
+            <td style="font-size:10px;">${s.selectedFees.map(f=>f.name).join(", ")}</td>
+            <td>₹${s.totalAmount}</td>
+            <td>${s.paidStatus ? '<span class="badge-paid">PAID</span>' : '<span class="badge-unpaid">UNPAID</span>'}<br><button onclick="togglePaid(${s.id})" style="background:#334155; padding:2px 6px; margin-top:3px; font-size:9px;">${s.paidStatus ? 'Unpaid' : 'Paid'}</button></td>
+            <td><button onclick="shareBillWhatsApp(${s.id})" style="background:#25D366; padding:4px 8px; font-size:10px;">📱 Share</button><br><span style="font-size:8px;">${s.whatsappNumber || 'No number'}</span></td>
+            <td><button onclick="openFullEditModalForId(${s.id})" style="background:#8b5cf6; padding:4px 8px; font-size:10px;">✏️ Edit</button><br><button onclick="printSingleInvoice(${s.id})" style="background:#6366f1; padding:4px 8px; margin-top:3px; font-size:9px;">🖨️ Print</button></td>
+        </tr>`).join("");
     }
-
-    window.exportCSV = function() {
-        let headers = ["Name","Gender","Class","From","To","Months","Fees","Total","Status"];
-        let rows = students.map(s => [s.name, s.gender, s.class, s.fromMonth, s.toMonth, s.monthsCount, s.selectedFees.map(f=>f.name).join(";"), s.totalAmount, s.paidStatus?"Paid":"Unpaid"]);
-        let csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(",")).join("\n");
-        let a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv])); a.download = "school_billing.csv"; a.click();
+    
+    window.openFullEditModalForId = function(id) {
+        document.getElementById("editStudentSelect").value = id;
+        openFullEditModal();
     };
 
-    window.resetAllData = function() { if(confirm("Delete ALL data?")) { feeHeads = []; students = []; saveAll(); } };
-
-    function init() { updateSchoolDisplay(); renderFeeHeads(); renderStudentTable(); updateDropdowns(); updateRevenue(); }
+    function init() {
+        updateSchoolDisplay();
+        renderFeeHeads();
+        renderStudentTable();
+        updateDropdowns();
+        updateRevenue();
+        if (revenueHidden) toggleRevenueVisibility();
+    }
     init();
 </script>
 </body>
