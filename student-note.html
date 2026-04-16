@@ -8,387 +8,621 @@
 <title>Students Educational Notes Portal-Brp Digital Institute</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f6fb;
+      overflow-x: hidden;
+    }
 
-body{
-background:#f4f6fb;
-overflow-x:hidden;
-}
+    /* Hero section - will be hidden when notes are open */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+                  url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&q=75');
+      background-size: cover;
+      background-position: center 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      will-change: transform;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
 
+    /* Class to hide hero */
+    .hero.hidden {
+      display: none;
+    }
 
-/* ================= HERO ================= */
+    .hero-content {
+      animation: quickFadeIn 0.5s ease-out;
+    }
 
-.hero{
-height:100vh;
-background:linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
-url('https://images.unsplash.com/photo-1509062522246-3755977927d7');
-background-size:cover;
-background-position:center;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-padding:20px;
-}
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
 
-.hero-content{
-animation:fadeIn 1.5s ease-in-out;
-}
+    .line1 {
+      font-size: 26px;
+      background: linear-gradient(90deg, #ffcc00, #ff9800);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
 
-.hero h1{
-font-size:48px;
-margin-bottom:20px;
-letter-spacing:1px;
-}
+    .line2 {
+      font-size: 24px;
+      color: #00e5ff;
+      margin-top: 5px;
+    }
 
-.line1{
-font-size:26px;
-background:linear-gradient(90deg,#ffcc00,#ff9800);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-font-weight:600;
-}
+    .line3 {
+      color: #ff4081;
+      margin-top: 10px;
+      font-size: 18px;
+    }
 
-.line2{
-font-size:24px;
-color:#00e5ff;
-margin-top:5px;
-}
+    .hero button {
+      margin-top: 30px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      background: #ff9800;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-.line3{
-color:#ff4081;
-margin-top:10px;
-font-size:18px;
-}
+    .hero button:hover {
+      background: #e68900;
+      transform: scale(1.03);
+    }
 
-.hero button{
-margin-top:30px;
-padding:12px 30px;
-border:none;
-border-radius:30px;
-background:#ff9800;
-color:white;
-font-size:16px;
-cursor:pointer;
-transition:0.3s;
-}
+    /* Class grid (main page) */
+    .class-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 80px 60px;
+      background: #f4f6fb;
+    }
 
-.hero button:hover{
-background:#e68900;
-transform:scale(1.05);
-}
+    .class-card {
+      height: 240px;
+      background-color: #b9c3d0;
+      background-size: cover;
+      background-position: center;
+      border-radius: 24px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      will-change: transform;
+    }
 
+    .class-card::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      top: 0;
+      left: 0;
+      transition: background 0.2s;
+    }
 
+    .class-card h3 {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      color: white;
+      z-index: 2;
+      font-size: 22px;
+      font-weight: 600;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      right: 20px;
+    }
 
-/* ================= CLASS GRID ================= */
+    .class-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    }
 
-.class-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
-padding:80px 60px;
-background:#f4f6fb;
-}
+    /* Notes section overlay - starts at top when hero hidden */
+    .notes-section {
+      display: none;
+      min-height: 100vh;
+      background-size: cover;
+      background-position: center;
+      padding: 60px 20px;
+    }
 
-.class-card{
-height:240px;
-background-size:cover;
-background-position:center;
-border-radius:20px;
-position:relative;
-cursor:pointer;
-overflow:hidden;
-transition:0.4s;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
+    .notes-overlay {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 40px 30px;
+      border-radius: 32px;
+      max-width: 1200px;
+      margin: auto;
+      color: white;
+      backdrop-filter: blur(12px);
+    }
 
-.class-card::after{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-top:0;
-left:0;
-}
+    .note-card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 16px 20px;
+      margin: 14px 0;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.2s;
+    }
 
-.class-card h3{
-position:absolute;
-bottom:20px;
-left:20px;
-color:white;
-z-index:2;
-font-size:22px;
-}
+    .note-card:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateX(6px);
+    }
 
-.class-card:hover{
-transform:translateY(-10px) scale(1.05);
-}
+    .note-card a {
+      background: #ffeb3b;
+      color: #1e1e2a;
+      padding: 6px 20px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: 0.15s;
+      white-space: nowrap;
+    }
 
-/* ================= NOTES SECTION ================= */
+    .back-btn {
+      margin-bottom: 28px;
+      background: #ff5722;
+      padding: 8px 28px;
+      border: none;
+      border-radius: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.15s;
+    }
 
-.notes-section{
-display:none;
-min-height:100vh;
-background-size:cover;
-background-position:center;
-padding:80px 20px;
-}
+    .back-btn:hover {
+      background: #e64a19;
+    }
 
-.notes-overlay{
-background:rgba(0,0,0,0.75);
-padding:50px;
-border-radius:25px;
-max-width:1000px;
-margin:auto;
-color:white;
-backdrop-filter:blur(10px);
-}
+    /* Current class highlight section (top) */
+    .current-class-section {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid rgba(255,215,0,0.5);
+    }
 
-.note-card{
-background:rgba(255,255,255,0.2);
-padding:18px;
-margin:12px 0;
-border-radius:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-transition:0.3s;
-}
+    .current-badge {
+      background: #ff9800;
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #1e1e2a;
+    }
 
-.note-card:hover{
-background:rgba(255,255,255,0.35);
-transform:translateX(5px);
-}
+    .current-class-card {
+      background: rgba(255, 193, 7, 0.2);
+      border: 1px solid #ffb300;
+      border-radius: 28px;
+      padding: 20px;
+      margin-top: 8px;
+    }
 
-.note-card a{
-background:#ffeb3b;
-color:black;
-padding:6px 18px;
-border-radius:20px;
-text-decoration:none;
-font-weight:bold;
-}
+    .current-class-name {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      word-break: break-word;
+    }
 
-.back-btn{
-margin-bottom:25px;
-background:#ff5722;
-padding:8px 25px;
-border:none;
-border-radius:20px;
-color:white;
-cursor:pointer;
-}
+    /* Other classes switcher */
+    .other-classes-section {
+      margin-top: 30px;
+      padding-top: 20px;
+    }
 
-/* Animation */
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
-}
+    .other-classes-title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
 
-@media(max-width:768px){
-.hero h1{font-size:32px;}
-.class-container{padding:40px 20px;}
-}
+    .other-classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
+      margin-top: 10px;
+    }
 
-</style>
+    .other-class-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      border-radius: 20px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .other-class-card:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: #ff9800;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: 500;
+    }
+
+    @keyframes quickFadeIn {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .class-container { padding: 40px 20px; gap: 18px; }
+      .notes-overlay { padding: 25px 18px; }
+      .note-card { flex-wrap: wrap; gap: 10px; }
+      .note-card a { white-space: normal; text-align: center; }
+      .other-classes-grid { grid-template-columns: 1fr 1fr; }
+      .other-class-card { padding: 12px 8px; font-size: 13px; }
+      .current-class-name { font-size: 22px; }
+    }
+
+    @media (max-width: 480px) {
+      .other-classes-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ================= HERO ================= -->
 
-<section class="hero">
-<div class="hero-content">
-<h1>Welcome To Educational Notes Portal</h1>
-<h2 class="line1">Learn Today – Teach Tomorrow</h2>
-<h2 class="line2">आज सिक – भोलि सिकाऊ</h2>
-<p class="line3">Empowering Students Through Digital Learning</p>
-<button onclick="scrollToClasses()">Explore Classes</button>
-</div>
+<section class="hero" id="heroSection">
+  <div class="hero-content">
+    <h1>Welcome To Educational Notes Portal</h1>
+    <h2 class="line1">Learn Today – Teach Tomorrow</h2>
+    <h2 class="line2">आज सिक – भोलि सिकाऊ</h2>
+    <p class="line3">Empowering Students Through Digital Learning</p>
+    <button onclick="scrollToClasses()">Explore Classes</button>
+  </div>
 </section>
 
-
-
-<!-- ================= CLASS GRID ================= -->
-
+<!-- CLASS GRID (main) -->
 <section class="class-container" id="classContainer"></section>
 
-
-
-<!-- ================= NOTES SECTION ================= -->
-
+<!-- NOTES SECTION (dynamic) -->
 <section id="notesSection" class="notes-section">
-<div class="notes-overlay">
-<button class="back-btn" onclick="goBack()">⬅ Back</button>
-<h2 id="classTitle"></h2>
-<div id="notesContainer"></div>
-</div>
+  <div class="notes-overlay">
+    <button class="back-btn" onclick="goBack()">⬅ Back to All Classes</button>
+    
+    <!-- Current class will be displayed at the top (highlighted) -->
+    <div id="currentClassTop"></div>
+    
+    <!-- Notes container -->
+    <div id="notesContainer" style="margin-top: 20px;"></div>
+    
+    <!-- Other classes switcher (below notes) -->
+    <div id="otherClassesWrapper"></div>
+  </div>
 </section>
 
-
-
-
-
-<!-- ================= FOOTER ================= -->
-<footer style="background:#1a1a1a;color:white;padding:40px 20px;text-align:center;font-family:'Poppins',sans-serif;">
-  <h3 style="font-size:24px;margin-bottom:10px;">Brp Digitial Institute-Educational Notes Portal</h3>
+<footer>
+  <h3 style="font-size:24px;margin-bottom:10px;">Brp Digital Institute - Educational Notes Portal</h3>
   <p style="color:#bbbbbb;margin-bottom:15px;">Empowering Students Through Digital Learning</p>
-  <p style="font-size:14px;color:#888;">© 2026 Brp Digital Institute|All rights reserved.</p>
+  <p style="font-size:14px;color:#888;">© 2026 Brp Digital Institute | All rights reserved.</p>
   <div style="margin-top:15px;">
-    <a href="#" style="margin:0 10px;color:#ff9800;text-decoration:none;font-weight:bold;">Home</a>
-    <a href="#" style="margin:0 10px;color:#ff9800;text-decoration:none;font-weight:bold;">Classes</a>
-    <a href="#" style="margin:0 10px;color:#ff9800;text-decoration:none;font-weight:bold;">Contact</a>
+    <a href="#">Home</a>
+    <a href="#">Classes</a>
+    <a href="#">Contact</a>
   </div>
 </footer>
 
 
-
-
-
-
-
-
-<script>
-/* ========= EDIT ONLY THIS PART ========= */
-
-const classData = [
-
-{
-name:"सामाजिक अध्ययन तथा मानव मूल्य शिक्षा-कक्षा ५",
-bg:"https://images.unsplash.com/photo-1588072432836-e10032774350",
-
-
-notes:[
-{name:"परम्परागत सामाजिक प्रचलनहरू", link:"https://drive.google.com/file/d/13SkdnKTXmPb1co696R5PQZedgwWp-wNn/view?usp=sharing"},
-{name:"स्थानीय उत्पादन", link:"https://drive.google.com/file/d/1htxVTpqfidT9ELioDi6uRxIJbOpo-R9j/view?usp=sharing"},
-{name:"स्थानीय सम्पदाको संरक्षण र सम्बर्धन", link:"https://drive.google.com/file/d/1mMjqJsHfhv2JTkq3bkSP8NN8x9pYdXuc/view?usp=sharing"},
-{name:"स्थानीय भाषा, वेषभुषा र रहनसहन", link:"  https://drive.google.com "},
-{name:"जनकपुर धाम", link:"https://drive.google.com/file/d/1PVTvaR-hoaW3IbiK9ETJbtqrIU_vZTSS/view?usp=sharing"},
-{name:"सौर्यमण्डल, ग्रह तथा उपग्रहहरु", link:"https://drive.google.com/file/d/1WplaVdafziMvmvABOeT3ZFmeAoG-NSIE/view?usp=sharing"},
-{name:"सडक सुरक्षा तथा ट्राफिक नियम", link:"https://drive.google.com/file/d/1HHCxQUj0rdseTkKDTIU6ZdlDjFfSTPLx/view?usp=sharing"},
-{name:"नेपालको प्राकृतिक तथा धरातलिय स्वरूप", link:"https://drive.google.com/file/d/1XIeus41hMkyyfCEOQt7IHhMUcXOVHg5I/view?usp=sharing"},
-{name:"सामुदायिक कार्यमा सहभागीता", link:"https://drive.google.com/file/d/1evKjoX1KRxpvwqoY80jv0kuH6ibMNZFg/view?usp=sharing"},
-{name:"हाम्रो पेसा तथा व्यवसायहरु", link:"https://drive.google.com/file/d/1XC9inECNq9ioH0CCcpQSfwgF-5Pru4uL/view?usp=sharing"},
-{name:"राष्ट्रिय विभूतिहरु", link:"https://drive.google.com/file/d/1o_0RpJLBcYC0ji_3zNdsvs8Pgj8xmKa7/view?usp=sharing"},
-{name:"सुरक्षा सहयोगी सेवाहरु", link:"https://drive.google.com/file/d/11XjOXGg-sesd8A2wiWdRklrutlhbULe9/view?usp=sharing"},
-{name:"अनुशासन", link:"https://drive.google.com/file/d/1-8Fp8IB1mAfpKOBzrdQboKuQ_R5GtOIm/view?usp=sharing"},
-{name:"सामाजिक समस्या:चोरी डकैती", link:"https://drive.google.com/file/d/1ziwTtusleyXMdnVlvXl8kB0N0X013ym4/view?usp=sharing"},
-{name:"नक्सा कार्य: नेपालको नक्सा ", link:"https://drive.google.com/file/d/1h5bZh4SOyCFpmNlYlWRsL-oC4hj25rDO/view?usp=sharing"},
-{name:"संवाद लेखन", link:"https://drive.google.com/file/d/1Cq7EUQsODmjEdy6Zb0ReJpIXs2vqWb0k/view?usp=sharing"},
-{name:"समाचार लेखन", link:"https://drive.google.com/file/d/1cdaNQCeG0g20t9Jlql1T5H-1gKbPlJZW/view?usp=sharing"},
-{name:"प्रतिवेदन लेखन", link:"https://drive.google.com/file/d/1sTuwLVCltyA4KdzXBcJAHC5vBp3tDJbO/view?usp=sharing"},
-{name:"Test-1", link:"https://drive.google.com/file/d/13CCfmvdSz2Z3rzPF9tHaWNXxU6gQdd9H/view?usp=sharing"},
-{name:"Test-2", link:"https://drive.google.com/file/d/1JsAD-qY9zZNICg5t0T0gCHpLUQjxM6mF/view?usp=sharing"},
-{name:"Test-3", link:"https://drive.google.com/file/d/1rPO2mnCcaO-6wHt-ZKI7GKLvpojmdrB5/view?usp=sharing"},
-{name:"Set-7", link:"https://drive.google.com/file/d/1l1PsGZbZ0TdfYq4GqhUvUnTD0QpnHiJd/view?usp=sharing"}
-
-]
-},
-
+  
+  
+  
+  
+  <script>
+  // ====================== ALL CLASS DATA ======================
+  const classData = [
+    {
+      name: "सामाजिक अध्ययन तथा मानव मूल्य शिक्षा-कक्षा ५",
+      bg: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&q=70",
+      notes: [
+        { name: "परम्परागत सामाजिक प्रचलनहरू", link: "https://drive.google.com/file/d/13SkdnKTXmPb1co696R5PQZedgwWp-wNn/view?usp=sharing" },
+        { name: "स्थानीय उत्पादन", link: "https://drive.google.com/file/d/1htxVTpqfidT9ELioDi6uRxIJbOpo-R9j/view?usp=sharing" },
+        { name: "स्थानीय सम्पदाको संरक्षण र सम्बर्धन", link: "https://drive.google.com/file/d/1mMjqJsHfhv2JTkq3bkSP8NN8x9pYdXuc/view?usp=sharing" },
+        { name: "स्थानीय भाषा, वेषभुषा र रहनसहन", link: "https://drive.google.com" },
+        { name: "जनकपुर धाम", link: "https://drive.google.com/file/d/1PVTvaR-hoaW3IbiK9ETJbtqrIU_vZTSS/view?usp=sharing" },
+        { name: "सौर्यमण्डल, ग्रह तथा उपग्रहहरु", link: "https://drive.google.com/file/d/1WplaVdafziMvmvABOeT3ZFmeAoG-NSIE/view?usp=sharing" },
+        { name: "सडक सुरक्षा तथा ट्राफिक नियम", link: "https://drive.google.com/file/d/1HHCxQUj0rdseTkKDTIU6ZdlDjFfSTPLx/view?usp=sharing" },
+        { name: "नेपालको प्राकृतिक तथा धरातलिय स्वरूप", link: "https://drive.google.com/file/d/1XIeus41hMkyyfCEOQt7IHhMUcXOVHg5I/view?usp=sharing" },
+        { name: "सामुदायिक कार्यमा सहभागीता", link: "https://drive.google.com/file/d/1evKjoX1KRxpvwqoY80jv0kuH6ibMNZFg/view?usp=sharing" },
+        { name: "हाम्रो पेसा तथा व्यवसायहरु", link: "https://drive.google.com/file/d/1XC9inECNq9ioH0CCcpQSfwgF-5Pru4uL/view?usp=sharing" },
+        { name: "राष्ट्रिय विभूतिहरु", link: "https://drive.google.com/file/d/1o_0RpJLBcYC0ji_3zNdsvs8Pgj8xmKa7/view?usp=sharing" },
+        { name: "सुरक्षा सहयोगी सेवाहरु", link: "https://drive.google.com/file/d/11XjOXGg-sesd8A2wiWdRklrutlhbULe9/view?usp=sharing" },
+        { name: "अनुशासन", link: "https://drive.google.com/file/d/1-8Fp8IB1mAfpKOBzrdQboKuQ_R5GtOIm/view?usp=sharing" },
+        { name: "सामाजिक समस्या:चोरी डकैती", link: "https://drive.google.com/file/d/1ziwTtusleyXMdnVlvXl8kB0N0X013ym4/view?usp=sharing" },
+        { name: "नक्सा कार्य: नेपालको नक्सा ", link: "https://drive.google.com/file/d/1h5bZh4SOyCFpmNlYlWRsL-oC4hj25rDO/view?usp=sharing" },
+        { name: "संवाद लेखन", link: "https://drive.google.com/file/d/1Cq7EUQsODmjEdy6Zb0ReJpIXs2vqWb0k/view?usp=sharing" },
+        { name: "समाचार लेखन", link: "https://drive.google.com/file/d/1cdaNQCeG0g20t9Jlql1T5H-1gKbPlJZW/view?usp=sharing" },
+        { name: "प्रतिवेदन लेखन", link: "https://drive.google.com/file/d/1sTuwLVCltyA4KdzXBcJAHC5vBp3tDJbO/view?usp=sharing" },
+        { name: "Test-1", link: "https://drive.google.com/file/d/13CCfmvdSz2Z3rzPF9tHaWNXxU6gQdd9H/view?usp=sharing" },
+        { name: "Test-2", link: "https://drive.google.com/file/d/1JsAD-qY9zZNICg5t0T0gCHpLUQjxM6mF/view?usp=sharing" },
+        { name: "Test-3", link: "https://drive.google.com/file/d/1rPO2mnCcaO-6wHt-ZKI7GKLvpojmdrB5/view?usp=sharing" },
+        { name: "Set-7", link: "https://drive.google.com/file/d/1l1PsGZbZ0TdfYq4GqhUvUnTD0QpnHiJd/view?usp=sharing" }
+      ]
+    },
+   
+    
+    
+    
+    
+    
+    {
+      name: "सामाजिक अध्ययन तथा मानव मूल्य शिक्षा-कक्षा ७",
+      bg: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&q=70",
+      notes: [
+        { name: "विकासका पूर्वाधार शिक्षा र स्वास्थ्य ", link: "https://drive.google.com/file/d/1vMeiOmsSEctXKCnaIhgyCxFTtz6xyx9P/view?usp=sharing" },
+        { name: "नेपाली परम्परागत परिकार र पहिरन", link: "https://drive.google.com/file/d/1y06IVGIq0a_qGtPhkjSrMNKMH4rg73p2/view?usp=sharing" },
+        { name: "VVI प्रश्नहरु", link: "https://drive.google.com/file/d/1URELS62VfSPtV9YJXJrnwND3K9JP10GS/view?usp=sharing" },
+        { name: "Model Set Note-1", link: "https://drive.google.com/file/d/14DqEYumxPjAPHI6LI5mCl0wsmpU3LCkl/view?usp=sharing" },
+        { name: "Model Set Note-2", link: "https://drive.google.com/file/d/1NS9uFgtvWe1V1YyfIOeHV8FmxW7hMO9f/view?usp=sharing" },
+        { name: "Unitwise Note-Unit 1 to 4", link: "https://drive.google.com/file/d/1soHaSXR6esGPcIKcnl5WJ8rm1-X23I2C/view?usp=sharing" },
+        { name: "Unitwise Note-Unit 5 & 6", link: "https://drive.google.com/file/d/1icJD2sCYi0Q1q6rMkCNSsVA1psjO-xyD/view?usp=sharing" },
+        { name: "Unitwise Note-Unit  7-9", link: "https://drive.google.com/file/d/19YkbzvQOb_WJUeUbEn6m7Tq4Ay5EioKQ/view?usp=sharing" },
+        { name: "विश्व र नेपालको समसामयिक घटनाक्रम", link: "https://drive.google.com/file/d/1MIVXowBg6r6D7KeTE1r82E48rxFHVVnV/view?usp=sharing" }
+      ]
+    },
+   
+    
+    
+    
+    
+    
+    {
+      name: "नेपाली ब्याकरण-कक्षा ७",
+      bg: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=70",
+      notes: [
+        { name: "व्याकरणको परिचय र नामका प्रकार", link: "https://drive.google.com/file/d/1fr4DherHA1LMjkbcp9lgJ4mBqWYF8XXJ/view?usp=sharing" },
+        { name: "पदवर्ग (नाम, सर्वनाम, विशेषण, क्रियापद...)", link: "https://drive.google.com/file/d/18VXRkP1BoTGiqPlMt-DrVu316bajq_Ec/view?usp=sharing" },
+        { name: "पदसंगति (वाक्य परिवर्तन)", link: "https://drive.google.com/file/d/1cTUJaOOYtkI7TvVunD2l-XO4bq1PHcAg/view?usp=sharing" },
+        { name: "पहिलो त्रैमासिक नमूना प्रश्न", link: "https://drive.google.com/file/d/1f9C_OZacmBx0m-GnHymQBuWjSSLCofNB/view?usp=sharing" },
+        { name: "नमूना प्रश्न र उत्तर लेख्ने तरिका", link: "https://drive.google.com/file/d/1D0mp9uTvcstaL60YnzZBdgYxgGOktdtv/view?usp=sharing" },
+        { name: "घरायसी चिठी र निवेदन", link: "https://drive.google.com/file/d/1VfdM76Fd_g7zAyJ8LbXxNEN4CF-Tf8K6/view?usp=sharing" }
+      ]
+    }
+  ];
 
 
 
   
+  // DOM elements
+  const heroSection = document.getElementById("heroSection");
+  const classContainer = document.getElementById("classContainer");
+  const notesSection = document.getElementById("notesSection");
+  const notesContainer = document.getElementById("notesContainer");
+  const otherClassesWrapper = document.getElementById("otherClassesWrapper");
+  const currentClassTop = document.getElementById("currentClassTop");
 
-{
-name:"सामाजिक अध्ययन तथा मानव मूल्य शिक्षा-कक्षा ७",
-bg:"https://images.unsplash.com/photo-1588072432836-e10032774350",
-notes:[
-{name:"विकासका पूर्वाधार शिक्षा र स्वास्थ्य ", link:"https://drive.google.com/file/d/1vMeiOmsSEctXKCnaIhgyCxFTtz6xyx9P/view?usp=sharing"},
-{name:" नेपाली परम्परागत परिकार र पहिरन", link:"https://drive.google.com/file/d/1y06IVGIq0a_qGtPhkjSrMNKMH4rg73p2/view?usp=sharing"},
-{name:"VVI प्रश्नहरु", link:"https://drive.google.com/file/d/1URELS62VfSPtV9YJXJrnwND3K9JP10GS/view?usp=sharing"},
-  {name:"Model Set Note-1", link:"https://drive.google.com/file/d/14DqEYumxPjAPHI6LI5mCl0wsmpU3LCkl/view?usp=sharing"},
-  {name:"Model Set Note-2", link:"https://drive.google.com/file/d/1NS9uFgtvWe1V1YyfIOeHV8FmxW7hMO9f/view?usp=sharing"},
-  {name:"Unitwise Note-Unit 1 to 4", link:"https://drive.google.com/file/d/1soHaSXR6esGPcIKcnl5WJ8rm1-X23I2C/view?usp=sharing"},
-  {name:"Unitwise Note-Unit 5 & 6", link:"https://drive.google.com/file/d/1icJD2sCYi0Q1q6rMkCNSsVA1psjO-xyD/view?usp=sharing"},
-  {name:"Unitwise Note-Unit  7-9", link:"https://drive.google.com/file/d/19YkbzvQOb_WJUeUbEn6m7Tq4Ay5EioKQ/view?usp=sharing"},
-  {name:"विश्व र नेपालको समसामयिक घटनाक्रम", link:"https://drive.google.com/file/d/1MIVXowBg6r6D7KeTE1r82E48rxFHVVnV/view?usp=sharing"}
-]
-},
+  // Helper: escape HTML
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
 
+  // Render notes page: current class at TOP, hero hidden, notes & other classes
+  function renderFullNotesView(selectedIndex) {
+    const selected = classData[selectedIndex];
+    if (!selected) return;
 
+    // Hide hero section and show notes
+    heroSection.classList.add("hidden");
+    notesSection.style.display = "block";
+    classContainer.style.display = "none";
 
+    // Set background image for the notes section
+    notesSection.style.backgroundImage = `url('${selected.bg}')`;
+    
+    // ---- 1. CURRENT CLASS SECTION (Top, highlighted) ----
+    const currentHtml = `
+      <div class="current-class-section">
+        <div class="current-badge">📘 Currently viewing</div>
+        <div class="current-class-card">
+          <div class="current-class-name">✨ ${escapeHtml(selected.name)}</div>
+        </div>
+      </div>
+    `;
+    currentClassTop.innerHTML = currentHtml;
+    
+    // ---- 2. NOTES LIST (for current class) ----
+    let notesHtml = '';
+    for (let note of selected.notes) {
+      notesHtml += `
+        <div class="note-card">
+          <span>${escapeHtml(note.name)}</span>
+          <a href="${note.link}" target="_blank" rel="noopener noreferrer">View</a>
+        </div>
+      `;
+    }
+    notesContainer.innerHTML = notesHtml;
+    
+    // ---- 3. OTHER CLASSES (all classes except current) ----
+    const otherClasses = classData.filter((_, idx) => idx !== selectedIndex);
+    let otherHtml = '';
+    if (otherClasses.length > 0) {
+      otherHtml += `<div class="other-classes-section">
+        <div class="other-classes-title">📚 Switch to another class</div>
+        <div class="other-classes-grid">`;
+      for (let i = 0; i < otherClasses.length; i++) {
+        const cls = otherClasses[i];
+        const originalIndex = classData.findIndex(c => c.name === cls.name && c.bg === cls.bg);
+        otherHtml += `
+          <div class="other-class-card" data-class-index="${originalIndex}">
+            ${escapeHtml(cls.name)}
+          </div>
+        `;
+      }
+      otherHtml += `</div></div>`;
+    } else {
+      otherHtml = `<div class="other-classes-section"><p>No other classes available.</p></div>`;
+    }
+    otherClassesWrapper.innerHTML = otherHtml;
+    
+    // Attach click events to each "other class card"
+    document.querySelectorAll('.other-class-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const idx = parseInt(card.getAttribute('data-class-index'));
+        if (!isNaN(idx) && idx !== selectedIndex) {
+          renderFullNotesView(idx);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
 
-  
+    // Scroll to top so the clicked class appears right at the top
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-{
-name:"नेपाली ब्याकरण-कक्षा ७",
-bg:"https://images.unsplash.com/photo-1577896851231-70ef18881754",
+  // Show notes for a class (entry point from class grid)
+  function showNotes(index) {
+    renderFullNotesView(index);
+  }
 
-notes:[
-{name:"व्याकरणको परिचय र नामका प्रकार", link:"ttps://drive.google.com/file/d/1fr4DherHA1LMjkbcp9lgJ4mBqWYF8XXJ/view?usp=sharing"},
-{name:"पदवर्ग (नाम, सर्वनाम, विशेषण, क्रियापद...)", link:"https://drive.google.com/file/d/18VXRkP1BoTGiqPlMt-DrVu316bajq_Ec/view?usp=sharing"},
-{name:"पदसंगति (वाक्य परिवर्तन)", link:"https://drive.google.com/file/d/1cTUJaOOYtkI7TvVunD2l-XO4bq1PHcAg/view?usp=sharing"},
-{name:"पहिलो त्रैमासिक नमूना प्रश्न", link:"https://drive.google.com/file/d/1f9C_OZacmBx0m-GnHymQBuWjSSLCofNB/view?usp=sharing"},
-{name:"नमूना प्रश्न र उत्तर लेख्ने तरिका", link:"https://drive.google.com/file/d/1D0mp9uTvcstaL60YnzZBdgYxgGOktdtv/view?usp=sharing"},
-{name:"घरायसी चिठी र निवेदन", link:"https://drive.google.com/file/d/1VfdM76Fd_g7zAyJ8LbXxNEN4CF-Tf8K6/view?usp=sharing"}
+  // Go back to class grid (show hero again)
+  function goBack() {
+    notesSection.style.display = "none";
+    classContainer.style.display = "grid";
+    heroSection.classList.remove("hidden");  // Show hero again
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
-]
-}
-];
+  // Scroll helper for hero button
+  function scrollToClasses() {
+    const classGrid = document.querySelector(".class-container");
+    if (classGrid) classGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
+  // ========== BUILD CLASS GRID with lazy loading ==========
+  let lazyObserver = null;
 
+  function initLazyLoading() {
+    if (!window.IntersectionObserver) {
+      document.querySelectorAll('.class-card').forEach(card => {
+        const bgUrl = card.getAttribute('data-bg');
+        if (bgUrl) card.style.backgroundImage = `url('${bgUrl}')`;
+      });
+      return;
+    }
+    lazyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+          const bgUrl = card.getAttribute('data-bg');
+          if (bgUrl && !card.style.backgroundImage) {
+            card.style.backgroundImage = `url('${bgUrl}')`;
+          }
+          lazyObserver.unobserve(card);
+        }
+      });
+    }, { rootMargin: "200px", threshold: 0.01 });
+    
+    document.querySelectorAll('.class-card').forEach(card => lazyObserver.observe(card));
+  }
 
-/* ======================================= */
+  function buildClassGrid() {
+    classContainer.innerHTML = '';
+    classData.forEach((cls, idx) => {
+      const card = document.createElement('div');
+      card.className = 'class-card';
+      card.style.backgroundColor = '#9aaebf';
+      card.setAttribute('data-bg', cls.bg);
+      card.innerHTML = `<h3>${escapeHtml(cls.name)}</h3>`;
+      card.onclick = () => showNotes(idx);
+      classContainer.appendChild(card);
+    });
+    initLazyLoading();
+  }
 
-const classContainer=document.getElementById("classContainer");
-const notesSection=document.getElementById("notesSection");
-const notesContainer=document.getElementById("notesContainer");
-const classTitle=document.getElementById("classTitle");
+  // Prefetch near cards for speed
+  function prefetchNearCards() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        const cards = document.querySelectorAll('.class-card');
+        for (let i = 0; i < Math.min(cards.length, 3); i++) {
+          const bg = cards[i]?.getAttribute('data-bg');
+          if (bg) { new Image().src = bg; }
+        }
+      }, { timeout: 800 });
+    } else {
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.class-card');
+        for (let i = 0; i < Math.min(cards.length, 2); i++) {
+          const bg = cards[i]?.getAttribute('data-bg');
+          if (bg) new Image().src = bg;
+        }
+      }, 300);
+    }
+  }
 
-function loadClasses(){
-classData.forEach((cls,index)=>{
-const card=document.createElement("div");
-card.className="class-card";
-card.style.backgroundImage=`url('${cls.bg}')`;
-card.innerHTML=`<h3>${cls.name}</h3>`;
-card.onclick=()=>showNotes(index);
-classContainer.appendChild(card);
-});
-}
+  // Attach global functions
+  window.showNotes = showNotes;
+  window.goBack = goBack;
+  window.scrollToClasses = scrollToClasses;
 
-function showNotes(index){
-const selected=classData[index];
-notesSection.style.display="block";
-notesSection.style.backgroundImage=`url('${selected.bg}')`;
-classContainer.style.display="none";
-classTitle.innerText=selected.name+" Notes";
-
-let html="";
-selected.notes.forEach(note=>{
-html+=`
-<div class="note-card">
-<span>${note.name}</span>
-<a href="${note.link}" target="_blank">View</a>
-</div>
-`;
-});
-
-notesContainer.innerHTML=html;
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function goBack(){
-notesSection.style.display="none";
-classContainer.style.display="grid";
-}
-
-function scrollToClasses(){
-document.querySelector(".class-container").scrollIntoView({behavior:"smooth"});
-}
-
-loadClasses();
-
+  // Initialize app
+  buildClassGrid();
+  window.addEventListener('load', () => {
+    prefetchNearCards();
+    const heroBtn = document.querySelector('.hero button');
+    if (heroBtn) heroBtn.onclick = (e) => { e.preventDefault(); scrollToClasses(); };
+  });
 </script>
 </body>
 </html>
-
-
