@@ -2,253 +2,532 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brp Digital Institute-Syllabus Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Brp Digital Institute | Syllabus Hub</title>
+<link rel="icon" type="image/png" href="Brp Digital Institute logo.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+<!-- Google Fonts + Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,500;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-    font-family:'Inter',sans-serif;
-    background:radial-gradient(circle at 10% 30%, #eef2ff, #d9e2ef);
-    min-height:100vh;
-    padding:2rem;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.main-container{max-width:1200px;margin:auto}
-
-/* HEADER */
-.glass-header{
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(14px);
-    border-radius:2rem;
-    padding:1.5rem;
-    margin-bottom:1.5rem;
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at 10% 20%, #eef2ff, #cbdff2, #b0c4e7);
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
 }
 
-h1{
-    font-size:2rem;
-    font-weight:800;
-    background:linear-gradient(135deg,#1e3c72,#2b4f8c);
-    -webkit-background-clip:text;
-    color:transparent;
+.main-container {
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
-.subhead{
-    color:#334155;
-    margin-top:5px;
-    border-left:4px solid #3b82f6;
-    padding-left:10px;
+/* GLASS HEADER */
+.glass-header {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    border-radius: 2.5rem;
+    padding: 1.8rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* GRID */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
-    margin-top:20px;
+.glass-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0b2b44, #1f5e96, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-/* CARD */
-.card{
-    background:rgba(255,255,255,0.75);
-    backdrop-filter:blur(8px);
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+.glass-header h1 i {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: #2563eb;
+    font-size: 2rem;
 }
 
-.card:hover{
-    transform:translateY(-8px);
-    background:white;
+.subhead {
+    color: #1e293b;
+    margin-top: 10px;
+    border-left: 5px solid #f97316;
+    padding-left: 16px;
+    font-weight: 500;
+    background: rgba(255,255,240,0.4);
+    border-radius: 0 12px 12px 0;
 }
 
-.card img{
-    width:90px;
-    height:90px;
-    object-fit:contain;
-    margin-bottom:10px;
+/* MONSTER TRUCK SECTION */
+.monster-zone {
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border-radius: 3rem;
+    margin-bottom: 2.5rem;
+    padding: 1rem 2rem 1.8rem;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,165,0,0.5);
 }
 
-.card i{
-    font-size:2rem;
-    color:#2563eb;
-    margin-bottom:10px;
+.monster-zone::before {
+    content: "⚡🔥";
+    position: absolute;
+    font-size: 140px;
+    right: -20px;
+    bottom: -40px;
+    opacity: 0.08;
+    pointer-events: none;
 }
 
-/* LABEL */
-.label{
-    font-weight:700;
-    color:#1e293b;
+.monster-truck {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
 }
 
-.sub{
-    font-size:0.75rem;
-    color:#64748b;
+.truck-art {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(0,0,0,0.35);
+    padding: 0.8rem 1.5rem;
+    border-radius: 60px;
+    backdrop-filter: blur(4px);
 }
 
-/* VIEWER */
-.viewer{
-    margin-top:25px;
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+.truck-body {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
 }
 
-iframe{
-    width:100%;
-    height:500px;
-    border:none;
+.car-icon {
+    font-size: 5rem;
+    color: #ffb347;
+    text-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    filter: drop-shadow(0 4px 6px black);
+}
+
+.big-wheels {
+    display: flex;
+    gap: 1rem;
+}
+
+.wheel-monster {
+    background: radial-gradient(circle at 30% 30%, #2c2c2c, #111);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 0 #3b3b3b, inset 0 0 0 5px #555, 0 0 0 3px #facc15;
+    animation: wheelRoll 2s infinite ease-in-out;
+}
+
+.wheel-monster i {
+    font-size: 2.3rem;
+    color: #cbd5e1;
+}
+
+.wheel-monster:last-child {
+    animation-delay: 0.3s;
+}
+
+@keyframes wheelRoll {
+    0% { transform: rotate(0deg) scale(1);}
+    50% { transform: rotate(10deg) scale(1.05);}
+    100% { transform: rotate(0deg) scale(1);}
+}
+
+.truck-text h3 {
+    color: #ffde9c;
+    font-weight: 800;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+.truck-text p {
+    color: #b9c7d9;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.truck-text p i {
+    font-size: 1.2rem;
+    color: #facc15;
+}
+
+/* section titles */
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 1rem 0 0.8rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,245,0.6);
+    backdrop-filter: blur(4px);
+    padding: 0.3rem 1.2rem;
+    border-radius: 40px;
+    color: #0c4a6e;
+}
+
+/* SUBJECT & CLASS GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    padding: 1.8rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255,255,240,0.8);
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.02);
+    background: white;
+    box-shadow: 0 24px 36px -12px rgba(0, 0, 0, 0.25);
+    border-color: #ffb347;
+}
+
+.card img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+    transition: transform 0.2s;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card i {
+    font-size: 3rem;
+    color: #f97316;
+    margin-bottom: 12px;
+}
+
+.label {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #0f172a;
+}
+
+.sub {
+    font-size: 0.75rem;
+    color: #475569;
+    font-weight: 500;
+    background: #eef2ff80;
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: 20px;
+    margin-top: 6px;
+}
+
+#classes .card {
+    background: linear-gradient(135deg, #ffffffdd, #fef9e6dd);
+    backdrop-filter: blur(8px);
+    padding: 1.4rem 0.8rem;
+}
+
+#classes .card i {
+    font-size: 2.8rem;
+    color: #2c6e9e;
+}
+
+/* Info message instead of embedded viewer */
+.info-panel {
+    margin-top: 30px;
+    background: linear-gradient(120deg, #fef9e6, #fff7e0);
+    border-radius: 28px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 12px 28px -8px rgba(0,0,0,0.1);
+    border-left: 8px solid #f97316;
+}
+
+.info-panel i {
+    font-size: 3rem;
+    color: #f97316;
+    margin-bottom: 1rem;
+}
+
+.info-panel h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.info-panel p {
+    color: #334155;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+/* responsive */
+@media (max-width: 760px) {
+    body { padding: 1rem; }
+    .card img { width: 110px; height: 110px; }
+    .monster-truck { flex-direction: column; align-items: center; text-align: center; }
+    .truck-art { flex-direction: column; }
+    .wheel-monster { width: 50px; height: 50px; }
+    .wheel-monster i { font-size: 1.7rem; }
+    .truck-text h3 { font-size: 1.4rem; }
+    .glass-header h1 { font-size: 1.6rem; }
+    .section-title { font-size: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+    .grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+    .card img { width: 95px; height: 95px; }
+}
+
+.footer-note {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #2d3a5e;
+    font-weight: 500;
+    background: rgba(255,255,245,0.6);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.4rem 1.5rem;
+    border-radius: 40px;
+    backdrop-filter: blur(4px);
 }
 </style>
 </head>
-
 <body>
 
 <div class="main-container">
 
-<!-- HEADER -->
-<div class="glass-header">
-    <h1><i class="fas fa-graduation-cap"></i>Brp Digital Institute- Syllabus Hub</h1>
-    <div class="subhead">Subject → Class → PDF View</div>
+   
+    <div class="glass-header">
+        <h1>
+            <i class="fas fa-graduation-cap"></i> 
+            BRP DIGITAL INSTITUTE
+            <span style="font-size: 1.4rem; background: #facc1510; padding: 0 12px; border-radius: 60px;">SYLLABUS HUB</span>       
+    </div>
+
+  
+    <div class="monster-zone">
+        <div class="monster-truck">
+            <div class="truck-art">
+                <div class="truck-body">
+                    <i class="fas fa-truck-monster car-icon"></i>
+                    <div class="big-wheels">
+                        <div class="wheel-monster"><i class="fas fa-circle-notch"></i></div>
+                        <div class="wheel-monster"><i class="fas fa-compact-disc"></i></div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px; margin-top: 8px;">
+                </div>
+
+
+
+            </div>
+            <div class="truck-text">
+                <h3><i class="fas fa-fire"></i> SYLLABUS BREAK <i class="fas fa-crown"></i></h3>
+                <p><i class="fas fa-external-link-alt"></i> पाठ्यवस्तु विभाजन</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- SUBJECTS SECTION -->
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+        <div class="section-title">📚 विषयहरू (Subjects)</div>
+        <span style="font-size: 0.8rem; background:#fff8e7; padding: 4px 12px; border-radius: 50px;"><i class="fas fa-hand-pointer"></i> कार्डमा क्लिक गर्नुहोस्</span>
+    </div>
+    <div id="subjects" class="grid"></div>
+
+    <!-- CLASSES SECTION -->
+    <div class="section-title" style="margin-top: 1.8rem;"><i class="fas fa-layer-group"></i> 📖 कक्षा (Classes)</div>
+    <div id="classes" class="grid"></div>
+
+    
+    <div class="footer-note">
+⚡Powered by: BRP DIGITAL INSTITUTE | Designed by: Brp Maillo
+    </div>
 </div>
 
-<!-- SUBJECT GRID -->
-<h3>📚 Subjects</h3>
-<div id="subjects" class="grid"></div>
-
-<!-- CLASS GRID -->
-<h3 style="margin-top:20px;">📖 Classes</h3>
-<div id="classes" class="grid"></div>
-
-<!-- VIEWER -->
-<div id="viewer" class="viewer"></div>
-
-</div>
 
 
 
-
-
-<script>
-
-
-
-const DATA = {
-     सामाजिक: {
-        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Sam.png",
-        classes:{
-            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview",
-            "Class 2":"https://drive.google.com/file/d/PASTE_ID/preview"
+<script>   
+    
+    const DEMO_PDF_URL = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+    
+    const SUBJECT_DATA = {
+        "सामाजिक अध्ययन": {
+            image: "https://raw.githubusercontent.com/brpmailo/photos/main/Sam.png",
+            classes: {
+                "कक्षा ४-५  (Class 4-5)": "https://drive.google.com/file/d/1LSXuGzlQWK9V34ia67LqTtOgzExTctC-/view?usp=sharing",
+                "कक्षा ६-८  (Class 6-8)": "https://drive.google.com/file/d/1vpjNQ4uKkHrAnRmqGQsn03yXT5X2xdNI/view?usp=sharing",
+                "कक्षा ९-१० (Class 9-10)": "https://drive.google.com/file/d/1GJUj0hzTzgaAfgmyR7Pfq5CtqWEaUnEa/view?usp=sharing"
+            }
+        },
+        "Math (गणित)": {
+            image: "https://raw.githubusercontent.com/brpmailo/photos/main/Math.png",
+            classes: {
+                "Class 1": DEMO_PDF_URL,
+                "Class 2": DEMO_PDF_URL,
+                "Class 3": DEMO_PDF_URL,
+                "Class 4": DEMO_PDF_URL
+            }
+        },
+        "Science (विज्ञान)": {
+            image: "https://raw.githubusercontent.com/brpmailo/photos/main/Sci.png",
+            classes: {
+                "Class 1": DEMO_PDF_URL,
+                "Class 2": DEMO_PDF_URL,
+                "Class 3 (Physics Focus)": DEMO_PDF_URL
+            }
+        },
+        "Nepali (नेपाली)": {
+            image: "https://raw.githubusercontent.com/brpmailo/photos/main/Nep.png",
+            classes: {
+                "Class 1 - व्याकरण": DEMO_PDF_URL,
+                "Class 2 - साहित्य": DEMO_PDF_URL,
+                "Class 3 - कविता": DEMO_PDF_URL
+            }
+        },
+        "English (अंग्रेजी)": {
+            image: "https://raw.githubusercontent.com/brpmailo/photos/main/Eng.png",
+            classes: {
+                "Class 1 - Grammar": DEMO_PDF_URL,
+                "Class 2 - Literature": DEMO_PDF_URL,
+                "Class 3 - Composition": DEMO_PDF_URL
+            }
         }
-    },
+    };
 
 
-    Math: {
-        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Math.png",
-        classes:{
-            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview",
-            "Class 2":"https://drive.google.com/file/d/PASTE_ID/preview"
-        }
-    },
 
-
-    Science: {
-        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Sci.png",
-        classes:{
-            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
-        }
-    },
-
-
-    Nepali: {
-        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Nep.png",
-        classes:{
-            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
+    
+    const subjectsContainer = document.getElementById('subjects');
+    const classesContainer = document.getElementById('classes');
+    let currentSubjectKey = null;
+    
+   
+    function renderSubjects() {
+        subjectsContainer.innerHTML = '';
+        Object.keys(SUBJECT_DATA).forEach(subjName => {
+            const subj = SUBJECT_DATA[subjName];
+            const card = document.createElement('div');
+            card.className = 'card';
+            const imgSrc = subj.image;
+            card.innerHTML = `
+                <img src="${imgSrc}" alt="${subjName}" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <i class="fas fa-microchip" style="display: none; font-size: 3.5rem;"></i>
+                <div class="label">${subjName}</div>
+                <div class="sub"><i class="fas fa-graduation-cap"></i> विषय</div>
+            `;
+            const fallbackIcon = card.querySelector('i');
+            const imgElement = card.querySelector('img');
+            imgElement.addEventListener('error', () => {
+                imgElement.style.display = 'none';
+                if(fallbackIcon) fallbackIcon.style.display = 'inline-block';
+            });
+            card.addEventListener('click', () => {
+                loadClassesForSubject(subjName);
+                document.getElementById('classes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            subjectsContainer.appendChild(card);
+        });
     }
-},
-
-
-    Science: {
-        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Sci.png",
-        classes:{
-            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
+    
+    // Render classes for selected subject
+    function loadClassesForSubject(subjectName) {
+        currentSubjectKey = subjectName;
+        const subject = SUBJECT_DATA[subjectName];
+        if(!subject) return;
+        classesContainer.innerHTML = '';
+        const classEntries = Object.entries(subject.classes);
+        if(classEntries.length === 0) {
+            classesContainer.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem;">कुनै कक्षा उपलब्ध छैन</div>`;
+            return;
         }
-    },
-
-
-    English: {
-        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Eng.png",
-        classes:{
-            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
-        }
+        classEntries.forEach(([className, pdfLink]) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <i class="fas fa-truck-monster" style="font-size:2.2rem; color:#d97706;"></i>
+                <div class="label">${className}</div>
+                <div class="sub">${subjectName}</div>
+            `;
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Open PDF in new tab (instead of embedding)
+                openPdfInNewTab(pdfLink, className);
+            });
+            classesContainer.appendChild(card);
+        });
     }
-     };
-
-
-
-
-
-
-
-
-
-function loadSubjects(){
-    const box=document.getElementById('subjects');
-    box.innerHTML='';
-
-    Object.keys(DATA).forEach(sub=>{
-        const div=document.createElement('div');
-        div.className='card';
-
-        div.innerHTML=`
-            <img src="${DATA[sub].image}">
-            <div class="label">${sub}</div>
-            <div class="sub">Subject</div>
-        `;
-
-        div.onclick=()=>loadClasses(sub);
-        box.appendChild(div);
-    });
-}
-
-
-function loadClasses(subject){
-    const box=document.getElementById('classes');
-    box.innerHTML='';
-
-    Object.keys(DATA[subject].classes).forEach(cls=>{
-        const div=document.createElement('div');
-        div.className='card';
-
-        div.innerHTML=`
-            <i class="fas fa-book"></i>
-            <div class="label">${cls}</div>
-            <div class="sub">${subject}</div>
-        `;
-
-        div.onclick=()=>openPDF(DATA[subject].classes[cls]);
-        box.appendChild(div);
-    });
-}
-
-
-function openPDF(link){
-    document.getElementById('viewer').innerHTML=
-        `<iframe src="${link}"></iframe>`;
-}
-
-
-loadSubjects();
-
+    
+    // Function to open PDF link in a new browser tab
+    function openPdfInNewTab(pdfUrl, className) {
+        if (!pdfUrl) {
+            alert("यो कक्षाको लागि PDF लिङ्क उपलब्ध छैन।");
+            return;
+        }
+       
+        window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    }
+    
+ 
+    renderSubjects();
+    
+   
+    const wheels = document.querySelectorAll('.wheel-monster');
+    if(wheels.length){
+        wheels.forEach(w => {
+            w.addEventListener('mouseenter', () => {
+                w.style.animation = 'wheelRoll 0.4s infinite linear';
+            });
+            w.addEventListener('mouseleave', () => {
+                w.style.animation = 'wheelRoll 2s infinite ease-in-out';
+            });
+        });
+    }
+    
+    console.log("✅ BRP Digital Institute");
 </script>
-
 </body>
 </html>
