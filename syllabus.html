@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brp Digital Institute-Syllabus Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:radial-gradient(circle at 10% 30%, #eef2ff, #d9e2ef);
+    min-height:100vh;
+    padding:2rem;
+}
+
+.main-container{max-width:1200px;margin:auto}
+
+/* HEADER */
+.glass-header{
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(14px);
+    border-radius:2rem;
+    padding:1.5rem;
+    margin-bottom:1.5rem;
+}
+
+h1{
+    font-size:2rem;
+    font-weight:800;
+    background:linear-gradient(135deg,#1e3c72,#2b4f8c);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.subhead{
+    color:#334155;
+    margin-top:5px;
+    border-left:4px solid #3b82f6;
+    padding-left:10px;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(8px);
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:white;
+}
+
+.card img{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+.card i{
+    font-size:2rem;
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+/* LABEL */
+.label{
+    font-weight:700;
+    color:#1e293b;
+}
+
+.sub{
+    font-size:0.75rem;
+    color:#64748b;
+}
+
+/* VIEWER */
+.viewer{
+    margin-top:25px;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+iframe{
+    width:100%;
+    height:500px;
+    border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-container">
+
+<!-- HEADER -->
+<div class="glass-header">
+    <h1><i class="fas fa-graduation-cap"></i>Brp Digital Institute- Syllabus Hub</h1>
+    <div class="subhead">Subject → Class → PDF View</div>
+</div>
+
+<!-- SUBJECT GRID -->
+<h3>📚 Subjects</h3>
+<div id="subjects" class="grid"></div>
+
+<!-- CLASS GRID -->
+<h3 style="margin-top:20px;">📖 Classes</h3>
+<div id="classes" class="grid"></div>
+
+<!-- VIEWER -->
+<div id="viewer" class="viewer"></div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+const DATA = {
+     सामाजिक: {
+        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Sam.png",
+        classes:{
+            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview",
+            "Class 2":"https://drive.google.com/file/d/PASTE_ID/preview"
+        }
+    },
+
+
+    Math: {
+        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Math.png",
+        classes:{
+            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview",
+            "Class 2":"https://drive.google.com/file/d/PASTE_ID/preview"
+        }
+    },
+
+
+    Science: {
+        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Sci.png",
+        classes:{
+            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
+        }
+    },
+
+
+    Nepali: {
+        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Nep.png",
+        classes:{
+            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
+    }
+},
+
+
+    Science: {
+        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Sci.png",
+        classes:{
+            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
+        }
+    },
+
+
+    English: {
+        image:"https://raw.githubusercontent.com/brpmailo/photos/main/Eng.png",
+        classes:{
+            "Class 1":"https://drive.google.com/file/d/PASTE_ID/preview"
+        }
+    }
+     };
+
+
+
+
+
+
+
+
+
+function loadSubjects(){
+    const box=document.getElementById('subjects');
+    box.innerHTML='';
+
+    Object.keys(DATA).forEach(sub=>{
+        const div=document.createElement('div');
+        div.className='card';
+
+        div.innerHTML=`
+            <img src="${DATA[sub].image}">
+            <div class="label">${sub}</div>
+            <div class="sub">Subject</div>
+        `;
+
+        div.onclick=()=>loadClasses(sub);
+        box.appendChild(div);
+    });
+}
+
+
+function loadClasses(subject){
+    const box=document.getElementById('classes');
+    box.innerHTML='';
+
+    Object.keys(DATA[subject].classes).forEach(cls=>{
+        const div=document.createElement('div');
+        div.className='card';
+
+        div.innerHTML=`
+            <i class="fas fa-book"></i>
+            <div class="label">${cls}</div>
+            <div class="sub">${subject}</div>
+        `;
+
+        div.onclick=()=>openPDF(DATA[subject].classes[cls]);
+        box.appendChild(div);
+    });
+}
+
+
+function openPDF(link){
+    document.getElementById('viewer').innerHTML=
+        `<iframe src="${link}"></iframe>`;
+}
+
+
+loadSubjects();
+
+</script>
+
+</body>
+</html>
